@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MovieDetails</string>
+    <string name="click_on_me_to_see_movie_details">Click on me to see Movie details!</string>
+    <string name="movie_details">Movie details!</string>
+    <string name="back">Back</string>
+    <string name="avengers_end_game">AVENGERS:END GAME</string>
+    <string name="_13">13+</string>
+    <string name="avengers_background">avengers_background</string>
+    <string name="action_adventure_fantasy">Action,adventure,fantasy</string>
+</resources>

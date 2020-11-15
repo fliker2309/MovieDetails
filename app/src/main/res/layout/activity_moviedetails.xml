@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/design_default_color_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="514dp"
+            android:background="@drawable/orig"
+            android:contentDescription="@string/avengers_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_to_main_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="315dp"
+            android:layout_marginBottom="226dp"
+            android:drawableLeft="@drawable/path"
+            android:drawablePadding="8dp"
+            android:text="@string/back"
+
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/background"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toTopOf="@+id/background" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="343dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="254dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="478dp"
+            android:text="@string/avengers_end_game"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pegi_info"
+            android:layout_width="24dp"
+            android:layout_height="16dp"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="226dp"
+            android:layout_marginEnd="335dp"
+            android:layout_marginBottom="13dp"
+            android:text="@string/_13"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/background" />
+
+        <TextView
+            android:id="@+id/text_genre"
+            android:layout_width="343dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/action_adventure_fantasy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/first_star_icon"
+            android:layout_width="13.02dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:srcCompat="@drawable/star_icon"
+            tools:ignore="ContentDescription" />
+
+
+
+        <ImageView
+            android:id="@+id/second_star_icon"
+            android:layout_width="13.02dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="434dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fourth_star_icon"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/star_icon" />
+
+
+
+        <ImageView
+            android:id="@+id/third_star_icon"
+            android:layout_width="13.02dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="434dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toEndOf="@+id/first_star_icon"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/star_icon" />
+        <ImageView
+            android:id="@+id/fourth_star_icon"
+            android:layout_width="13.02dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="434dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toEndOf="@+id/third_star_icon"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/star_icon" />
+
+        <ImageView
+            android:id="@+id/fifth_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="434dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/second_star_icon"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/empty_star_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
