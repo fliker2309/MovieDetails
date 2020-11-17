@@ -2,10 +2,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MyFirstApp" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-
-
-
-
+    </style>
+    <style name="ActorsTextName">
+        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#D8D8D8</item>
+        <item name="lineHeight">16sp</item>
     </style>
 
 </resources>
