@@ -17,6 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="514dp"
             android:background="@drawable/orig"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/avengers_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,14 +30,14 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="315dp"
             android:layout_marginBottom="226dp"
             android:drawableLeft="@drawable/path"
-            android:drawablePadding="8dp"
+            android:drawablePadding="0dp"
             android:text="@string/back"
-
+            app:strokeWidth="0dp"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/background"
@@ -54,6 +56,8 @@
             android:text="@string/avengers_end_game"
             android:textColor="@color/white"
             android:gravity="center_vertical"
+            android:textAllCaps="false"
+            android:textAppearance="@style/MovieName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,6 +204,7 @@
             android:gravity="center_vertical"
             android:text="@string/after_the_devastating_events_of_avengers_infinity_war_the_universe_is_in_ruins_with_the_help_of_remaining_allies_the_avengers_assemble_once_more_in_order_to_reverse_thanos_actions_and_restore_balance_to_the_universe"
             android:textColor="#FFFFFF"
+            android:alpha="0.75"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -229,6 +234,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="7dp"
+            android:paddingStart="-7dp"
+
             app:layout_constraintEnd_toStartOf="@+id/second_actor_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cast"
@@ -240,7 +247,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="7dp"
-
+            android:paddingStart="-7dp"
             app:layout_constraintEnd_toStartOf="@+id/third_actor_image"
             app:layout_constraintStart_toEndOf="@+id/first_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/cast"
@@ -252,7 +259,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="7dp"
-
+            android:paddingStart="-7dp"
             app:layout_constraintEnd_toStartOf="@+id/fourth_actor_image"
             app:layout_constraintStart_toEndOf="@+id/second_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/cast"
@@ -264,7 +271,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="7dp"
-
+            android:paddingStart="-7dp"
             android:layout_marginEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/third_actor_image"
@@ -293,6 +300,7 @@
 
             android:text="@string/chris_evans"
             android:textAppearance="@style/ActorsTextName"
+
             app:layout_constraintEnd_toEndOf="@+id/second_actor_image"
             app:layout_constraintStart_toStartOf="@+id/second_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/second_actor_image" />
@@ -305,6 +313,7 @@
             android:text="@string/mark_ruffalo"
             android:gravity="center_vertical"
             android:textAppearance="@style/ActorsTextName"
+
             app:layout_constraintEnd_toEndOf="@+id/third_actor_image"
             app:layout_constraintStart_toStartOf="@+id/third_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/third_actor_image" />
@@ -317,6 +326,7 @@
             android:gravity="center_vertical"
             android:text="@string/chris_hemsworth"
             android:textAppearance="@style/ActorsTextName"
+
             app:layout_constraintEnd_toEndOf="@+id/fourth_actor_image"
             app:layout_constraintStart_toStartOf="@+id/fourth_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/fourth_actor_image" />
