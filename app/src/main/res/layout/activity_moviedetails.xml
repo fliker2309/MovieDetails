@@ -32,7 +32,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="44dp"
             android:drawableLeft="@drawable/path"
             android:drawablePadding="0dp"
