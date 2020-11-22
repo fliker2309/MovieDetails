@@ -20,11 +20,18 @@
         <item name="android:letterSpacing">-0.01</item>
         <item name="android:shadowColor">#80000000</item>
         <item name="android:shadowDx">0</item>
-
         <item name="android:shadowDy">6</item>
-
         <item name="android:shadowRadius">12</item>
-
     </style>
+    <style name="ratingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:minHeight">12dp</item>
+        <item name="android:maxHeight">24dp</item>
+        <item name="android:stepSize">1</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:numStars">5</item>
+        <item name="colorControlActivated">#FF3466</item>
+        <item name="colorControlNormal">#6D6D80</item>
+    </style>
+
 
 </resources>
