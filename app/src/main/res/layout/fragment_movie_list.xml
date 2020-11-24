@@ -25,16 +25,26 @@
             android:text="@string/movies_list"
             android:textAppearance="@style/ActorsTextName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatTextView>
 
-        </androidx.appcompat.widget.AppCompatTextView>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_background_linear"
+            android:layout_width="170dp"
+            android:layout_height="296dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="27dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_movies_list"
+            app:srcCompat="@drawable/icon_background" />
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/label_avengers"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="27dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_movies_list"
             app:srcCompat="@drawable/avengers">
@@ -47,16 +57,17 @@
             android:layout_height="24dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="8dp"
+            android:background="@color/background_color"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:text="@string/_13"
             android:textAppearance="@style/pegiInfo"
-            android:background="@color/background_color"
 
             app:layout_constraintStart_toStartOf="@+id/label_avengers"
             app:layout_constraintTop_toTopOf="@+id/label_avengers" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
@@ -66,6 +77,7 @@
             app:srcCompat="@drawable/ic_like" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -75,6 +87,18 @@
 
             app:layout_constraintStart_toStartOf="@id/label_avengers"
             app:layout_constraintTop_toBottomOf="@id/pegi_info" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="4dp"
+            android:rating="4"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toBottomOf="@id/text_genre" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
