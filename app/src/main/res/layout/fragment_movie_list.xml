@@ -16,27 +16,52 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+
+
+            android:layout_marginTop="55dp"
             android:text="@string/movies_list"
-            android:textColor="@color/white"
-
-
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="49dp">
+            android:textAppearance="@style/ActorsTextName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:srcCompat="@drawable/avengers"
-
-            tools:layout_editor_absoluteX="82dp"
-            tools:layout_editor_absoluteY="118dp">
-
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="27dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:srcCompat="@drawable/avengers">
 
         </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/_13"
+            app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+            app:srcCompat="@drawable/ic_like" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
