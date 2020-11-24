@@ -18,10 +18,8 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-
 
             android:layout_marginTop="55dp"
             android:text="@string/movies_list"
@@ -44,11 +42,16 @@
         </androidx.appcompat.widget.AppCompatImageView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:text="@string/_13"
+            android:textAppearance="@style/pegiInfo"
+            android:background="@color/background_color"
+
             app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
             app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
 
