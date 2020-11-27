@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MovieListClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,8 +17,19 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-interface MovieListClickListener{
-    fun onChangeFragment()
+
+    override fun onChangeFragment() {
+    supportFragmentManager.beginTransaction()
+        .replace(R.id.main_container, FragmentMovieDetails())
+        .commit()
+
+    }
+
+
 }
 
+interface MovieListClickListener {
+    fun onChangeFragment() {
+
+    }
 }
