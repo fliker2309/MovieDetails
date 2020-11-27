@@ -92,13 +92,14 @@
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/label_ratingBar"
-            style="@android:attr/ratingBarStyleSmall"
-            android:layout_width="152dp"
-            android:layout_height="110dp"
+            style="@style/label_ratingBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:rating="4"
-            android:scaleX=".5"
-            android:scaleY=".5"
+
             android:theme="@style/label_ratingBar"
+
             app:layout_constraintStart_toStartOf="@id/label_avengers"
             app:layout_constraintTop_toBottomOf="@id/text_genre" />
 
