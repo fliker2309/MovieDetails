@@ -16,14 +16,9 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.main_container, FragmentMovieList())
             .commit()
 
-
-
-
     }
-
-
-
-
-
+interface MovieListClickListener{
+    fun onChangeFragment()
+}
 
 }
