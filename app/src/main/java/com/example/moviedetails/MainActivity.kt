@@ -18,7 +18,13 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 
     }
 
-    override fun onChangeFragment() {
+    override fun toFirstFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, FragmentMovieList())
+            .commit()
+
+    }
+    override fun toSecondFragment() {
     supportFragmentManager.beginTransaction()
         .replace(R.id.main_container, FragmentMovieDetails())
         .commit()
@@ -29,7 +35,10 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 }
 
 interface MovieListClickListener {
-    fun onChangeFragment() {
+    fun toFirstFragment(){
+
+    }
+    fun toSecondFragment() {
 
     }
 }
