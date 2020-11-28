@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 
     override fun toSecondFragment() {
         supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
             .replace(R.id.main_container, MovieDetailsFragment())
+
             .commit()
 
     }
