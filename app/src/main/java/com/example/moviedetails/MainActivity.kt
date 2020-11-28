@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 
-class MainActivity : AppCompatActivity(), MovieListClickListener {
+class MainActivity : AppCompatActivity(), ClickListenerFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,18 +18,10 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 
     }
 
-    override fun toFirstFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, MovieListFragment())
-            .commit()
-
-    }
-
     override fun toSecondFragment() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.main_container, MovieDetailsFragment())
-
             .commit()
 
     }
@@ -37,8 +29,3 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 
 }
 
-interface MovieListClickListener {
-    fun toFirstFragment()
-
-    fun toSecondFragment()
-}

@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 
 
 class MovieDetailsFragment : Fragment() {
-    private var fragmentMovieDetailsClickListener: MovieListClickListener? = null
+    private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class MovieDetailsFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
         view?.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
-            fragmentMovieDetailsClickListener?.toFirstFragment()
+            activity?.onBackPressed()
         }
 
 
@@ -31,7 +31,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is MovieListClickListener) {
+        if (context is ClickListenerFragment) {
             fragmentMovieDetailsClickListener = context
         }
     }
@@ -40,4 +40,8 @@ class MovieDetailsFragment : Fragment() {
         super.onDetach()
         fragmentMovieDetailsClickListener = null
     }
+}
+
+interface ClickListenerFragment {
+    fun toSecondFragment()
 }

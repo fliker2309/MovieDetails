@@ -10,7 +10,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 
 class MovieListFragment : Fragment() {
-    private var fragmentMovieListClickListener: MovieListClickListener? = null
+    private var fragmentMovieListClickListener: ClickListenerFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +28,7 @@ class MovieListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is MovieListClickListener) {
+        if (context is ClickListenerFragment) {
             fragmentMovieListClickListener = context
         }
 
