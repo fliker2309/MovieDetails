@@ -11,21 +11,20 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 
 
-class FragmentMovieDetails : Fragment() {
+class MovieDetailsFragment : Fragment() {
     private var fragmentMovieDetailsClickListener: MovieListClickListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
-        view?.findViewById<Button>(R.id.back_to_main_button)?.apply {
-            setOnClickListener {
-                fragmentMovieDetailsClickListener?.toFirstFragment()
-            }
-
+        view?.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
+            fragmentMovieDetailsClickListener?.toFirstFragment()
         }
+
+
         return view
 
     }
@@ -36,8 +35,9 @@ class FragmentMovieDetails : Fragment() {
             fragmentMovieDetailsClickListener = context
         }
     }
+
     override fun onDetach() {
         super.onDetach()
-        fragmentMovieDetailsClickListener=null
+        fragmentMovieDetailsClickListener = null
     }
 }

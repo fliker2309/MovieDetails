@@ -13,21 +13,22 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, FragmentMovieList())
+            .add(R.id.main_container, MovieListFragment())
             .commit()
 
     }
 
     override fun toFirstFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, FragmentMovieList())
+            .replace(R.id.main_container, MovieListFragment())
             .commit()
 
     }
+
     override fun toSecondFragment() {
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.main_container, FragmentMovieDetails())
-        .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, MovieDetailsFragment())
+            .commit()
 
     }
 
@@ -35,10 +36,7 @@ class MainActivity : AppCompatActivity(), MovieListClickListener {
 }
 
 interface MovieListClickListener {
-    fun toFirstFragment(){
+    fun toFirstFragment()
 
-    }
-    fun toSecondFragment() {
-
-    }
+    fun toSecondFragment()
 }

@@ -44,7 +44,6 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="44dp"
             android:drawableLeft="@drawable/ic_path"
-
             android:text="@string/back"
             android:textAllCaps="false"
             android:textColor="#6D6D80"
@@ -56,16 +55,13 @@
             android:id="@+id/film_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
-
             android:gravity="center_vertical"
             android:text="@string/avengers_end_game"
             android:textAllCaps="false"
             android:textAppearance="@style/MovieName"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pegi_info" />
@@ -87,7 +83,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-
             android:gravity="center_vertical"
             android:text="@string/action_adventure_fantasy"
             android:textColor="#FF3466"
@@ -140,7 +135,6 @@
             android:gravity="center_vertical"
             android:text="@string/after_the_devastating_events_of_avengers_infinity_war_the_universe_is_in_ruins_with_the_help_of_remaining_allies_the_avengers_assemble_once_more_in_order_to_reverse_thanos_actions_and_restore_balance_to_the_universe"
             android:textColor="#FFFFFF"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/story_line" />
@@ -235,11 +229,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-
             android:gravity="center_vertical"
             android:text="@string/mark_ruffalo"
             android:textAppearance="@style/ActorsTextName"
-
             app:layout_constraintEnd_toEndOf="@+id/third_actor_image"
             app:layout_constraintStart_toStartOf="@+id/third_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/third_actor_image" />
@@ -255,7 +247,6 @@
             app:layout_constraintEnd_toEndOf="@+id/fourth_actor_image"
             app:layout_constraintStart_toStartOf="@+id/fourth_actor_image"
             app:layout_constraintTop_toBottomOf="@+id/fourth_actor_image" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
