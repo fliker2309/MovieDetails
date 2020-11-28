@@ -20,8 +20,8 @@ class MovieListFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         view?.findViewById<ImageView>(R.id.label_background_linear)?.setOnClickListener {
-                fragmentMovieListClickListener?.toSecondFragment()
-            }
+            fragmentMovieListClickListener?.toSecondFragment()
+        }
 
         return view
     }

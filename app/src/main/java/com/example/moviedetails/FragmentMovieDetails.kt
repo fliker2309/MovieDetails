@@ -24,7 +24,6 @@ class MovieDetailsFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-
         return view
 
     }
