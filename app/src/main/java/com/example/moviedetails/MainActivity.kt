@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
         if (savedInstanceState == null) {
             movieListFragment = MovieListFragment.newInstance()
             supportFragmentManager.beginTransaction()
-                .add(R.id.main_container, movieListFragment,MovieListFragment.TAG)
+                .add(R.id.main_container, movieListFragment, MovieListFragment.TAG)
                 .commit()
         } else {
             movieListFragment =
