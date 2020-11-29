@@ -38,4 +38,10 @@ class MovieListFragment : Fragment() {
         super.onDetach()
         fragmentMovieListClickListener = null
     }
+
+    companion object {
+        fun newInstance() = MovieListFragment()
+
+        const val TAG = "moviesListFragment"
+    }
 }

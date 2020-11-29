@@ -36,7 +36,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_background_radial"
+            android:layout_width="170dp"
+            android:layout_height="296dp"
+            android:layout_marginTop="27dp"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toBottomOf="@+id/text_movies_list"
+            app:srcCompat="@drawable/ic_gradient_movie_item_background" />
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/label_avengers"
             android:layout_width="wrap_content"
@@ -108,7 +115,7 @@
             android:id="@+id/second_star_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:srcCompat="@drawable/ic_filled_star"
             app:layout_constraintStart_toEndOf="@id/first_star_icon"
@@ -117,7 +124,7 @@
             android:id="@+id/third_star_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:srcCompat="@drawable/ic_filled_star"
             app:layout_constraintStart_toEndOf="@id/second_star_icon"
@@ -126,7 +133,7 @@
             android:id="@+id/fourth_star_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:srcCompat="@drawable/ic_filled_star"
             app:layout_constraintStart_toEndOf="@id/third_star_icon"
@@ -135,7 +142,7 @@
             android:id="@+id/fifth_star_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:srcCompat="@drawable/ic_unfilled_star"
             app:layout_constraintStart_toEndOf="@id/fourth_star_icon"
@@ -145,7 +152,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="3dp"
             android:text="@string/_125_reviews"
             android:textAppearance="@style/label_review"
             app:layout_constraintStart_toEndOf="@id/fifth_star_icon"

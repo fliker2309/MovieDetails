@@ -7,14 +7,21 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 
 class MainActivity : AppCompatActivity(), ClickListenerFragment {
+
+    private lateinit var movieListFragment: MovieListFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, MovieListFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            movieListFragment = MovieListFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_container, movieListFragment,MovieListFragment.TAG)
+                .commit()
+        } else {
+            movieListFragment =
+                supportFragmentManager.findFragmentByTag(MovieListFragment.TAG) as MovieListFragment
+        }
 
     }
 
@@ -25,7 +32,6 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
             .commit()
 
     }
-
 
 }
 
