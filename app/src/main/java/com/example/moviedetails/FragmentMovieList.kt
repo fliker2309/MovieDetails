@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.card.MaterialCardView
 
 class MovieListFragment : Fragment() {
     private var fragmentMovieListClickListener: ClickListenerFragment? = null
@@ -19,7 +20,7 @@ class MovieListFragment : Fragment() {
     ): View {
 
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
-        view?.findViewById<ImageView>(R.id.label_background_linear)?.setOnClickListener {
+        view?.findViewById<MaterialCardView>(R.id.movie_promo_card)?.setOnClickListener {
             fragmentMovieListClickListener?.toSecondFragment()
         }
 
