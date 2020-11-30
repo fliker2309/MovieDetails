@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -107,8 +106,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="3dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="4sp"
             android:text="@string/_125_reviews"
-            android:textAppearance="@style/review"
+            android:textColor="#6D6D80"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/ratingBar"
             app:layout_constraintTop_toBottomOf="@+id/text_genre" />
 
@@ -150,7 +152,6 @@
             android:textColor="#ECECEC"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/story_line_description" />
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/first_actor_image"
