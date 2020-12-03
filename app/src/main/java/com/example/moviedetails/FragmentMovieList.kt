@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 
 class MovieListFragment : Fragment() {
     private var fragmentMovieListClickListener: ClickListenerFragment? = null
+    private var movieListRecycler: RecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,11 +22,17 @@ class MovieListFragment : Fragment() {
     ): View {
 
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
-        view?.findViewById<MaterialCardView>(R.id.movie_promo_card)?.setOnClickListener {
+
+        view?.findViewById<RecyclerView>(R.id.movie_list_recycler_view)?.setOnClickListener {
             fragmentMovieListClickListener?.toSecondFragment()
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
+        movieListRecycler?.adapter = MovieListAdapter()
     }
 
     override fun onAttach(context: Context) {
