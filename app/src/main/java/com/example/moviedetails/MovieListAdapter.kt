@@ -18,14 +18,14 @@ class MovieListAdapter(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_HEADER -> HeaderViewHolder(
+            TYPE_HEADER_ID -> HeaderViewHolder(
                 inflater.inflate(
                     R.layout.movie_list_header,
                     parent,
                     false
                 )
             )
-            TYPE_MOVIES -> MovieListViewHolder(
+            TYPE_MOVIES_ID -> MovieListViewHolder(
                 inflater.inflate(
                     R.layout.view_holder_movie,
                     parent,
@@ -45,8 +45,8 @@ class MovieListAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            0 -> Companion.TYPE_HEADER
-            else -> Companion.TYPE_MOVIES
+            0 -> Companion.TYPE_HEADER_ID
+            else -> Companion.TYPE_MOVIES_ID
         }
     }
 
@@ -55,8 +55,8 @@ class MovieListAdapter(
     }
 
     companion object {
-        const val TYPE_HEADER = 0
-        const val TYPE_MOVIES = 1
+        const val TYPE_HEADER_ID = 0
+        const val TYPE_MOVIES_ID = 1
     }
 }
 
