@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MovieListFragment : Fragment() {
@@ -27,6 +28,7 @@ class MovieListFragment : Fragment() {
         return view
     }
 
+    val gridLayoutManager = GridLayoutManager(activity, spanCount)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
        movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler?.adapter = MovieListAdapter()
