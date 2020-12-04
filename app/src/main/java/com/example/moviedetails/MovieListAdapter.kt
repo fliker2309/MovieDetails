@@ -1,23 +1,46 @@
 package com.example.moviedetails
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 
 import android.view.ViewGroup
+import android.widget.HeaderViewListAdapter
+import androidx.core.content.contentValuesOf
 
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MovieListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieListAdapter(
+    context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MovieListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false)
-        )
+        return when (viewType) {
+            TYPE_HEADER -> HeaderViewHolder(
+                inflater.inflate(
+                    R.layout.movie_list_header,
+                    parent,
+                    false
+                )
+            )
+            TYPE_MOVIES -> MovieListViewHolder(
+                inflater.inflate(
+                    R.layout.view_holder_movie,
+                    parent,
+                    false
+                )
+            )
+
+            else -> throw IllegalArgumentException()
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        when (holder) {
+            is MovieListViewHolder -> holder.bind(getItem(position))
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -46,4 +69,14 @@ class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
+}
+
+class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    companion object {
+        fun from(parent: ViewGroup): HeaderViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val view = inflater.inflate(R.layout.movie_list_header, parent, false)
+            return HeaderViewHolder(view)
+        }
+    }
 }
