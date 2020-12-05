@@ -22,6 +22,8 @@ data class Movie(
     val fourth_star_icon: Int,
     @DrawableRes
     val fifth_star_icon: Int,
+    val rating_bar: Int,
+    val story_line : String,
     val reviews_quantity: String,
     val cast : List<Actor>,
     val label_name: String,
