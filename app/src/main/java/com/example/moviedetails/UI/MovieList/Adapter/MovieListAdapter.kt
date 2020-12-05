@@ -36,9 +36,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
     private val reviews: TextView = view.findViewById(R.id.reviews_quantity)
     private val duration: TextView = view.findViewById((R.id.avengers_movie_duration))
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
-    private val fifthStar: ImageView= view.findViewById(R.id.fifth_star_icon)
-
-//
+    private val fifthStar: ImageView = view.findViewById(R.id.fifth_star_icon)
 
     fun bind(movie: Movie) {
         labelImage.setImageResource(movie.label_image)
@@ -50,16 +48,11 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
         likeIcon.setImageResource(movie.ic_like)
         fifthStar.setImageResource((movie.fifth_star_icon))
 
-
-
-
-
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }
 
     }
-
 
 }
 
