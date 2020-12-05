@@ -13,9 +13,6 @@ class MovieListFragment : Fragment() {
     private var fragmentMovieListClickListener: ClickListenerFragment? = null
     private var movieListRecycler: RecyclerView? = null
 
-    private var _binding: FragmentMoviesListBinding? = null
-    private val binding
-        get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,7 +28,7 @@ class MovieListFragment : Fragment() {
         return view
     }
 
-    val gridLayoutManager = GridLayoutManager(activity, spanCount)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
        movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler?.adapter = MovieListAdapter()
