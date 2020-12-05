@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 
 class MovieListAdapter(
-    context: Context
+
+    private val cardListener: (Long) -> Unit
 ) : RecyclerView.Adapter<ViewHolder>() {
     private val inflater: LayoutInflater = from(context)
 
@@ -45,6 +46,12 @@ class MovieListViewHolder(itemView: View) : ViewHolder(itemView) {
             return MovieListViewHolder(view)
         }
     }
+}
+fun generateActors(): List<Actor>{
+    return listOf  (
+
+            )
+
 }
 
 data class Movie(
