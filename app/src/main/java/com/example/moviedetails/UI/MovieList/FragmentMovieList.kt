@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.data.DataContainer
+import com.example.moviedetails.data.Movie
 
 class MovieListFragment : Fragment() {
-    private var fragmentMovieListClickListener: ClickListenerFragment? = null
+
+
     private var movieListRecycler: RecyclerView? = null
 
     override fun onCreateView(
@@ -18,11 +21,16 @@ class MovieListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val movieList = DataContainer.getAllMovies()
+        val numberOfColums = 2
+        val movieListAdapter = MovieListAdapter(
+            cardListener = onMovieLabelClick()
+        )
+        val gridLayoutManager = GridLayoutManager(context,2)
 
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
 
-        view?.findViewById<RecyclerView>(R.id.movie_list_recycler_view)?.setOnClickListener {
-            fragmentMovieListClickListener?.toSecondFragment()
+
         }
 
         return view
@@ -30,21 +38,17 @@ class MovieListFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-       movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
-        movieListRecycler?.adapter = MovieListAdapter()
+
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is ClickListenerFragment) {
-            fragmentMovieListClickListener = context
-        }
 
     }
 
     override fun onDetach() {
         super.onDetach()
-        fragmentMovieListClickListener = null
+
     }
 
     companion object {
@@ -52,4 +56,8 @@ class MovieListFragment : Fragment() {
 
         const val TAG = "moviesListFragment"
     }
+
+   private fun onMovieLabelClick(){
+
+   }
 }
