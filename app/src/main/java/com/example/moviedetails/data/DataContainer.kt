@@ -2,6 +2,7 @@ package com.example.moviedetails.data
 
 import com.example.moviedetails.R
 
+
 object DataContainer {
     //avengers cast
     private val downewJR = Actor(1, "Robert Downey Jr.", R.drawable.stark)
