@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ic_gps"
         android:layout_width="wrap_content"
@@ -26,16 +27,15 @@
         android:textAppearance="@style/ActorsTextName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-//исправить крепление*
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movie_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="33dp"
         android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/view_holder_movie"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/text_movies_list"
+        tools:listitem="@layout/view_holder_movie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
