@@ -36,6 +36,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
     private val reviews: TextView = view.findViewById(R.id.reviews_quantity)
     private val duration: TextView = view.findViewById((R.id.avengers_movie_duration))
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
+    private val fifthStar: ImageView= view.findViewById(R.id.fifth_star_icon)
 
 //
 
@@ -47,6 +48,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
         reviews.text = movie.reviews_quantity
         duration.text = movie.duration
         likeIcon.setImageResource(movie.ic_like)
+        fifthStar.setImageResource((movie.fifth_star_icon))
 
 
 

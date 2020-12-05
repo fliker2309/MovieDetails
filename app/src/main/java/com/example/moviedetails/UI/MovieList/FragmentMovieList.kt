@@ -30,20 +30,15 @@ class MovieListFragment : Fragment() {
                 Toast.makeText(context, "Worked!", Toast.LENGTH_SHORT)
                     .show()
             }
-
-
         )
         val gridLayoutManager = GridLayoutManager(context, 2)
-
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler.layoutManager = gridLayoutManager
         movieListRecycler.adapter = movieListAdapter
 
-
         return view
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
