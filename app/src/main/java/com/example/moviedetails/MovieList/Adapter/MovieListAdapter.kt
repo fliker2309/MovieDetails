@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.LayoutInflater.*
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.annotation.DrawableRes
+
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.google.android.material.card.MaterialCardView
+
 
 
 class MovieListAdapter(
@@ -23,8 +23,12 @@ class MovieListAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(movie : Movie,cardListener:(Long)-> Unit ) {
+        binding.apply{
+            moviePromoCard.setOnDebouncedClickListener{
+                cardListener(movie.id)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,18 +48,28 @@ class MovieListViewHolder(itemView: View) : ViewHolder(itemView) {
 }
 
 data class Movie(
-    val promo_card: MaterialCardView,
-    val label_image: ImageView,
-    val label_background_linear: ImageView,
-    val pegi_info: TextView,
-    val ic_like: ImageView,
-    val text_genre: TextView,
-    val first_star_icon: ImageView,
-    val second_star_icon: ImageView,
-    val third_star_icon: ImageView,
-    val fourth_star_icon: ImageView,
-    val fifth_star_icon: ImageView,
-    val reviews_quantity: TextView,
-    val label_name: TextView,
-    val duration: TextView
+    val id : Long,
+    @DrawableRes
+    val label_image: Int,
+    @DrawableRes
+    val label_background_linear: Int,
+    val pegi_info: String,
+    @DrawableRes
+    val ic_like: Int,
+    val text_genre: String,
+    @DrawableRes
+    val first_star_icon: Int,
+    @DrawableRes
+    val second_star_icon: Int,
+    @DrawableRes
+    val third_star_icon: Int,
+    @DrawableRes
+    val fourth_star_icon: Int,
+    @DrawableRes
+    val fifth_star_icon: Int,
+    val reviews_quantity: String,
+    val cast : List<Actor>,
+    val label_name: String,
+
+    val duration: Int
 )
