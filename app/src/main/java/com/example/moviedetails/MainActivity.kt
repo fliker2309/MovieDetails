@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
         if (savedInstanceState == null) {
             movieListFragment = MovieListFragment.newInstance()
             supportFragmentManager.beginTransaction()
