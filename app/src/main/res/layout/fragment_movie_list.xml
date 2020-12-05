@@ -26,7 +26,7 @@
         android:textAppearance="@style/ActorsTextName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+//исправить крепление*
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movie_list_recycler_view"
         android:layout_width="match_parent"
