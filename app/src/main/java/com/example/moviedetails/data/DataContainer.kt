@@ -4,6 +4,7 @@ import com.example.moviedetails.R
 
 
 object DataContainer {
+
     //avengers cast
     private val downewJR = Actor(1, "Robert Downey Jr.", R.drawable.stark)
     private val evansC = Actor(2, "Chris Evans", R.drawable.evans)
@@ -113,7 +114,6 @@ object DataContainer {
         )
     )
 
-    fun getMovie(id: Long): Movie = moviesMap[id] ?: error("Cannot find such movie ID=$id")
 
     fun getAllMovies(): List<Movie> {
         return moviesMap.map { it.value }

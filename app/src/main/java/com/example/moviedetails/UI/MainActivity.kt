@@ -1,10 +1,14 @@
-package com.example.moviedetails
+package com.example.moviedetails.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import com.example.moviedetails.R
+import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
+import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import com.example.moviedetails.ui.movielist.MovieListFragment
 
 class MainActivity : AppCompatActivity(), ClickListenerFragment {
 

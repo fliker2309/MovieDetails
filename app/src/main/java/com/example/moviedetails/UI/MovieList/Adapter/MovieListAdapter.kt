@@ -17,6 +17,7 @@ class MovieListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.view_holder_movie, parent, false)
+
         return MovieListViewHolder(view, cardListener)
     }
 
@@ -47,7 +48,6 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
         duration.text = movie.duration
         likeIcon.setImageResource(movie.ic_like)
         fifthStar.setImageResource((movie.fifth_star_icon))
-
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }

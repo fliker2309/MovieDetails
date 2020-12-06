@@ -1,4 +1,4 @@
-package com.example.moviedetails
+package com.example.moviedetails.ui.movielist
 
 import android.content.Context
 import android.os.Bundle
@@ -9,12 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.MovieListAdapter
+import com.example.moviedetails.R
 import com.example.moviedetails.data.DataContainer
 import com.example.moviedetails.data.Movie
+import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
 
 class MovieListFragment : Fragment() {
 
-
+    private var fragmentMovieListClickListener: ClickListenerFragment? = null
     private lateinit var movieListRecycler: RecyclerView
 
     override fun onCreateView(
@@ -27,9 +30,10 @@ class MovieListFragment : Fragment() {
             movies = movieList,
             cardListener = {
                 //обрабатывает переход на новый экран
-                Toast.makeText(context, "Worked!", Toast.LENGTH_SHORT)
-                    .show()
+                fragmentMovieListClickListener?.toSecondFragment()
             }
+
+
         )
         val gridLayoutManager = GridLayoutManager(context, 2)
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
@@ -46,11 +50,15 @@ class MovieListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        if (context is ClickListenerFragment) {
+            fragmentMovieListClickListener = context
+        }
 
     }
 
     override fun onDetach() {
         super.onDetach()
+        fragmentMovieListClickListener = null
 
     }
 
@@ -60,7 +68,4 @@ class MovieListFragment : Fragment() {
         const val TAG = "moviesListFragment"
     }
 
-    private fun onMovieLabelClick() {
-
-    }
 }
