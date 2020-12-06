@@ -26,9 +26,9 @@ class MovieDetailsAdapter(
 }
 
 class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    // private val idActor: Int = view.findViewById<>()
+
     private val avatarActor: ImageView = view.findViewById(R.id.first_actor_image)
-    private val nameActor : TextView = view.findViewById(R.id.first_actor_name)
+    private val nameActor: TextView = view.findViewById(R.id.first_actor_name)
 
 
     fun bind(actor: Actor) {

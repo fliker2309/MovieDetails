@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cast"
         app:srcCompat="@drawable/stark" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/first_actor_name"
         android:layout_width="0dp"
@@ -28,80 +29,5 @@
         app:layout_constraintEnd_toEndOf="@+id/first_actor_image"
         app:layout_constraintStart_toStartOf="@id/first_actor_image"
         app:layout_constraintTop_toBottomOf="@+id/first_actor_image" />
-<!---
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/second_actor_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="7dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintEnd_toStartOf="@+id/third_actor_image"
-        app:layout_constraintStart_toEndOf="@+id/first_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/cast"
-        app:srcCompat="@drawable/evans" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/third_actor_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="7dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintEnd_toStartOf="@+id/fourth_actor_image"
-        app:layout_constraintStart_toEndOf="@+id/second_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/cast"
-        app:srcCompat="@drawable/ruffulo" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fourth_actor_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="7dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/third_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/cast"
-        app:srcCompat="@drawable/hemsword" />
-
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/second_actor_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="center_vertical"
-        android:text="@string/chris_evans"
-        android:textAppearance="@style/ActorsTextName"
-        app:layout_constraintEnd_toEndOf="@+id/second_actor_image"
-        app:layout_constraintStart_toStartOf="@+id/second_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/second_actor_image" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/third_actor_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="center_vertical"
-        android:text="@string/mark_ruffalo"
-        android:textAppearance="@style/ActorsTextName"
-        app:layout_constraintEnd_toEndOf="@+id/third_actor_image"
-        app:layout_constraintStart_toStartOf="@+id/third_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/third_actor_image" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fourth_actor_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="center_vertical"
-        android:text="@string/chris_hemsworth"
-        android:textAppearance="@style/ActorsTextName"
-        app:layout_constraintEnd_toEndOf="@+id/fourth_actor_image"
-        app:layout_constraintStart_toStartOf="@+id/fourth_actor_image"
-        app:layout_constraintTop_toBottomOf="@+id/fourth_actor_image" />
--->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
