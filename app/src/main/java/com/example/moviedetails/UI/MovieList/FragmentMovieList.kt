@@ -29,7 +29,6 @@ class MovieListFragment : Fragment() {
         val movieListAdapter = MovieListAdapter(
             movies = movieList,
             cardListener = {
-                //обрабатывает переход на новый экран
                 fragmentMovieListClickListener?.toSecondFragment()
             }
 
