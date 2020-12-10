@@ -1,7 +1,6 @@
 package com.example.moviedetails.data
 
-import com.example.moviedetails.R
-
+import com.example.moviedetails.ui.R
 
 object DataContainer {
 
