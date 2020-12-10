@@ -1,12 +1,12 @@
-package com.example.moviedetails.ui
+package com.example.moviedetails.UI
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.moviedetails.R
-import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
-import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
-import com.example.moviedetails.ui.movielist.MovieListFragment
+import com.example.moviedetails.UI.moviedetails.ClickListenerFragment
+import com.example.moviedetails.UI.moviedetails.MovieDetailsFragment
+import com.example.moviedetails.UI.movielist.MovieListFragment
 
 class MainActivity : AppCompatActivity(), ClickListenerFragment {
 
