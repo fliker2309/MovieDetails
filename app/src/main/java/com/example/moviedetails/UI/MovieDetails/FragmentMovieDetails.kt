@@ -1,7 +1,6 @@
 package com.example.moviedetails.ui.moviedetails
 
 import android.content.Context
-import android.media.Rating
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +10,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.R
 import com.example.moviedetails.data.Actor
 import com.example.moviedetails.data.DataContainer
-import com.example.moviedetails.data.Movie
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
-import org.w3c.dom.Text
 
 private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
