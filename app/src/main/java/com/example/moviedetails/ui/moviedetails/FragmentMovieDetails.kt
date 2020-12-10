@@ -57,7 +57,6 @@ class MovieDetailsFragment : Fragment() {
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
             storyLine.text = movie.story_line
-
         }
         val movieDetailsAdapter = MovieDetailsAdapter()
         val linearLayoutManager = LinearLayoutManager(context)

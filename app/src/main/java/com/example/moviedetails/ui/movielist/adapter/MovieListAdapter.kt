@@ -52,9 +52,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }
-
     }
-
 }
 
 
