@@ -1,10 +1,11 @@
-package com.example.moviedetails
+package com.example.moviedetails.ui
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.fragment.app.FragmentManager
+import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
+import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import com.example.moviedetails.ui.movielist.MovieListFragment
 
 class MainActivity : AppCompatActivity(), ClickListenerFragment {
 
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         if (savedInstanceState == null) {
             movieListFragment = MovieListFragment.newInstance()
             supportFragmentManager.beginTransaction()
@@ -22,7 +24,6 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
             movieListFragment =
                 supportFragmentManager.findFragmentByTag(MovieListFragment.TAG) as MovieListFragment
         }
-
     }
 
     override fun toSecondFragment() {
@@ -30,8 +31,6 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
             .addToBackStack(null)
             .replace(R.id.main_container, MovieDetailsFragment())
             .commit()
-
     }
-
 }
 
