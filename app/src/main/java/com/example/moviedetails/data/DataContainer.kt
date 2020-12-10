@@ -114,6 +114,7 @@ object DataContainer {
         )
     )
 
+    fun getMovie(id: Long): Movie = moviesMap[id] ?: error("Cannot find such movie ID=$id")
 
     fun getAllMovies(): List<Movie> {
         return moviesMap.map { it.value }
