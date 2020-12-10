@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedetails.MovieListAdapter
+import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.R
 import com.example.moviedetails.data.DataContainer
-import com.example.moviedetails.data.Movie
+
 import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
+
 
 class MovieListFragment : Fragment() {
 
@@ -31,8 +31,6 @@ class MovieListFragment : Fragment() {
             cardListener = {
                 fragmentMovieListClickListener?.toSecondFragment()
             }
-
-
         )
         val gridLayoutManager = GridLayoutManager(context, 2)
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
@@ -44,7 +42,6 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
     }
 
     override fun onAttach(context: Context) {
@@ -52,19 +49,15 @@ class MovieListFragment : Fragment() {
         if (context is ClickListenerFragment) {
             fragmentMovieListClickListener = context
         }
-
     }
 
     override fun onDetach() {
         super.onDetach()
         fragmentMovieListClickListener = null
-
     }
 
     companion object {
         fun newInstance() = MovieListFragment()
-
         const val TAG = "moviesListFragment"
     }
-
 }

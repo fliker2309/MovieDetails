@@ -1,10 +1,8 @@
 package com.example.moviedetails.ui
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import com.example.moviedetails.R
 import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
@@ -26,7 +24,6 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
             movieListFragment =
                 supportFragmentManager.findFragmentByTag(MovieListFragment.TAG) as MovieListFragment
         }
-
     }
 
     override fun toSecondFragment() {

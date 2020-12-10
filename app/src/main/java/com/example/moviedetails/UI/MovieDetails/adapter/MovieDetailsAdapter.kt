@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.R
 import com.example.moviedetails.data.Actor
 
-class MovieDetailsAdapter(
-    private val actors: List<Actor>
-) : RecyclerView.Adapter<ActorViewHolder>() {
+class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
+
+    private var actors: List<Actor> = listOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.view_holder_actor, parent, false)

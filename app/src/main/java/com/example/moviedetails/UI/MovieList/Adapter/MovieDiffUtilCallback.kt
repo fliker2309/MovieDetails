@@ -1,4 +1,4 @@
-package com.example.moviedetails
+package com.example.moviedetails.ui.movielist.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.moviedetails.data.Movie

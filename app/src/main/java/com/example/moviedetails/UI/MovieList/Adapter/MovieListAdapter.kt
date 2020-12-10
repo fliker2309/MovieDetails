@@ -1,4 +1,4 @@
-package com.example.moviedetails
+package com.example.moviedetails.ui.movielist.adapter
 
 
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.R
 
 class MovieListAdapter(
     private val movies: List<Movie>,
