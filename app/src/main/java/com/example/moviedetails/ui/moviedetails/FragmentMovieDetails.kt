@@ -49,6 +49,8 @@ class MovieDetailsFragment : Fragment() {
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
 
+
+
         movie?.let {
             backgroundImage.setImageResource(movie.movie_background_image)
             pegiInfo.text = movie.pegi_info
@@ -57,12 +59,16 @@ class MovieDetailsFragment : Fragment() {
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
             storyLine.text = movie.story_line
+            val movieDetailsAdapter = MovieDetailsAdapter()
+            actors.apply {
+                val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+                actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+                actorListRecycler.layoutManager = linearLayoutManager
+                actorListRecycler.adapter = movieDetailsAdapter
+            }
+
         }
-        val movieDetailsAdapter = MovieDetailsAdapter()
-        val linearLayoutManager = LinearLayoutManager(context)
-        actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
-        actorListRecycler.layoutManager = linearLayoutManager
-        actorListRecycler.adapter = movieDetailsAdapter
+
 
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
@@ -80,12 +86,6 @@ class MovieDetailsFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         fragmentMovieDetailsClickListener = null
-    }
-
-    companion object {
-        fun newInstance(movieId: Long) = MovieDetailsFragment().apply {
-            arguments = bundleOf(MOVIE_ID_KEY to movieId)
-        }
     }
 }
 
