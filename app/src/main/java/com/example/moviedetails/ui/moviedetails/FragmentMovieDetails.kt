@@ -13,9 +13,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
-import com.example.moviedetails.data.Actor
 import com.example.moviedetails.data.DataContainer
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
+import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 
 private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
@@ -25,7 +25,7 @@ class MovieDetailsFragment : Fragment() {
 
     private lateinit var actorListRecycler: RecyclerView
     private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
-    private val movieDetailsAdapter = MovieDetailsAdapter()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,6 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val pegiInfo: TextView = view!!.findViewById(R.id.pegi_info)
@@ -48,11 +47,14 @@ class MovieDetailsFragment : Fragment() {
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
-        actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
 
         val movie = movieId?.let { DataContainer.getMovie(it) }
         val cast = movie?.cast
-
+        val movieDetailsAdapter = cast?.let {
+            MovieDetailsAdapter(
+                actors = cast
+            )
+        }
         movie?.let {
             backgroundImage.setImageResource(movie.movie_background_image)
             pegiInfo.text = movie.pegi_info
@@ -61,21 +63,19 @@ class MovieDetailsFragment : Fragment() {
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
             storyLine.text = movie.story_line
-            cast.let {
-                val linearLayoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                actorListRecycler.layoutManager = linearLayoutManager
-                actorListRecycler.adapter = movieDetailsAdapter
-            }
-
-
+            actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+            val linearLayoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            actorListRecycler.layoutManager = linearLayoutManager
+            actorListRecycler.adapter = movieDetailsAdapter
         }
-
-
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     override fun onAttach(context: Context) {
