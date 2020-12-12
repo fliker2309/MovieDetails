@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.data.Actor
 
-class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
-
+class MovieDetailsAdapter(
     private var actors: List<Actor> = listOf()
+) : RecyclerView.Adapter<ActorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -33,7 +33,6 @@ class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameActor: TextView = view.findViewById(R.id.first_actor_name)
 
     fun bind(actor: Actor) {
-
         avatarActor.setImageResource(actor.avatar!!)
         nameActor.text = actor.fullName
     }

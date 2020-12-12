@@ -22,7 +22,7 @@ private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 class MovieDetailsFragment : Fragment() {
 
     private var movieId: Long? = null
-    private val actors: List<Actor> = listOf()
+
     private lateinit var actorListRecycler: RecyclerView
     private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
     private val movieDetailsAdapter = MovieDetailsAdapter()
@@ -39,6 +39,7 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val pegiInfo: TextView = view!!.findViewById(R.id.pegi_info)
@@ -48,7 +49,9 @@ class MovieDetailsFragment : Fragment() {
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
         actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+
         val movie = movieId?.let { DataContainer.getMovie(it) }
+        val cast = movie?.cast
 
         movie?.let {
             backgroundImage.setImageResource(movie.movie_background_image)
@@ -58,7 +61,7 @@ class MovieDetailsFragment : Fragment() {
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
             storyLine.text = movie.story_line
-            actors.let {
+            cast.let {
                 val linearLayoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 actorListRecycler.layoutManager = linearLayoutManager
