@@ -78,10 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="182dp"
-           tools:text="@string/action_adventure_drama"
             android:textAppearance="@style/genre"
             app:layout_constraintStart_toStartOf="@id/label_avengers"
-            app:layout_constraintTop_toBottomOf="@id/pegi_info" />
+            app:layout_constraintTop_toBottomOf="@id/pegi_info"
+            tools:text="@string/action_adventure_drama" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/first_star_icon"
@@ -101,7 +101,7 @@
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/first_star_icon"
             app:layout_constraintTop_toBottomOf="@id/text_genre"
-           tools:srcCompat="@drawable/ic_filled_star" />
+            tools:srcCompat="@drawable/ic_filled_star" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/third_star_icon"
@@ -139,10 +139,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="3dp"
-           tools:text="@string/_125_reviews"
             android:textAppearance="@style/label_review"
             app:layout_constraintStart_toEndOf="@id/fifth_star_icon"
-            app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/label_avengers_movie"
@@ -150,20 +150,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
-           tools:text="@string/label_avengers_end_game"
             android:textAppearance="@style/label_movie_name"
             app:layout_constraintStart_toStartOf="@id/label_avengers"
-            app:layout_constraintTop_toBottomOf="@id/label_avengers" />
+            app:layout_constraintTop_toBottomOf="@id/label_avengers"
+            tools:text="@string/label_avengers_end_game" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/avengers_movie_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="@string/_137_min"
             android:textAppearance="@style/label_movie_duration"
             app:layout_constraintStart_toStartOf="@id/label_avengers_movie"
-            app:layout_constraintTop_toBottomOf="@id/label_avengers_movie" />
-
+            app:layout_constraintTop_toBottomOf="@id/label_avengers_movie"
+            tools:text="@string/_137_min" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
