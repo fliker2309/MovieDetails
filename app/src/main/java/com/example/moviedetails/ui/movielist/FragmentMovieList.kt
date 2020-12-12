@@ -35,7 +35,7 @@ class MovieListFragment : Fragment() {
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
 
-        val gridLayoutManager = GridLayoutManager(activity,spanCount)
+        val gridLayoutManager = GridLayoutManager(activity, spanCount)
         gridLayoutManager.spanSizeLookup
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
