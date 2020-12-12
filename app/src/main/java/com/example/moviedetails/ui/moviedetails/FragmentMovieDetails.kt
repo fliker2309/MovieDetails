@@ -26,6 +26,7 @@ class MovieDetailsFragment : Fragment() {
     private val actors: List<Actor> = listOf()
     private lateinit var actorListRecycler: RecyclerView
     private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
+    private val movieDetailsAdapter = MovieDetailsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class MovieDetailsFragment : Fragment() {
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
-
+        actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
 
 
         movie?.let {
@@ -59,13 +60,13 @@ class MovieDetailsFragment : Fragment() {
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
             storyLine.text = movie.story_line
-            val movieDetailsAdapter = MovieDetailsAdapter()
-            actors.apply {
-                val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-                actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+            actors.let {
+                val linearLayoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 actorListRecycler.layoutManager = linearLayoutManager
                 actorListRecycler.adapter = movieDetailsAdapter
             }
+
 
         }
 
