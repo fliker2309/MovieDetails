@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
@@ -41,7 +40,6 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
-        val movie = movieId?.let { DataContainer.getMovie(it) }
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val pegiInfo: TextView = view!!.findViewById(R.id.pegi_info)
         val movieName: TextView = view.findViewById(R.id.film_name)
@@ -50,7 +48,7 @@ class MovieDetailsFragment : Fragment() {
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
         actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
-
+        val movie = movieId?.let { DataContainer.getMovie(it) }
 
         movie?.let {
             backgroundImage.setImageResource(movie.movie_background_image)
