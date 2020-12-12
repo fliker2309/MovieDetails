@@ -33,9 +33,8 @@ class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameActor: TextView = view.findViewById(R.id.first_actor_name)
 
     fun bind(actor: Actor) {
-        actor.avatar?.let { avatarImage ->
-            avatarActor.setImageResource(avatarImage)
-        } ?: avatarActor.setImageResource(R.drawable.ic_unknown_actor_avatar)
+
+        avatarActor.setImageResource(actor.avatar!!)
         nameActor.text = actor.fullName
     }
 }

@@ -32,7 +32,11 @@ class MovieListFragment : Fragment() {
                 fragmentMovieListClickListener?.toSecondFragment()
             }
         )
-        val gridLayoutManager = GridLayoutManager(context, 2)
+        val spanCount =
+            calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
+
+        val gridLayoutManager = GridLayoutManager(activity,spanCount)
+        gridLayoutManager.spanSizeLookup
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler.layoutManager = gridLayoutManager
@@ -59,5 +63,10 @@ class MovieListFragment : Fragment() {
     companion object {
         fun newInstance() = MovieListFragment()
         const val TAG = "moviesListFragment"
+    }
+
+    private fun calculateSpanCount(spanWidthPixels: Int): Int {
+        val screenWidthPixels = requireContext().resources.displayMetrics.widthPixels
+        return (screenWidthPixels / spanWidthPixels + 0.5).toInt()
     }
 }
