@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
@@ -88,6 +89,11 @@ class MovieDetailsFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         fragmentMovieDetailsClickListener = null
+    }
+    companion object {
+        fun newInstance(movieId: Long) = MovieDetailsFragment().apply {
+            arguments = bundleOf(MOVIE_ID_KEY to movieId)
+        }
     }
 }
 
