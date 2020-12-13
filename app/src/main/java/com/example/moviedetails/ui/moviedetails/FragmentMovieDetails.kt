@@ -22,10 +22,8 @@ private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 class MovieDetailsFragment : Fragment() {
 
     private var movieId: Long? = null
-
     private lateinit var actorListRecycler: RecyclerView
     private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +45,6 @@ class MovieDetailsFragment : Fragment() {
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
-
-
         val movie = movieId?.let { DataContainer.getMovie(it) }
         val cast = movie?.cast
         val movieDetailsAdapter = cast?.let {
@@ -97,7 +93,8 @@ class MovieDetailsFragment : Fragment() {
             return fragment
         }
     }
+
     interface ClickListenerFragment {
-        fun toSecondFragment()
+
     }
 }

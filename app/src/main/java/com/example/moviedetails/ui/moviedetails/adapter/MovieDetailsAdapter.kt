@@ -27,10 +27,9 @@ class MovieDetailsAdapter(
     override fun getItemCount(): Int = actors.size
 }
 
-class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    private val avatarActor: ImageView = view.findViewById(R.id.first_actor_image)
-    private val nameActor: TextView = view.findViewById(R.id.first_actor_name)
+class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+    private val avatarActor: ImageView = listItemView.findViewById(R.id.actor_image)
+    private val nameActor: TextView = listItemView.findViewById(R.id.actor_name)
 
     fun bind(actor: Actor) {
         apply {
