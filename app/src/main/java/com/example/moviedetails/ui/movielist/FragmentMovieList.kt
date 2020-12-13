@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.data.DataContainer
-
-import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
+import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 
 
 class MovieListFragment : Fragment() {
 
-    private var fragmentMovieListClickListener: ClickListenerFragment? = null
+    private var fragmentMovieListClickListener: MovieDetailsFragment.ClickListenerFragment? = null
     private lateinit var movieListRecycler: RecyclerView
 
     override fun onCreateView(
@@ -50,7 +49,7 @@ class MovieListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is ClickListenerFragment) {
+        if (context is MovieDetailsFragment.ClickListenerFragment) {
             fragmentMovieListClickListener = context
         }
     }

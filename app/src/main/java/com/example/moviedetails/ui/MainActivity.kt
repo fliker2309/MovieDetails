@@ -3,11 +3,10 @@ package com.example.moviedetails.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.moviedetails.ui.moviedetails.ClickListenerFragment
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import com.example.moviedetails.ui.movielist.MovieListFragment
 
-class MainActivity : AppCompatActivity(), ClickListenerFragment {
+class MainActivity : AppCompatActivity(), MovieDetailsFragment.ClickListenerFragment {
 
     private lateinit var movieListFragment: MovieListFragment
 
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity(), ClickListenerFragment {
     override fun toSecondFragment() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.main_container, MovieDetailsFragment())
+            .replace(R.id.main_container, MovieDetailsFragment.newInstance(movieId = 1L))
             .commit()
     }
 }

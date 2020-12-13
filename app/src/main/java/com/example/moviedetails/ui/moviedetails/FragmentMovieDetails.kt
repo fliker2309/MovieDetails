@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
@@ -49,6 +48,7 @@ class MovieDetailsFragment : Fragment() {
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
 
+
         val movie = movieId?.let { DataContainer.getMovie(it) }
         val cast = movie?.cast
         val movieDetailsAdapter = cast?.let {
@@ -76,9 +76,6 @@ class MovieDetailsFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is ClickListenerFragment) {
@@ -90,13 +87,17 @@ class MovieDetailsFragment : Fragment() {
         super.onDetach()
         fragmentMovieDetailsClickListener = null
     }
+
     companion object {
-        fun newInstance(movieId: Long) = MovieDetailsFragment().apply {
-            arguments = bundleOf(MOVIE_ID_KEY to movieId)
+        fun newInstance(movieId: Long): MovieDetailsFragment {
+            val args = Bundle()
+            args.putLong(MOVIE_ID_KEY, movieId)
+            val fragment = MovieDetailsFragment()
+            fragment.arguments = args
+            return fragment
         }
     }
-}
-
-interface ClickListenerFragment {
-    fun toSecondFragment()
+    interface ClickListenerFragment {
+        fun toSecondFragment()
+    }
 }
