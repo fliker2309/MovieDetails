@@ -10,7 +10,7 @@ import com.example.moviedetails.ui.R
 import com.example.moviedetails.data.Actor
 
 class MovieDetailsAdapter(
-    private var actors: List<Actor> = listOf()
+    private var actors: List<Actor>
 ) : RecyclerView.Adapter<ActorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
@@ -33,7 +33,11 @@ class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val nameActor: TextView = view.findViewById(R.id.first_actor_name)
 
     fun bind(actor: Actor) {
-        avatarActor.setImageResource(actor.avatar!!)
-        nameActor.text = actor.fullName
+        apply {
+            actor.avatar?.let { avatarImage ->
+                avatarActor.setImageResource(avatarImage)
+            } ?: avatarActor.setImageResource(R.drawable.ic_unknown_actor_avatar)
+            nameActor.text = actor.fullName
+        }
     }
 }

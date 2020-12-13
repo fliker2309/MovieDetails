@@ -16,6 +16,10 @@ import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 
 class MovieListFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = MovieListFragment()
+        const val TAG = "moviesListFragment"
+    }
     private var fragmentMovieListClickListener: MovieDetailsFragment.ClickListenerFragment? = null
     private lateinit var movieListRecycler: RecyclerView
 
@@ -27,9 +31,7 @@ class MovieListFragment : Fragment() {
         val movieList = DataContainer.getAllMovies()
         val movieListAdapter = MovieListAdapter(
             movies = movieList,
-            cardListener = {
-                fragmentMovieListClickListener?.toSecondFragment()
-            }
+            cardListener = onMoviePromoCardClick()
         )
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
@@ -59,9 +61,11 @@ class MovieListFragment : Fragment() {
         fragmentMovieListClickListener = null
     }
 
-    companion object {
-        fun newInstance() = MovieListFragment()
-        const val TAG = "moviesListFragment"
+    private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
+        fragmentManager?.beginTransaction()
+            ?.addToBackStack(null)
+            ?.add(R.id.main_container, MovieDetailsFragment.newInstance(movieId))
+            ?.commit()
     }
 
     private fun calculateSpanCount(spanWidthPixels: Int): Int {
