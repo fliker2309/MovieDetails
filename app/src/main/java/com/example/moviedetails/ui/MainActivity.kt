@@ -1,10 +1,9 @@
 package com.example.moviedetails.ui
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import com.example.moviedetails.ui.movielist.MovieListFragment
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var movieListFragment: MovieListFragment

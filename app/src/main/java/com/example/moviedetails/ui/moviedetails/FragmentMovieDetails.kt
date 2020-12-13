@@ -95,6 +95,5 @@ class MovieDetailsFragment : Fragment() {
     }
 
     interface ClickListenerFragment {
-
     }
 }

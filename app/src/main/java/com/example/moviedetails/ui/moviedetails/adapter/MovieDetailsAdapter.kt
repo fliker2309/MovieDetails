@@ -16,7 +16,6 @@ class MovieDetailsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.view_holder_actor, parent, false)
-
         return ActorViewHolder(view)
     }
 
