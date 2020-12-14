@@ -31,11 +31,9 @@ class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView
     private val nameActor: TextView = listItemView.findViewById(R.id.actor_name)
 
     fun bind(actor: Actor) {
-        apply {
-            actor.avatar?.let { avatarImage ->
-                avatarActor.setImageResource(avatarImage)
-            } ?: avatarActor.setImageResource(R.drawable.ic_unknown_actor_avatar)
-            nameActor.text = actor.fullName
-        }
+        actor.avatar?.let { avatarImage ->
+            avatarActor.setImageResource(avatarImage)
+        } ?: avatarActor.setImageResource(R.drawable.ic_unknown_actor_avatar)
+        nameActor.text = actor.fullName
     }
 }
