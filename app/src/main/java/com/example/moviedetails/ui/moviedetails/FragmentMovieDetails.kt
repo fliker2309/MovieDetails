@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
@@ -23,7 +24,6 @@ class MovieDetailsFragment : Fragment() {
 
     private var movieId: Long? = null
     private lateinit var actorListRecycler: RecyclerView
-    private var fragmentMovieDetailsClickListener: ClickListenerFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class MovieDetailsFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
         val backgroundImage: ImageView = view.findViewById(R.id.background)
-        val pegiInfo: TextView = view!!.findViewById(R.id.pegi_info)
+        val pegiInfo: TextView = view.findViewById(R.id.pegi_info)
         val movieName: TextView = view.findViewById(R.id.film_name)
         val genre: TextView = view.findViewById(R.id.text_genre)
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
@@ -72,28 +72,13 @@ class MovieDetailsFragment : Fragment() {
         return view
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is ClickListenerFragment) {
-            fragmentMovieDetailsClickListener = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        fragmentMovieDetailsClickListener = null
-    }
-
     companion object {
         fun newInstance(movieId: Long): MovieDetailsFragment {
-            val args = Bundle()
-            args.putLong(MOVIE_ID_KEY, movieId)
-            val fragment = MovieDetailsFragment()
-            fragment.arguments = args
-            return fragment
+            return MovieDetailsFragment().apply {
+                arguments = bundleOf(
+                    MOVIE_ID_KEY to movieId
+                )
+            }
         }
-    }
-
-    interface ClickListenerFragment {
     }
 }
