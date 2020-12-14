@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_promo_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="18dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:maxWidth="170dp"
+    app:cardCornerRadius="6dp"
+    app:strokeColor="#803B3B4D"
+    app:strokeWidth="2dp"
+    tools:layout_marginTop="30dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_gradient_movie_item_background"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_avengers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/avengers" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/label_background_linear"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/label_avengers"
+            app:layout_constraintEnd_toEndOf="@id/label_avengers"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toTopOf="@id/label_avengers"
+            app:srcCompat="@drawable/icon_background"
+            tools:viewBindingIgnore="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pegi_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/pegiInfo"
+            app:layout_constraintEnd_toStartOf="@id/ic_like"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_rectangle"
+            tools:srcCompat="@drawable/ic_rectangle"
+            tools:viewBindingIgnore="true" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pegi_info"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_like" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="182dp"
+            android:textAppearance="@style/genre"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toBottomOf="@id/pegi_info"
+            tools:text="@string/action_adventure_drama" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/first_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            tools:srcCompat="@drawable/ic_filled_star" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/second_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toEndOf="@id/first_star_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            tools:srcCompat="@drawable/ic_filled_star" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/third_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toEndOf="@id/second_star_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            tools:srcCompat="@drawable/ic_filled_star" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fourth_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toEndOf="@id/third_star_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            tools:srcCompat="@drawable/ic_filled_star" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fifth_star_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toEndOf="@id/fourth_star_icon"
+            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            tools:srcCompat="@drawable/ic_unfilled_star" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/reviews_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="3dp"
+            android:textAppearance="@style/label_review"
+            app:layout_constraintStart_toEndOf="@id/fifth_star_icon"
+            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            tools:text="@string/_125_reviews" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label_avengers_movie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:textAppearance="@style/label_movie_name"
+            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintTop_toBottomOf="@id/label_avengers"
+            tools:text="@string/label_avengers_end_game" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/avengers_movie_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/label_movie_duration"
+            app:layout_constraintStart_toStartOf="@id/label_avengers_movie"
+            app:layout_constraintTop_toBottomOf="@id/label_avengers_movie"
+            tools:text="@string/_137_min" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
