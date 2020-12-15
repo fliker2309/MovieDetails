@@ -156,7 +156,7 @@
             tools:text="@string/label_avengers_end_game" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/avengers_movie_duration"
+            android:id="@+id/runtime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/label_movie_duration"
