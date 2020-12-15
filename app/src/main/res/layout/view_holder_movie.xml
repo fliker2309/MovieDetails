@@ -34,7 +34,7 @@
             app:srcCompat="@drawable/avengers" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/label_background_linear"
+            android:id="@+id/poster_background_linear"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
@@ -47,7 +47,7 @@
             tools:viewBindingIgnore="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/pegi_info"
+            android:id="@+id/minimum_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -68,19 +68,19 @@
             android:layout_marginTop="11dp"
             android:layout_marginEnd="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/pegi_info"
+            app:layout_constraintStart_toEndOf="@id/minimum_age"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/ic_like" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_genre"
+            android:id="@+id/genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="182dp"
             android:textAppearance="@style/genre"
             app:layout_constraintStart_toStartOf="@id/poster"
-            app:layout_constraintTop_toBottomOf="@id/pegi_info"
+            app:layout_constraintTop_toBottomOf="@id/minimum_age"
             tools:text="@string/action_adventure_drama" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -90,7 +90,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@id/poster"
-            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             tools:srcCompat="@drawable/ic_filled_star" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -100,7 +100,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/first_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             tools:srcCompat="@drawable/ic_filled_star" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -110,7 +110,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/second_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             tools:srcCompat="@drawable/ic_filled_star" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -120,7 +120,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/third_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             tools:srcCompat="@drawable/ic_filled_star" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -130,7 +130,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toEndOf="@id/fourth_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/text_genre"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             tools:srcCompat="@drawable/ic_unfilled_star" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -141,7 +141,7 @@
             android:layout_marginTop="3dp"
             android:textAppearance="@style/label_review"
             app:layout_constraintStart_toEndOf="@id/fifth_star_icon"
-            app:layout_constraintTop_toBottomOf="@+id/text_genre"
+            app:layout_constraintTop_toBottomOf="@+id/genre"
             tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
