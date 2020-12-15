@@ -24,7 +24,7 @@
         android:paddingBottom="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/label_avengers"
+            android:id="@+id/poster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -39,10 +39,10 @@
             android:layout_height="0dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/label_avengers"
-            app:layout_constraintEnd_toEndOf="@id/label_avengers"
-            app:layout_constraintStart_toStartOf="@id/label_avengers"
-            app:layout_constraintTop_toTopOf="@id/label_avengers"
+            app:layout_constraintBottom_toBottomOf="@id/poster"
+            app:layout_constraintEnd_toEndOf="@id/poster"
+            app:layout_constraintStart_toStartOf="@id/poster"
+            app:layout_constraintTop_toTopOf="@id/poster"
             app:srcCompat="@drawable/icon_background"
             tools:viewBindingIgnore="true" />
 
@@ -79,7 +79,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="182dp"
             android:textAppearance="@style/genre"
-            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintStart_toStartOf="@id/poster"
             app:layout_constraintTop_toBottomOf="@id/pegi_info"
             tools:text="@string/action_adventure_drama" />
 
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
-            app:layout_constraintStart_toStartOf="@id/label_avengers"
+            app:layout_constraintStart_toStartOf="@id/poster"
             app:layout_constraintTop_toBottomOf="@id/text_genre"
             tools:srcCompat="@drawable/ic_filled_star" />
 
@@ -151,8 +151,8 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="6dp"
             android:textAppearance="@style/label_movie_name"
-            app:layout_constraintStart_toStartOf="@id/label_avengers"
-            app:layout_constraintTop_toBottomOf="@id/label_avengers"
+            app:layout_constraintStart_toStartOf="@id/poster"
+            app:layout_constraintTop_toBottomOf="@id/poster"
             tools:text="@string/label_avengers_end_game" />
 
         <androidx.appcompat.widget.AppCompatTextView

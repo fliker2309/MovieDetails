@@ -1,6 +1,5 @@
 package com.example.moviedetails.ui.moviedetails
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,9 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
-import com.example.moviedetails.data.DataContainer
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
-import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 
 private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
@@ -45,7 +42,7 @@ class MovieDetailsFragment : Fragment() {
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
         val reviews: TextView = view.findViewById(R.id.reviews)
         val storyLine: TextView = view.findViewById(R.id.story_line_description)
-        val movie = movieId?.let { DataContainer.getMovie(it) }
+
         val cast = movie?.cast
         val movieDetailsAdapter = cast?.let {
             MovieDetailsAdapter(
