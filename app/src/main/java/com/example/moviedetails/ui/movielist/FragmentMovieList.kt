@@ -1,6 +1,5 @@
 package com.example.moviedetails.ui.movielist
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
-import com.example.moviedetails.data.DataContainer
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 
 
@@ -20,7 +18,7 @@ class MovieListFragment : Fragment() {
         fun newInstance() = MovieListFragment()
         const val TAG = "moviesListFragment"
     }
-    private var fragmentMovieListClickListener: MovieDetailsFragment.ClickListenerFragment? = null
+    private var fragmentMovieListClickListener: MovieDetailsFragment? = null
     private lateinit var movieListRecycler: RecyclerView
 
     override fun onCreateView(
@@ -28,7 +26,7 @@ class MovieListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val movieList = DataContainer.getAllMovies()
+
         val movieListAdapter = MovieListAdapter(
             movies = movieList,
             cardListener = onMoviePromoCardClick()
@@ -47,18 +45,6 @@ class MovieListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is MovieDetailsFragment.ClickListenerFragment) {
-            fragmentMovieListClickListener = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        fragmentMovieListClickListener = null
     }
 
     private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
