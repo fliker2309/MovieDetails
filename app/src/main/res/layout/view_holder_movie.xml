@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@drawable/ic_gradient_movie_item_background"
-        android:paddingBottom="8dp">
+        android:paddingBottom="@dimen/spacing_low">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poster"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_low"
             android:textAppearance="@style/pegiInfo"
             app:layout_constraintEnd_toStartOf="@id/ic_like"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
