@@ -134,7 +134,7 @@
             tools:srcCompat="@drawable/ic_unfilled_star" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/reviews_quantity"
+            android:id="@+id/total_reviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -145,7 +145,7 @@
             tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/label_avengers_movie"
+            android:id="@+id/movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -160,8 +160,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/label_movie_duration"
-            app:layout_constraintStart_toStartOf="@id/label_avengers_movie"
-            app:layout_constraintTop_toBottomOf="@id/label_avengers_movie"
+            app:layout_constraintStart_toStartOf="@id/movie_title"
+            app:layout_constraintTop_toBottomOf="@id/movie_title"
             tools:text="@string/_137_min" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

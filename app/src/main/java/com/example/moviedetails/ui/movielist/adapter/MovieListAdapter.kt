@@ -1,18 +1,19 @@
 package com.example.moviedetails.ui.movielist.adapter
 
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
 
+
 class MovieListAdapter(
     private val movies: List<Movie>,
-    private val cardListener: (Long) -> Unit,
+    private val cardListener: (Int) -> Unit,
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
@@ -29,39 +30,62 @@ class MovieListAdapter(
     override fun getItemCount(): Int = movies.size
 }
 
+class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
+    RecyclerView.ViewHolder(view) {
+    private val posterImage: ImageView = view.findViewById(R.id.poster)
+    private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
+    private val movieTitle: TextView = view.findViewById(R.id.movie_title)
+    private val pegiInfo: TextView = view.findViewById(R.id.pegi_info)
+    private val movieDurationText: TextView = view.findViewById((R.id.runtime))
+    private val movieTagsText: TextView = view.findViewById(R.id.text_genre)
+    private val movieTotalReviewText: TextView = view.findViewById(R.id.total_reviews)
+    fun bind(movie: Movie) {
+        itemView.setOnClickListener {
+            cardListener.invoke(movie.id)
+        }
+        //загрузка постера фильма
+        Glide
+            .with(itemView.context)
+            .load(movie.poster)
+            .centerCrop()
+            .placeholder(R.drawable.ic_image_download)
+            .error(R.drawable.ic_image_download)
+            .into(posterImage)
+
+        likeIcon.setImageResource(R.drawable.ic_like)
+        pegiInfo.text = itemView.context.getString(
+            R.string.pg_rating,
+            movie.minimumAge.toString()
+        )
+      //  movieRatingBar.setCurrentRating(movie.ratings / 2)
+        movieTitle.text = movie.title
+        movieDurationText.text = itemView.resources.getString(
+            R.string.movie_duration,
+            movie.runtime.toString()
+        )
+        movieTagsText.text = movie.genres.joinToString { it.name }
+        movieTotalReviewText.text = itemView.context.getString(
+            R.string.total_reviews,
+            movie.numberOfRatings.toString()
+        )
+    }
+
+
+}
+
+
+/*
 class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) :
     RecyclerView.ViewHolder(view) {
-    private val labelImage: ImageView = view.findViewById(R.id.label_avengers)
-    private val movieName: TextView = view.findViewById(R.id.label_avengers_movie)
-    private val pegiInfo: TextView = view.findViewById(R.id.pegi_info)
-    private val genre: TextView = view.findViewById(R.id.text_genre)
-    private val reviews: TextView = view.findViewById(R.id.reviews_quantity)
-    private val duration: TextView = view.findViewById((R.id.avengers_movie_duration))
-    private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
+
+
     private val firstStar: ImageView = view.findViewById(R.id.first_star_icon)
     private val secondStar: ImageView = view.findViewById(R.id.second_star_icon)
     private val thirdStar: ImageView = view.findViewById(R.id.third_star_icon)
     private val fourthStar: ImageView = view.findViewById(R.id.fourth_star_icon)
     private val fifthStar: ImageView = view.findViewById(R.id.fifth_star_icon)
 
-    fun bind(movie: Movie) {
-        labelImage.setImageResource(movie.label_image)
-        movieName.text = movie.movie_name
-        pegiInfo.text = movie.pegi_info
-        genre.text = movie.text_genre
-        reviews.text = movie.reviews_quantity
-        duration.text = movie.duration
-        likeIcon.setImageResource(movie.ic_like)
-        firstStar.setImageResource(movie.first_star_icon)
-        secondStar.setImageResource(movie.second_star_icon)
-        thirdStar.setImageResource(movie.third_star_icon)
-        fourthStar.setImageResource(movie.fourth_star_icon)
-        fifthStar.setImageResource((movie.fifth_star_icon))
-        itemView.setOnClickListener {
-            cardListener.invoke(movie.id)
-        }
-    }
-}
+}*/
 
 
 
