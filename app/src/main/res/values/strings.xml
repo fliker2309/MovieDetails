@@ -19,4 +19,7 @@
     <string name="action_adventure_drama">Action, Adventure, Drama</string>
     <string name="label_avengers_end_game">Avengers:End Game</string>
     <string name="_137_min">137 MIN</string>
+    <string name="total_reviews">%s Reviews</string>
+    <string name="movie_duration">%s MIN</string>
+    <string name="pg_rating">%s+</string>
 </resources>
