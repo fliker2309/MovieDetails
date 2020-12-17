@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/orig" />
+            tools:srcCompat="@drawable/orig" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/gradient_background"
@@ -52,42 +51,42 @@
             app:strokeWidth="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/film_name"
+            android:id="@+id/movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
-            android:text="@string/avengers_end_game"
             android:textAllCaps="false"
             android:textAppearance="@style/MovieName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pegi_info" />
+            app:layout_constraintTop_toBottomOf="@id/minimum_age"
+            tools:text="@string/avengers_end_game" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/pegi_info"
+            android:id="@+id/minimum_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="150dp"
-            android:text="@string/_13"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_to_main_button" />
+            app:layout_constraintTop_toBottomOf="@id/back_to_main_button"
+            tools:text="@string/_13" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_genre"
+            android:id="@+id/genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
-            android:text="@string/action_adventure_fantasy"
             android:textColor="#FF3466"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/film_name" />
+            app:layout_constraintTop_toBottomOf="@+id/movie_title"
+            tools:text="@string/action_adventure_fantasy" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -96,24 +95,24 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:rating="4"
             android:theme="@style/ratingBar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+            app:layout_constraintTop_toBottomOf="@+id/genre"
+            tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/reviews"
+            android:id="@+id/total_reviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginTop="3dp"
             android:gravity="center_vertical"
             android:lineSpacingExtra="4sp"
-            android:text="@string/_125_reviews"
             android:textColor="#6D6D80"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/ratingBar"
-            app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+            app:layout_constraintTop_toBottomOf="@+id/genre"
+            tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/story_line"
@@ -125,10 +124,10 @@
             android:text="@string/storyline"
             android:textColor="#ECECEC"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/reviews" />
+            app:layout_constraintTop_toBottomOf="@id/total_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/story_line_description"
+            android:id="@+id/overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -136,11 +135,11 @@
             android:layout_marginEnd="16dp"
             android:alpha="0.75"
             android:gravity="center_vertical"
-            android:text="@string/after_the_devastating_events_of_avengers_infinity_war_the_universe_is_in_ruins_with_the_help_of_remaining_allies_the_avengers_assemble_once_more_in_order_to_reverse_thanos_actions_and_restore_balance_to_the_universe"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/story_line" />
+            app:layout_constraintTop_toBottomOf="@+id/story_line"
+            tools:text="@string/after_the_devastating_events_of_avengers_infinity_war_the_universe_is_in_ruins_with_the_help_of_remaining_allies_the_avengers_assemble_once_more_in_order_to_reverse_thanos_actions_and_restore_balance_to_the_universe" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cast"
@@ -152,7 +151,7 @@
             android:text="@string/cast"
             android:textColor="#ECECEC"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/story_line_description" />
+            app:layout_constraintTop_toBottomOf="@id/overview" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actor_list_recycler_view"
@@ -162,8 +161,8 @@
             android:clipToPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cast"
-
             tools:listitem="@layout/view_holder_actor" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
