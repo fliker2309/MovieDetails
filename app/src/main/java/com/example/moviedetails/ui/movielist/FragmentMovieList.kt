@@ -18,7 +18,7 @@ class MovieListFragment : Fragment() {
         fun newInstance() = MovieListFragment()
         const val TAG = "moviesListFragment"
     }
-    private var fragmentMovieListClickListener: MovieDetailsFragment? = null
+
     private lateinit var movieListRecycler: RecyclerView
 
     override fun onCreateView(
@@ -28,6 +28,7 @@ class MovieListFragment : Fragment() {
     ): View {
 
         val movieListAdapter = MovieListAdapter(
+            //что делать с мувилистом
             movies = movieList,
             cardListener = onMoviePromoCardClick()
         )
@@ -47,7 +48,7 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
-    private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
+    private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
             ?.addToBackStack(null)
             ?.add(R.id.main_container, MovieDetailsFragment.newInstance(movieId))
