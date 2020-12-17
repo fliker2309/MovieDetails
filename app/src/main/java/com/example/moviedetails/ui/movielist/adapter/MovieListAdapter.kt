@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.moviedetails.data.Movie
@@ -36,9 +37,10 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
     private val movieTitle: TextView = view.findViewById(R.id.movie_title)
     private val pegiInfo: TextView = view.findViewById(R.id.pegi_info)
-    private val movieDurationText: TextView = view.findViewById((R.id.runtime))
-    private val movieTagsText: TextView = view.findViewById(R.id.text_genre)
-    private val movieTotalReviewText: TextView = view.findViewById(R.id.total_reviews)
+    private val durationText: TextView = view.findViewById((R.id.runtime))
+    private val tagsText: TextView = view.findViewById(R.id.text_genre)
+    private val totalReviewText: TextView = view.findViewById(R.id.total_reviews)
+    private val ratingBar: RatingBar = view.findViewById(R.id.poster_ratingBar)
     fun bind(movie: Movie) {
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
@@ -57,14 +59,14 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
             R.string.pg_rating,
             movie.minimumAge.toString()
         )
-      //  movieRatingBar.setCurrentRating(movie.ratings / 2)
+        ratingBar.setCurrentRating(movie.ratings / 2)
         movieTitle.text = movie.title
-        movieDurationText.text = itemView.resources.getString(
+        durationText.text = itemView.resources.getString(
             R.string.movie_duration,
             movie.runtime.toString()
         )
-        movieTagsText.text = movie.genres.joinToString { it.name }
-        movieTotalReviewText.text = itemView.context.getString(
+        tagsText.text = movie.genres.joinToString { it.name }
+        totalReviewText.text = itemView.context.getString(
             R.string.total_reviews,
             movie.numberOfRatings.toString()
         )
