@@ -53,13 +53,15 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="@dimen/spacing_low"
             android:textAppearance="@style/pegiInfo"
+            android:paddingTop="3dp"
             app:layout_constraintEnd_toStartOf="@id/ic_like"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_rectangle"
-            tools:srcCompat="@drawable/ic_rectangle"
-            tools:viewBindingIgnore="true" />
+            android:background="@drawable/ic_rectangle"
+            tools:viewBindingIgnore="true"
+            tools:text="@string/_13"
+           />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_like"
@@ -82,67 +84,29 @@
             app:layout_constraintStart_toStartOf="@id/poster"
             app:layout_constraintTop_toBottomOf="@id/minimum_age"
             tools:text="@string/action_adventure_drama" />
-<!-->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/first_star_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toStartOf="@id/poster"
-            app:layout_constraintTop_toBottomOf="@id/genre"
-            tools:srcCompat="@drawable/ic_filled_star" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/second_star_icon"
+        <RatingBar
+            android:id="@+id/poster_ratingBar"
+            style="@style/label_ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toEndOf="@id/first_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/genre"
-            tools:srcCompat="@drawable/ic_filled_star" />
+            android:layout_marginTop="@dimen/spacing_low"
+            tools:numStars="5"
+            app:layout_constraintStart_toStartOf="@id/genre"
+            app:layout_constraintTop_toBottomOf="@id/genre">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/third_star_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toEndOf="@id/second_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/genre"
-            tools:srcCompat="@drawable/ic_filled_star" />
+        </RatingBar>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fourth_star_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toEndOf="@id/third_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/genre"
-            tools:srcCompat="@drawable/ic_filled_star" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fifth_star_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toEndOf="@id/fourth_star_icon"
-            app:layout_constraintTop_toBottomOf="@id/genre"
-            tools:srcCompat="@drawable/ic_unfilled_star" />
-            <!-->
-// сделать рейтингбар
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/total_reviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="3dp"
             android:textAppearance="@style/label_review"
-            app:layout_constraintStart_toEndOf="@id/fifth_star_icon"
-            app:layout_constraintTop_toBottomOf="@+id/genre"
+            app:layout_constraintStart_toEndOf="@id/poster_ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/poster_ratingBar"
+            app:layout_constraintBottom_toBottomOf="@+id/poster_ratingBar"
             tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
