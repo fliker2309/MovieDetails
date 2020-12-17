@@ -52,16 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="@dimen/spacing_low"
-            android:textAppearance="@style/pegiInfo"
+            android:background="@drawable/ic_rectangle"
             android:paddingTop="3dp"
+            android:textAppearance="@style/pegiInfo"
             app:layout_constraintEnd_toStartOf="@id/ic_like"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ic_rectangle"
-            tools:viewBindingIgnore="true"
             tools:text="@string/_13"
-           />
+            tools:viewBindingIgnore="true" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_like"
@@ -91,12 +90,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_low"
-            tools:numStars="5"
             app:layout_constraintStart_toStartOf="@id/genre"
-            app:layout_constraintTop_toBottomOf="@id/genre">
-
-        </RatingBar>
-
+            app:layout_constraintTop_toBottomOf="@id/genre"
+            tools:numStars="5" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/total_reviews"
@@ -104,9 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:textAppearance="@style/label_review"
+            app:layout_constraintBottom_toBottomOf="@+id/poster_ratingBar"
             app:layout_constraintStart_toEndOf="@id/poster_ratingBar"
             app:layout_constraintTop_toTopOf="@+id/poster_ratingBar"
-            app:layout_constraintBottom_toBottomOf="@+id/poster_ratingBar"
             tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
