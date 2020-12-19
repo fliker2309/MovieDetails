@@ -10,6 +10,8 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
@@ -19,13 +21,13 @@ private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
 class MovieDetailsFragment : Fragment() {
 
-    private var movieId: Long? = null
+    private var movieId: Int? = null
     private lateinit var actorListRecycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            movieId = it.getLong(MOVIE_ID_KEY)
+            movieId = it.getInt(MOVIE_ID_KEY)
         }
     }
 
@@ -36,27 +38,27 @@ class MovieDetailsFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_movies_details, container, false)
         val backgroundImage: ImageView = view.findViewById(R.id.background)
-        val pegiInfo: TextView = view.findViewById(R.id.pegi_info)
-        val movieName: TextView = view.findViewById(R.id.film_name)
-        val genre: TextView = view.findViewById(R.id.text_genre)
+        val minimumAge: TextView = view.findViewById(R.id.minimum_age)
+        val movieTitle: TextView = view.findViewById(R.id.movie_title)
+        val genre: TextView = view.findViewById(R.id.genre)
         val rating: RatingBar = view.findViewById(R.id.ratingBar)
-        val reviews: TextView = view.findViewById(R.id.reviews)
-        val storyLine: TextView = view.findViewById(R.id.story_line_description)
+        val reviews: TextView = view.findViewById(R.id.total_reviews)
+        val storyLine: TextView = view.findViewById(R.id.overview)
 
-        val cast = movie?.cast
+      !!  val cast = movie?.cast
         val movieDetailsAdapter = cast?.let {
             MovieDetailsAdapter(
                 actors = cast
             )
         }
-        movie?.let {
+        !!movie?.let {
             backgroundImage.setImageResource(movie.movie_background_image)
             pegiInfo.text = movie.pegi_info
             movieName.text = movie.movie_name
             genre.text = movie.text_genre
             rating.numStars = movie.rating_bar
             reviews.text = movie.reviews_quantity
-            storyLine.text = movie.story_line
+            storyLine.text = movie.overview
             actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
             val linearLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

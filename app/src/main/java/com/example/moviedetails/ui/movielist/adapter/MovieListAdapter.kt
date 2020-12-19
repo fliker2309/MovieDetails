@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
     // куда девать movies...
-    private val movies: List<Movie>,
+   // private val movies: List<Movie>,
     private val cardListener: (Int) -> Unit,
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
@@ -40,6 +41,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     private val durationText: TextView = view.findViewById((R.id.runtime))
     private val tagsText: TextView = view.findViewById(R.id.genre)
     private val totalReviewText: TextView = view.findViewById(R.id.total_reviews)
+    //private val rating: RatingBar = view.findViewById(R.id.poster_ratingBar)
 
     //private val ratingBar: RatingBar = view.findViewById(R.id.poster_ratingBar)
     fun bind(movie: Movie) {
@@ -60,7 +62,8 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
             R.string.pg_rating,
             movie.minimumAge.toString()
         )
-        // ratingBar.setCurrentRating(movie.ratings / 2)
+       // rating.setCurrentRating(movie.ratings / 2)
+
         movieTitle.text = movie.title
         durationText.text = itemView.resources.getString(
             R.string.movie_duration,

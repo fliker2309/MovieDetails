@@ -29,7 +29,7 @@ class MovieListFragment : Fragment() {
 
         val movieListAdapter = MovieListAdapter(
             //что делать с мувилистом
-            movies = movieList,
+           // movies = movieList,
             cardListener = onMoviePromoCardClick()
         )
         val spanCount =
