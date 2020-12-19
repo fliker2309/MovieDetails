@@ -85,7 +85,7 @@
             tools:text="@string/action_adventure_drama" />
 
         <RatingBar
-            android:id="@+id/poster_ratingBar"
+            android:id="@+id/ratingBar"
             style="@style/label_ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,9 +101,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:textAppearance="@style/label_review"
-            app:layout_constraintBottom_toBottomOf="@+id/poster_ratingBar"
-            app:layout_constraintStart_toEndOf="@id/poster_ratingBar"
-            app:layout_constraintTop_toTopOf="@+id/poster_ratingBar"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar"
             tools:text="@string/_125_reviews" />
 
         <androidx.appcompat.widget.AppCompatTextView
