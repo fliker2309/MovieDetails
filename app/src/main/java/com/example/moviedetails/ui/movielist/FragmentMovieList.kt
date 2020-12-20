@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.loadMovies
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MovieListFragment : Fragment() {
@@ -26,8 +31,9 @@ class MovieListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return inflater.inflate(R.layout.fragment_movie_list, container, false)
 
-        val movieListAdapter = MovieListAdapter(
+      /*  val movieListAdapter = MovieListAdapter(
             //что делать с мувилистом
            // movies = movieList,
             cardListener = onMoviePromoCardClick()
@@ -42,10 +48,28 @@ class MovieListFragment : Fragment() {
         movieListRecycler.layoutManager = gridLayoutManager
         movieListRecycler.adapter = movieListAdapter
 
-        return view
+        return view*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val spanCount =
+            calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
+
+        val gridLayoutManager = GridLayoutManager(activity, spanCount)
+        gridLayoutManager.spanSizeLookup
+
+        movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
+        movieListRecycler.layoutManager = gridLayoutManager
+        movieListRecycler.adapter = movieListAdapter
+        var movies: List<Movie> = listOf()
+        CoroutineScope(Dispatchers.Default).launch {
+            setMovieListVisible(movies, movieListRecycler, view)
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            movies = loadMovies(requireContext())
+            setMovieListVisible(movies, movieListRecyclerView, movieListEmpty, view)
+        }
     }
 
     private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->

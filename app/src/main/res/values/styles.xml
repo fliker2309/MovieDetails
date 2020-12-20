@@ -105,4 +105,7 @@
         <item name="contentPaddingRight">16dp</item>
         <item name="cardBackgroundColor">@color/background_color</item>
     </style>
+    <style name="roundedSquare">
+        <item name="cornerSize">10%</item>
+    </style>
 </resources>

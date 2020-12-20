@@ -41,6 +41,7 @@ class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView
             .transform(centerCropScaleType, roundedCorners)
             .placeholder(R.drawable.ic_image_download)
             .error(R.drawable.ic_image_download)
+
             .into(avatar)
 
         name.text = actor.name

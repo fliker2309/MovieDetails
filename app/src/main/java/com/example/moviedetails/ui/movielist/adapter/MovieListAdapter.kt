@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
-    // куда девать movies...
-   // private val movies: List<Movie>,
+    private val movies: List<Movie>,
     private val cardListener: (Int) -> Unit,
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
@@ -48,7 +47,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }
-        //загрузка постера фильма
+
         Glide
             .with(itemView.context)
             .load(movie.poster)
@@ -56,14 +55,14 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
             .placeholder(R.drawable.ic_image_download)
             .error(R.drawable.ic_image_download)
             .into(posterImage)
+
 //сделать дробное оппеделение рейтинга
         likeIcon.setImageResource(R.drawable.ic_like)
         minimumAge.text = itemView.context.getString(
             R.string.pg_rating,
             movie.minimumAge.toString()
         )
-       // rating.setCurrentRating(movie.ratings / 2)
-
+        // rating.setCurrentRating(movie.ratings / 2)
         movieTitle.text = movie.title
         durationText.text = itemView.resources.getString(
             R.string.movie_duration,
