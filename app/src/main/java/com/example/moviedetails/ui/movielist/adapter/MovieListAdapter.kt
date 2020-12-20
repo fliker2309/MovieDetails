@@ -10,17 +10,18 @@ import kotlinx.coroutines.launch
 import com.bumptech.glide.Glide
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.data.Genre
 import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
-    private val movies: List<Movie>,
-    private val cardListener: (Int) -> Unit,
+    private val cardListener: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
+
+    private var movies: List<Movie> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.view_holder_movie, parent, false)
-
         return MovieListViewHolder(view, cardListener)
     }
 
@@ -38,16 +39,14 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     private val movieTitle: TextView = view.findViewById(R.id.movie_title)
     private val minimumAge: TextView = view.findViewById(R.id.minimum_age)
     private val durationText: TextView = view.findViewById((R.id.runtime))
-    private val tagsText: TextView = view.findViewById(R.id.genre)
+    private val genreText: TextView = view.findViewById(R.id.genre)
     private val totalReviewText: TextView = view.findViewById(R.id.total_reviews)
-    //private val rating: RatingBar = view.findViewById(R.id.poster_ratingBar)
+    private val rating: RatingBar = view.findViewById(R.id.ratingBar)
 
-    //private val ratingBar: RatingBar = view.findViewById(R.id.poster_ratingBar)
     fun bind(movie: Movie) {
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }
-
         Glide
             .with(itemView.context)
             .load(movie.poster)
@@ -56,24 +55,27 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
             .error(R.drawable.ic_image_download)
             .into(posterImage)
 
-//сделать дробное оппеделение рейтинга
         likeIcon.setImageResource(R.drawable.ic_like)
         minimumAge.text = itemView.context.getString(
             R.string.pg_rating,
             movie.minimumAge.toString()
         )
-        // rating.setCurrentRating(movie.ratings / 2)
+        rating.rating= convertRating(movie.ratings)
         movieTitle.text = movie.title
         durationText.text = itemView.resources.getString(
             R.string.movie_duration,
             movie.runtime.toString()
         )
-        tagsText.text = movie.genres.joinToString { it.name }
+        genreText.text = movie.genres.joinToString { it.name }
         totalReviewText.text = itemView.context.getString(
             R.string.total_reviews,
             movie.numberOfRatings.toString()
         )
     }
+
+    private fun convertRating(rating10: Float): Float = rating10 / 2.0f
+
+
 }
 
 
