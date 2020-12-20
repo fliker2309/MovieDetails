@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
 import com.example.moviedetails.data.loadMovies
+import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
@@ -18,6 +19,8 @@ import kotlinx.coroutines.launch
 
 
 class MovieListFragment : Fragment() {
+
+    private var movies: List<Movie> = listOf()
 
     companion object {
         fun newInstance() = MovieListFragment()
@@ -32,47 +35,22 @@ class MovieListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
-
-      /*  val movieListAdapter = MovieListAdapter(
-            //что делать с мувилистом
-           // movies = movieList,
-            cardListener = onMoviePromoCardClick()
-        )
-        val spanCount =
-            calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
-
-        val gridLayoutManager = GridLayoutManager(activity, spanCount)
-        gridLayoutManager.spanSizeLookup
-        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
-        movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
-        movieListRecycler.layoutManager = gridLayoutManager
-        movieListRecycler.adapter = movieListAdapter
-
-        return view*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movies = MainActivity.movies
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
-
+        val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
         val gridLayoutManager = GridLayoutManager(activity, spanCount)
         gridLayoutManager.spanSizeLookup
-
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler.layoutManager = gridLayoutManager
         movieListRecycler.adapter = movieListAdapter
-        var movies: List<Movie> = listOf()
-        CoroutineScope(Dispatchers.Default).launch {
-            setMovieListVisible(movies, movieListRecycler, view)
-        }
-        CoroutineScope(Dispatchers.IO).launch {
-            movies = loadMovies(requireContext())
-            setMovieListVisible(movies, movieListRecyclerView, movieListEmpty, view)
-        }
     }
 
-    private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
+    private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
             ?.addToBackStack(null)
             ?.add(R.id.main_container, MovieDetailsFragment.newInstance(movieId))

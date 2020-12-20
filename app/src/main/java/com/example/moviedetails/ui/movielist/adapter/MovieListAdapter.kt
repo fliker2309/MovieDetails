@@ -14,7 +14,7 @@ import com.example.moviedetails.data.Genre
 import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
-    private val cardListener: (Int) -> Unit
+    private val cardListener: (Long) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
     private var movies: List<Movie> = listOf()
@@ -32,7 +32,7 @@ class MovieListAdapter(
     override fun getItemCount(): Int = movies.size
 }
 
-class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
+class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) :
     RecyclerView.ViewHolder(view) {
     private val posterImage: ImageView = view.findViewById(R.id.poster)
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
@@ -45,7 +45,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
 
     fun bind(movie: Movie) {
         itemView.setOnClickListener {
-            cardListener.invoke(movie.id)
+            cardListener.invoke(movie.id.toLong())
         }
         Glide
             .with(itemView.context)
@@ -74,8 +74,6 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
-
-
 }
 
 
