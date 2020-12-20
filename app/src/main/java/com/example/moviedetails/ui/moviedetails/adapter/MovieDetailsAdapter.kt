@@ -32,18 +32,13 @@ class MovieDetailsAdapter(
 class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
     private val avatar: ImageView = listItemView.findViewById(R.id.actor_image)
     private val name: TextView = listItemView.findViewById(R.id.actor_name)
-    private val centerCropScaleType = CenterCrop()
-    private val roundedCorners = RoundedCorners(R.dimen.actor_corner_radius)
 
     fun bind(actor: Actor) {
         Glide.with(itemView.context)
             .load(actor.picture)
-            .transform(centerCropScaleType, roundedCorners)
             .placeholder(R.drawable.ic_image_download)
             .error(R.drawable.ic_image_download)
-
             .into(avatar)
-
         name.text = actor.name
     }
 }
