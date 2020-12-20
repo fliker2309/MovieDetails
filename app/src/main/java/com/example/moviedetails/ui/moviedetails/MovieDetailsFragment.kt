@@ -31,7 +31,6 @@ class MovieDetailsFragment : Fragment() {
         arguments?.let {
             movieId = it.getInt(MOVIE_ID_KEY)
         }
-        movie = MainActivity.movies.single { it.id == movieId }
     }
 
     override fun onCreateView(
@@ -39,7 +38,6 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return inflater.inflate(R.layout.fragment_movies_details, container, false)
     }
 
@@ -74,7 +72,7 @@ class MovieDetailsFragment : Fragment() {
             )
             movieTitle.text = movie.title
             genre.text = movie.genres.toString()
-            rating.rating= convertRating(movie.ratings)
+            rating.rating = convertRating(movie.ratings)
             totalReviews.text = movie.numberOfRatings.toString()
             storyLine.text = movie.overview
             actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)

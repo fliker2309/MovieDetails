@@ -1,5 +1,6 @@
 package com.example.moviedetails.ui.movielist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +17,13 @@ import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MovieListFragment : Fragment() {
 
     private var movies: List<Movie> = listOf()
+private var coroutineScope: CoroutineScope()
 
     companion object {
         fun newInstance() = MovieListFragment()
@@ -39,7 +42,7 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movies = MainActivity.movies
+    //    val movieList = loadMovies(context:Context)// описать суспендфунецию
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
         val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
@@ -60,5 +63,11 @@ class MovieListFragment : Fragment() {
     private fun calculateSpanCount(spanWidthPixels: Int): Int {
         val screenWidthPixels = requireContext().resources.displayMetrics.widthPixels
         return (screenWidthPixels / spanWidthPixels + 0.5).toInt()
+    }
+    private suspend fun getMovies() = withContext(Dispatchers.IO){
+
+    }
+    private suspend fun getMovie(id: Int): Movie = withContext(Dispatchers.IO){
+
     }
 }

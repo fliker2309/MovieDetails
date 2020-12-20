@@ -9,10 +9,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var movieListFragment: MovieListFragment
 
-    companion object {
-        var movies: List<Movie> = listOf()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
