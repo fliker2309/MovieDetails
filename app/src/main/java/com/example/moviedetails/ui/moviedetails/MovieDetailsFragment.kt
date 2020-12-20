@@ -11,7 +11,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
