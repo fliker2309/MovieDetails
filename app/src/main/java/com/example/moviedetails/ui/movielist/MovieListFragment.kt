@@ -70,11 +70,9 @@ class MovieListFragment : Fragment() {
         return (screenWidthPixels / spanWidthPixels + 0.5).toInt()
     }
 
-    private suspend fun getMovies() = withContext(Dispatchers.IO) {
+    /*private suspend fun getMovies() = withContext(Dispatchers.IO) {
 
-    }
+    }*/
 
-    private suspend fun getMovie(id: Int): Movie = withContext(Dispatchers.IO) {
 
-    }
 }
