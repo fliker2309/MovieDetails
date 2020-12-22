@@ -44,7 +44,7 @@
         android:gravity="center"
         android:text="@string/empty_movie_text"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/movie_list_recycler_view"
         app:layout_constraintEnd_toEndOf="@+id/movie_list_recycler_view"
         app:layout_constraintStart_toStartOf="@+id/movie_list_recycler_view"
