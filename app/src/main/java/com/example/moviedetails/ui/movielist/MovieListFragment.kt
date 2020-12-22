@@ -21,9 +21,8 @@ import kotlinx.coroutines.*
 
 class MovieListFragment : Fragment() {
 
-    private var movies: List<Movie> = listOf()
 
-    /* private var ioScope = CoroutineScope(Dispatchers.IO)*/
+    /* private var scope = CoroutineScope(Dispatchers.IO)*/
     private lateinit var movieListRecycler: RecyclerView
 
     companion object {
@@ -41,14 +40,11 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
 
-            val operation = async(Dispatchers.IO) {
-                movies = loadMovies(requireContext())
-            }
-             operation.await()
-        }
-        val movieList = movies
+        var movies: List<Movie> = listOf()
+
+
+
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
         val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
@@ -57,10 +53,8 @@ class MovieListFragment : Fragment() {
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         movieListRecycler.layoutManager = gridLayoutManager
         movieListRecycler.adapter = movieListAdapter
-
-
-
     }
+
 
     private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
