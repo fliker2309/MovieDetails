@@ -14,10 +14,11 @@ import com.example.moviedetails.data.Genre
 import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
+    private var movies: List<Movie>,
     private val cardListener: (Long) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
-    private var movies: List<Movie> = listOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
