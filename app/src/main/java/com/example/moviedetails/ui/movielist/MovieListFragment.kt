@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
@@ -23,7 +24,7 @@ import kotlinx.coroutines.withContext
 class MovieListFragment : Fragment() {
 
     private var movies: List<Movie> = listOf()
-private var coroutineScope: CoroutineScope()
+    private var ioScope = CoroutineScope(Dispatchers.IO)
 
     companion object {
         fun newInstance() = MovieListFragment()
@@ -42,7 +43,11 @@ private var coroutineScope: CoroutineScope()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    //    val movieList = loadMovies(context:Context)// описать суспендфунецию
+        lifecycleScope.launchWhenCreated {
+
+        }
+
+        //    val movieList = loadMovies(context:Context)// описать суспендфунецию
         val spanCount =
             calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
         val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
@@ -64,10 +69,12 @@ private var coroutineScope: CoroutineScope()
         val screenWidthPixels = requireContext().resources.displayMetrics.widthPixels
         return (screenWidthPixels / spanWidthPixels + 0.5).toInt()
     }
-    private suspend fun getMovies() = withContext(Dispatchers.IO){
+
+    private suspend fun getMovies() = withContext(Dispatchers.IO) {
 
     }
-    private suspend fun getMovie(id: Int): Movie = withContext(Dispatchers.IO){
+
+    private suspend fun getMovie(id: Int): Movie = withContext(Dispatchers.IO) {
 
     }
 }
