@@ -42,19 +42,39 @@ class MovieListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var movies: List<Movie> = listOf()
-
-
-
-        val spanCount =
-            calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
-        val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
-        val gridLayoutManager = GridLayoutManager(activity, spanCount)
-        gridLayoutManager.spanSizeLookup
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
-        movieListRecycler.layoutManager = gridLayoutManager
-        movieListRecycler.adapter = movieListAdapter
-    }
+        val movieListEmpty = view.findViewById<TextView>(R.id.empty_recycler_text_view)
 
+        CoroutineScope(Dispatchers.Default).launch {
+            setMovieListVisible(movies, movieListRecycler, movieListEmpty, view)
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            movies = loadMovies(requireContext())
+            setMovieListVisible(movies, movieListRecycler, movieListEmpty, view)
+        }
+    }
+        private suspend fun setMovieListVisible(
+            movies: List<Movie>,
+            movieListRecyclerView: RecyclerView,
+            movieListEmpty: TextView,
+            view: View
+        ) = withContext(Dispatchers.Main) {
+            if (movies.isNotEmpty()) {
+
+                movieListRecyclerView.visibility = View.VISIBLE
+                movieListEmpty.visibility = View.GONE
+                val spanCount =
+                    calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
+                val movieListAdapter = MovieListAdapter(cardListener = onMoviePromoCardClick())
+                val gridLayoutManager = GridLayoutManager(activity, spanCount)
+                gridLayoutManager.spanSizeLookup
+                movieListRecycler.layoutManager = gridLayoutManager
+                movieListRecycler.adapter = movieListAdapter
+            } else {
+                movieListRecyclerView.visibility = View.INVISIBLE
+                movieListEmpty.visibility = View.VISIBLE
+            }
+        }
 
     private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
