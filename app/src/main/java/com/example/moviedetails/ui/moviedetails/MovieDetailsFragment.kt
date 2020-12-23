@@ -43,6 +43,7 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
         val movieTitle: TextView = view.findViewById(R.id.movie_title)
