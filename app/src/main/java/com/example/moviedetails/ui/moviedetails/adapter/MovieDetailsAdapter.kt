@@ -12,9 +12,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.data.Actor
 
-class MovieDetailsAdapter(
-    private var actors: List<Actor>
-) : RecyclerView.Adapter<ActorViewHolder>() {
+class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
+
+    private var actors: List<Actor> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -27,6 +27,11 @@ class MovieDetailsAdapter(
     }
 
     override fun getItemCount(): Int = actors.size
+
+    fun updateActors(newActors: List<Actor>) {
+        actors = newActors
+        notifyDataSetChanged()
+    }
 }
 
 class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {

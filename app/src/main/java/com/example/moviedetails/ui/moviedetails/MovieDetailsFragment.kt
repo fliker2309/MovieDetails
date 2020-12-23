@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
+import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
 
@@ -22,7 +23,7 @@ private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 class MovieDetailsFragment : Fragment() {
 
     companion object {
-        fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
+        fun newInstance(movieId: Long) = MovieDetailsFragment().apply {
             arguments = bundleOf(MOVIE_ID_KEY to movieId)
         }
     }
@@ -48,6 +49,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        movie = MainActivity.movies.single { it.id == movieId }
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
         val movieTitle: TextView = view.findViewById(R.id.movie_title)
@@ -59,9 +61,6 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
-        val cast = movie.actors
-
-
         movie.let {
             Glide
                 .with(this)
@@ -80,12 +79,13 @@ class MovieDetailsFragment : Fragment() {
             rating.rating = convertRating(movie.ratings)
             totalReviews.text = movie.numberOfRatings.toString()
             storyLine.text = movie.overview
-            val movieDetailsAdapter = MovieDetailsAdapter(actors = cast)
+            val movieDetailsAdapter = MovieDetailsAdapter()
             actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
             val linearLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             actorListRecycler.layoutManager = linearLayoutManager
             actorListRecycler.adapter = movieDetailsAdapter
+            (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(movie.actors)
         }
     }
 

@@ -18,8 +18,6 @@ class MovieListAdapter(
     private val cardListener: (Long) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.view_holder_movie, parent, false)
