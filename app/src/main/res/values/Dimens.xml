@@ -9,4 +9,5 @@
     <dimen name="poster_image_spacing">6dp</dimen>
     <dimen name="poster_image_height">250dp</dimen>
     <dimen name="spacing_top">44dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
 </resources>

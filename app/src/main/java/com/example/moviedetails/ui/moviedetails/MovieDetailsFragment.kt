@@ -55,7 +55,7 @@ class MovieDetailsFragment : Fragment() {
             activity?.onBackPressed()
         }
         val cast = movie.actors
-        val movieDetailsAdapter = MovieDetailsAdapter(actors = cast)
+
 
         movie.let {
             Glide
@@ -75,6 +75,7 @@ class MovieDetailsFragment : Fragment() {
             rating.rating = convertRating(movie.ratings)
             totalReviews.text = movie.numberOfRatings.toString()
             storyLine.text = movie.overview
+            val movieDetailsAdapter = MovieDetailsAdapter(actors = cast)
             actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
             val linearLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
