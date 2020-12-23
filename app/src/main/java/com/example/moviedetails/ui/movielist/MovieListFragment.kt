@@ -1,18 +1,15 @@
 package com.example.moviedetails.ui.movielist
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
 import com.example.moviedetails.data.loadMovies
-import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
@@ -21,8 +18,6 @@ import kotlinx.coroutines.*
 
 class MovieListFragment : Fragment() {
 
-
-    /* private var scope = CoroutineScope(Dispatchers.IO)*/
     private lateinit var movieListRecycler: RecyclerView
 
     companion object {
@@ -46,21 +41,19 @@ class MovieListFragment : Fragment() {
         val movieListEmpty = view.findViewById<TextView>(R.id.empty_recycler_text_view)
 
         CoroutineScope(Dispatchers.Default).launch {
-            setMovieListVisible(movies, movieListRecycler, movieListEmpty, view)
+            setMovieListVisible(movies, movieListRecycler, movieListEmpty)
         }
         CoroutineScope(Dispatchers.IO).launch {
             movies = loadMovies(requireContext())
-            setMovieListVisible(movies, movieListRecycler, movieListEmpty, view)
+            setMovieListVisible(movies, movieListRecycler, movieListEmpty)
         }
     }
         private suspend fun setMovieListVisible(
             movies: List<Movie>,
             movieListRecyclerView: RecyclerView,
-            movieListEmpty: TextView,
-            view: View
+            movieListEmpty: TextView
         ) = withContext(Dispatchers.Main) {
             if (movies.isNotEmpty()) {
-
                 movieListRecyclerView.visibility = View.VISIBLE
                 movieListEmpty.visibility = View.GONE
                 val spanCount =
