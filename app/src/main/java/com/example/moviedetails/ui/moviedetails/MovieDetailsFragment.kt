@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
 
@@ -22,6 +21,11 @@ private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
 
 class MovieDetailsFragment : Fragment() {
 
+    companion object {
+        fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
+            arguments = bundleOf(MOVIE_ID_KEY to movieId)
+        }
+    }
     private var movieId: Int? = null
     private lateinit var actorListRecycler: RecyclerView
     private lateinit var movie: Movie
@@ -82,16 +86,6 @@ class MovieDetailsFragment : Fragment() {
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             actorListRecycler.layoutManager = linearLayoutManager
             actorListRecycler.adapter = movieDetailsAdapter
-        }
-    }
-
-    companion object {
-        fun newInstance(movieId: Long): MovieDetailsFragment {
-            return MovieDetailsFragment().apply {
-                arguments = bundleOf(
-                    MOVIE_ID_KEY to movieId
-                )
-            }
         }
     }
 
