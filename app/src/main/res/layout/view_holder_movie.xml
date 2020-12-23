@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movie_promo_card"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
+    android:layout_marginStart="@dimen/poster_image_spacing"
+    android:layout_marginEnd="@dimen/poster_image_spacing"
     android:layout_marginBottom="18dp"
     android:clickable="true"
     android:focusable="true"
-    android:maxWidth="170dp"
+    android:maxWidth="@dimen/card_view_max_width"
     app:cardCornerRadius="6dp"
     app:strokeColor="#803B3B4D"
     app:strokeWidth="2dp"
@@ -25,13 +25,14 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/poster_image_height"
             android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/avengers" />
+            tools:srcCompat="@drawable/avengers" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poster_background_linear"
@@ -54,7 +55,7 @@
             android:layout_marginTop="@dimen/spacing_low"
             android:background="@drawable/ic_rectangle"
             android:paddingTop="3dp"
-            android:text="@string/_13"
+            tools:text="@string/_13"
             android:textAppearance="@style/pegiInfo"
             app:layout_constraintEnd_toStartOf="@id/ic_like"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -71,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/minimum_age"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_like" />
+           tools:srcCompat="@drawable/ic_like" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/genre"
@@ -90,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_6dp"
-            android:rating="4"
+            tools:rating="4"
             android:theme="@style/ratingBar"
             app:layout_constraintStart_toStartOf="@id/genre"
             app:layout_constraintTop_toBottomOf="@id/genre" />
