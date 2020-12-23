@@ -5,4 +5,8 @@
     <dimen name="actor_corner_radius">4dp</dimen>
     <dimen name="card_view_min_width">140dp</dimen>
     <dimen name="card_view_max_width">170dp</dimen>
+    <dimen name="cast_pick_size">80dp</dimen>
+    <dimen name="poster_image_spacing">6dp</dimen>
+    <dimen name="poster_image_height">250dp</dimen>
+    <dimen name="spacing_top">44dp</dimen>
 </resources>
