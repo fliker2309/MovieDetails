@@ -36,13 +36,10 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var movies: List<Movie> = listOf()
+        var movies: List<Movie>
         movieListRecycler = view.findViewById(R.id.movie_list_recycler_view)
         val movieListEmpty = view.findViewById<TextView>(R.id.empty_recycler_text_view)
 
-        CoroutineScope(Dispatchers.Default).launch {
-            setMovieListVisible(movies, movieListRecycler, movieListEmpty)
-        }
         CoroutineScope(Dispatchers.IO).launch {
             movies = loadMovies(requireContext())
             setMovieListVisible(movies, movieListRecycler, movieListEmpty)
