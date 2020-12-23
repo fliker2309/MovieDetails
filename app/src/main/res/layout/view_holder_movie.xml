@@ -3,6 +3,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/movie_promo_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,7 +13,7 @@
     android:clickable="true"
     android:focusable="true"
     android:maxWidth="@dimen/card_view_max_width"
-    app:cardCornerRadius="6dp"
+    app:cardCornerRadius="@dimen/card_corner_radius"
     app:strokeColor="#803B3B4D"
     app:strokeWidth="2dp"
     tools:layout_marginTop="30dp">
@@ -25,10 +26,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/poster"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/poster_image_height"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -55,12 +56,12 @@
             android:layout_marginTop="@dimen/spacing_low"
             android:background="@drawable/ic_rectangle"
             android:paddingTop="3dp"
-            tools:text="@string/_13"
             android:textAppearance="@style/pegiInfo"
             app:layout_constraintEnd_toStartOf="@id/ic_like"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/_13"
             tools:viewBindingIgnore="true" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/minimum_age"
             app:layout_constraintTop_toTopOf="parent"
-           tools:srcCompat="@drawable/ic_like" />
+            tools:srcCompat="@drawable/ic_like" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/genre"
@@ -91,10 +92,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_6dp"
-            tools:rating="4"
             android:theme="@style/ratingBar"
             app:layout_constraintStart_toStartOf="@id/genre"
-            app:layout_constraintTop_toBottomOf="@id/genre" />
+            app:layout_constraintTop_toBottomOf="@id/genre"
+            tools:rating="4" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/total_reviews"
