@@ -18,25 +18,28 @@ import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
 
-private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
+
 
 class MovieDetailsFragment : Fragment() {
 
     companion object {
+        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
         fun newInstance(movieId: Long) = MovieDetailsFragment().apply {
             arguments = bundleOf(MOVIE_ID_KEY to movieId)
         }
     }
-    private var movieId: Int? = null
+
+   /* private var movieId: Int? = null*/
     private lateinit var actorListRecycler: RecyclerView
     private lateinit var movie: Movie
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+   /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             movieId = it.getInt(MOVIE_ID_KEY)
         }
-    }
+
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +51,9 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val movieId = arguments?.getInt(MOVIE_ID_KEY)
+        movie = MainActivity.movies.single{it.id ==movieId}
 
-        movie = MainActivity.movies.single { it.id == movieId }
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
         val movieTitle: TextView = view.findViewById(R.id.movie_title)
@@ -61,6 +65,7 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
+      /*  movie = MainActivity.movies.findLast { it.id == movieId }!!*/
         movie.let {
             Glide
                 .with(this)
