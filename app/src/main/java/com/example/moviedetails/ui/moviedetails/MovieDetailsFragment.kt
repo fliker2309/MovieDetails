@@ -1,5 +1,6 @@
 package com.example.moviedetails.ui.moviedetails
 
+
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,17 +30,17 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-   /* private var movieId: Int? = null*/
+    private var movieId: Int? = null
     private lateinit var actorListRecycler: RecyclerView
     private lateinit var movie: Movie
 
-   /* override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             movieId = it.getInt(MOVIE_ID_KEY)
         }
 
-    }*/
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +53,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = arguments?.getInt(MOVIE_ID_KEY)
-        movie = MainActivity.movies.single{it.id ==movieId}
+        movie = MainActivity.movies.single { it.id == movieId }
 
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
@@ -65,7 +66,7 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
-      /*  movie = MainActivity.movies.findLast { it.id == movieId }!!*/
+        movie = MainActivity.movies.findLast { it.id == movieId }!!
         movie.let {
             Glide
                 .with(this)
@@ -96,7 +97,6 @@ class MovieDetailsFragment : Fragment() {
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
 }
-
 
 
 
