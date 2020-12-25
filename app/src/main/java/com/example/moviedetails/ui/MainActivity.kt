@@ -20,6 +20,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        lifecycleScope.launch {
+            val operation = async(Dispatchers.IO) {
+                movies = loadMovies(applicationContext)
+            }
+            operation.await()
+        }
+
         if (savedInstanceState == null) {
             movieListFragment = MovieListFragment.newInstance()
             supportFragmentManager.beginTransaction()
