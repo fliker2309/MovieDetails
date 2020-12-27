@@ -1,7 +1,5 @@
 package com.example.moviedetails.ui.moviedetails
 
-
-
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +10,6 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 
 class MovieDetailsFragment : Fragment() {
 
@@ -57,7 +53,7 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //инициализация movie
-        var movie: Movie? = null
+        var movie: Movie?
         actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
         val movieDetailsAdapter = MovieDetailsAdapter()
 
@@ -94,7 +90,7 @@ class MovieDetailsFragment : Fragment() {
                         movie?.minimumAge.toString()
                     )
                     movieTitle.text = movie?.title
-                    genre.text = movie?.genres?.joinToString{it.name}
+                    genre.text = movie?.genres?.joinToString { it.name }
                     rating.rating = convertRating(it.ratings)
                     totalReviews.text = movie?.numberOfRatings.toString()
                     storyLine.text = movie?.overview
