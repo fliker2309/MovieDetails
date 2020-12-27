@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MovieDetailsFragment : Fragment() {
@@ -41,7 +43,6 @@ class MovieDetailsFragment : Fragment() {
         arguments?.let {
             movieId = it.getInt(MOVIE_ID_KEY)
         }
-
     }
 
     override fun onCreateView(
@@ -55,17 +56,15 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //инициализация movie
         var movie: Movie? = null
-        val movieDetailsAdapter = MovieDetailsAdapter()
         actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+        val movieDetailsAdapter = MovieDetailsAdapter()
+
         val linearLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         actorListRecycler.layoutManager = linearLayoutManager
         actorListRecycler.adapter = movieDetailsAdapter
-
-        CoroutineScope(Dispatchers.IO).launch {
-            movie = loadMovies(requireContext()).findLast { it.id == movieId }
-        }
 
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
@@ -78,27 +77,30 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
+        CoroutineScope(Dispatchers.IO).launch {
+            movie = loadMovies(requireContext()).findLast { it.id == movieId }
+            withContext(Dispatchers.Main) {
+                movie?.let {
+                    Glide
+                        .with(this@MovieDetailsFragment)// для контекста фрагмента, а не корутины
+                        .load(movie?.backdrop)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_image_download)
+                        .error(R.drawable.ic_image_download)
+                        .into(backgroundImage)
 
-        movie?.let {
-            Glide
-                .with(this)
-                .load(movie?.backdrop)
-                .centerCrop()
-                .placeholder(R.drawable.ic_image_download)
-                .error(R.drawable.ic_image_download)
-                .into(backgroundImage)
-
-            minimumAge.text = context!!.getString(
-                R.string.pg_rating,
-                movie?.minimumAge.toString()
-            )
-            movieTitle.text = movie?.title
-            genre.text = movie?.genres.toString()
-            rating.rating = convertRating(it.ratings)
-            totalReviews.text = movie?.numberOfRatings.toString()
-            storyLine.text = movie?.overview
-
-            (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(it.actors)
+                    minimumAge.text = context!!.getString(
+                        R.string.pg_rating,
+                        movie?.minimumAge.toString()
+                    )
+                    movieTitle.text = movie?.title
+                    genre.text = movie?.genres?.joinToString{it.name}
+                    rating.rating = convertRating(it.ratings)
+                    totalReviews.text = movie?.numberOfRatings.toString()
+                    storyLine.text = movie?.overview
+                    (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(it.actors)
+                }
+            }
         }
     }
 
