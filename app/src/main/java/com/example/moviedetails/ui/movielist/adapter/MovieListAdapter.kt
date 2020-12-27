@@ -15,7 +15,7 @@ import com.example.moviedetails.ui.R
 
 class MovieListAdapter(
     private var movies: List<Movie>,
-    private val cardListener: (Long) -> Unit
+    private val cardListener: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
@@ -31,7 +31,7 @@ class MovieListAdapter(
     override fun getItemCount(): Int = movies.size
 }
 
-class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) :
+class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
     private val posterImage: ImageView = view.findViewById(R.id.poster)
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
@@ -44,7 +44,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Long) -> Unit) 
 
     fun bind(movie: Movie) {
         itemView.setOnClickListener {
-            cardListener.invoke(movie.id.toLong())
+            cardListener.invoke(movie.id)
         }
         Glide
             .with(itemView.context)

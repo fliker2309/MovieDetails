@@ -65,7 +65,7 @@ class MovieListFragment : Fragment() {
             }
         }
 
-    private fun onMoviePromoCardClick(): (Long) -> Unit = { movieId ->
+    private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
             ?.addToBackStack(null)
             ?.add(R.id.main_container, MovieDetailsFragment.newInstance(movieId))
