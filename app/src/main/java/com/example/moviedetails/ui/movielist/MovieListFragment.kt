@@ -15,7 +15,6 @@ import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import kotlinx.coroutines.*
 
-
 class MovieListFragment : Fragment() {
 
     private lateinit var movieListRecycler: RecyclerView

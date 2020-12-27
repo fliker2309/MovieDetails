@@ -1,6 +1,7 @@
 package com.example.moviedetails.ui.moviedetails
 
 
+
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +16,12 @@ import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.ui.MainActivity
+import com.example.moviedetails.data.loadMovies
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MovieDetailsFragment : Fragment() {
@@ -32,7 +35,6 @@ class MovieDetailsFragment : Fragment() {
 
     private var movieId: Int? = null
     private lateinit var actorListRecycler: RecyclerView
-    private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +54,18 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movieId = arguments?.getInt(MOVIE_ID_KEY)
-        movie = MainActivity.movies.single { it.id == movieId }
+
+        var movie: Movie? = null
+        val movieDetailsAdapter = MovieDetailsAdapter()
+        actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
+        val linearLayoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        actorListRecycler.layoutManager = linearLayoutManager
+        actorListRecycler.adapter = movieDetailsAdapter
+
+        CoroutineScope(Dispatchers.IO).launch {
+            movie = loadMovies(requireContext()).findLast { it.id == movieId }
+        }
 
         val backgroundImage: ImageView = view.findViewById(R.id.background)
         val minimumAge: TextView = view.findViewById(R.id.minimum_age)
@@ -66,11 +78,11 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
             activity?.onBackPressed()
         }
-        movie = MainActivity.movies.findLast { it.id == movieId }!!
-        movie.let {
+
+        movie?.let {
             Glide
                 .with(this)
-                .load(movie.backdrop)
+                .load(movie?.backdrop)
                 .centerCrop()
                 .placeholder(R.drawable.ic_image_download)
                 .error(R.drawable.ic_image_download)
@@ -78,20 +90,15 @@ class MovieDetailsFragment : Fragment() {
 
             minimumAge.text = context!!.getString(
                 R.string.pg_rating,
-                movie.minimumAge.toString()
+                movie?.minimumAge.toString()
             )
-            movieTitle.text = movie.title
-            genre.text = movie.genres.toString()
-            rating.rating = convertRating(movie.ratings)
-            totalReviews.text = movie.numberOfRatings.toString()
-            storyLine.text = movie.overview
-            val movieDetailsAdapter = MovieDetailsAdapter()
-            actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
-            val linearLayoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            actorListRecycler.layoutManager = linearLayoutManager
-            actorListRecycler.adapter = movieDetailsAdapter
-            (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(movie.actors)
+            movieTitle.text = movie?.title
+            genre.text = movie?.genres.toString()
+            rating.rating = convertRating(it.ratings)
+            totalReviews.text = movie?.numberOfRatings.toString()
+            storyLine.text = movie?.overview
+
+            (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(it.actors)
         }
     }
 
