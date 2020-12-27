@@ -15,6 +15,7 @@
             android:id="@+id/background"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxHeight="@dimen/movie_background_max_height"
             android:adjustViewBounds="true"
             android:foreground="@drawable/icon_background"
             android:scaleType="centerCrop"
