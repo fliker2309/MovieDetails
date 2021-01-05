@@ -1,29 +1,28 @@
 package com.example.moviedetails.presentation.movielist
 
-
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.data.loadMovies
-import kotlinx.coroutines.Dispatchers
+import com.example.moviedetails.domain.MovieInteractor
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MovieListViewModel(private val app: Application) : AndroidViewModel(app) {
+class MovieListViewModel(
+    private val interactor: MovieInteractor
+) : ViewModel() {
 
-    private var _movieListLiveData: MutableLiveData<List<Movie>> = MutableLiveData(emptyList())
-    val movieListLiveData: LiveData<List<Movie>>
-        get() = _movieListLiveData
-    private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val loadingLiveData: LiveData<Boolean>
-        get() = _loadingLiveData
+    private var _mutableMovieListLiveData: MutableLiveData<List<Movie>> =
+        MutableLiveData(emptyList())
+    val moviesList: LiveData<List<Movie>> get() = _mutableMovieListLiveData
 
-    fun getMovies() {
+    init {
+        getMovies()
+    }
+
+    private fun getMovies() {
         viewModelScope.launch {
-            _loadingLiveData.value = true
-            _movieListLiveData.value =
-                withContext(Dispatchers.IO) { loadMovies(app.applicationContext) }
-            _loadingLiveData.value = false
+          viewModelScope.launch {
+              val movies = interactor.getMoviesList()
+              _mutableMovieListLiveData.setValue(interactor.getMoviesList())
+          }
         }
     }
 }
