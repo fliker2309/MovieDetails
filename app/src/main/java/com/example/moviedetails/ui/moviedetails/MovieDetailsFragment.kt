@@ -26,7 +26,7 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    private val movieDetailsViewModel: MovieDetailsViewModel()
+    val movieDetailsViewModel: MovieDetailsViewModel
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding: FragmentMoviesDetailsBinding
         get() = _binding!!
@@ -69,7 +69,6 @@ class MovieDetailsFragment : Fragment() {
                 View.GONE
             (binding.actorListRecyclerView.adapter as MovieDetailsAdapter).updateActors(movie.actors)
         }
-
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
