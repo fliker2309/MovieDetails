@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.moviedetails.ui.R
 import com.example.moviedetails.data.Actor
+import com.example.moviedetails.ui.R
 
 class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
 
