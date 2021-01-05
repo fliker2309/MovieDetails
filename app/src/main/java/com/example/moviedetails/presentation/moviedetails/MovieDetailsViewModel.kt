@@ -1,27 +1,35 @@
 package com.example.moviedetails.presentation.moviedetails
 
-import android.app.Application
-import android.app.VoiceInteractor
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.data.loadMovies
 import com.example.moviedetails.domain.MovieInteractor
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MovieDetailsViewModel(private val interactor: MovieInteractor) : ViewModel() {
+class MovieDetailsViewModel(
+    private val interactor: MovieInteractor
+) : ViewModel() {
 
-    private var _movieLiveData: MutableLiveData<Movie> = MutableLiveData<Movie>()
-    val movieLiveData: LiveData<Movie>
-        get() = _movieLiveData
+    private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData<Movie>()
+    private var _mutableSelectedMovieList: MutableLiveData<Int> = MutableLiveData(0)
 
-    fun getMovie(movieId: Int) {
+    val movieLiveData: LiveData<Movie> get() = _mutableMovieLiveData
+    val selectedMovieList: LiveData<Int> get() = _mutableSelectedMovieList
+
+    //получение фильма с помощью корутин в architecture components
+    fun getMovie() {
         viewModelScope.launch {
-            val movies = withContext(Dispatchers.IO) { loadMovies(app.applicationContext) }
-            movies.singleOrNull { it.id == movieId }?.let {
-                _movieLiveData.value = it
+            val movieID = selectedMovieList.value
+            val movies = interactor.getMoviesList()
+            val movie = movies.find { actor -> movieID == actor.id }
+            if (movie != null) {
+                _mutableMovieLiveData.setValue(movie)
             }
+        }
+    }
+
+    fun setMovie(movieID: Int) {
+        viewModelScope.launch {
+            _mutableSelectedMovieList.setValue(movieID)
         }
     }
 }
