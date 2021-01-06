@@ -29,7 +29,9 @@ class MovieDetailsFragment : Fragment() {
     private var selectedMovieID: Int = 0
     private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
 
-    private var binding: FragmentMoviesDetailsBinding? = null
+    private var _binding: FragmentMoviesDetailsBinding? = null
+    private val binding :FragmentMoviesDetailsBinding
+    get() = _binding!!
 
 
     override fun onCreateView(
@@ -42,8 +44,8 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMoviesDetailsBinding.bind(view)
-        binding!!.backToMainButton.setOnClickListener {
+        _binding = FragmentMoviesDetailsBinding.bind(view)
+        binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
         viewFill(
@@ -72,17 +74,17 @@ class MovieDetailsFragment : Fragment() {
 
     private fun viewFill(movie: Movie) {
         movie.apply {
-            binding!!.background.load(movie.backdrop)
-            binding!!.minimumAge.text = requireContext().getString(
+            binding.background.load(movie.backdrop)
+            binding.minimumAge.text = requireContext().getString(
                 R.string.pg_rating,
                 movie.minimumAge.toString()
             )
-            binding!!.movieTitle.text = movie.title
-            binding!!.genre.text = movie.genres.joinToString { it.name }
-            binding!!.ratingBar.rating = convertRating(movie.ratings)
-            binding!!.totalReviews.text = movie.numberOfRatings.toString()
-            binding!!.storyLine.text = movie.overview
-            actorListRecycler = binding!!.actorListRecyclerView
+            binding.movieTitle.text = movie.title
+            binding.genre.text = movie.genres.joinToString { it.name }
+            binding.ratingBar.rating = convertRating(movie.ratings)
+            binding.totalReviews.text =getString(R.string.total_reviews,movie.numberOfRatings.toString())
+            binding.storyLine.text = movie.overview
+            actorListRecycler = binding.actorListRecyclerView
             val actorAdapter = ActorAdapter()
 
             val linearLayoutManager =
@@ -102,7 +104,7 @@ class MovieDetailsFragment : Fragment() {
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
 
     override fun onDestroyView() {
-        binding = null
+        _binding = null
         super.onDestroyView()
     }
 
