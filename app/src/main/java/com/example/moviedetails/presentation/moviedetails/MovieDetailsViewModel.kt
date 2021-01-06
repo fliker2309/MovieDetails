@@ -9,7 +9,7 @@ class MovieDetailsViewModel(
     private val interactor: MovieInteractor
 ) : ViewModel() {
 
-    private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData(
+    private var _mutableMovie: MutableLiveData<Movie> = MutableLiveData(
         Movie(
             id = 0,
             title = "",
@@ -24,10 +24,10 @@ class MovieDetailsViewModel(
             actors = listOf()
         )
     )
-    private var _mutableSelectedMovieList: MutableLiveData<Int> = MutableLiveData(0)
+    private var _selectedMovieList: MutableLiveData<Int> = MutableLiveData(0)
 
-    val movieLiveData: LiveData<Movie> get() = _mutableMovieLiveData
-    val selectedMovieList: LiveData<Int> get() = _mutableSelectedMovieList
+    val movie: LiveData<Movie> get() = _mutableMovie
+    val selectedMovieList: LiveData<Int> get() = _selectedMovieList
 
     //получение фильма с помощью корутин в architecture components
     fun getMovie() {
@@ -36,14 +36,14 @@ class MovieDetailsViewModel(
             val movies = interactor.getMoviesList()
             val movie = movies.find { actor -> movieID == actor.id }
             if (movie != null) {
-                _mutableMovieLiveData.setValue(movie)
+                _mutableMovie.postValue(movie)
             }
         }
     }
 
     fun setMovie(movieID: Int) {
         viewModelScope.launch {
-            _mutableSelectedMovieList.setValue(movieID)
+            _selectedMovieList.postValue(movieID)
         }
     }
 }

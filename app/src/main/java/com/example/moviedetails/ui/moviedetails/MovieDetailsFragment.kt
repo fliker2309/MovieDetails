@@ -68,7 +68,7 @@ class MovieDetailsFragment : Fragment() {
         if (savedInstanceState == null) {
             movieDetailsViewModel.setMovie(selectedMovieID)
         }
-        movieDetailsViewModel.movieLiveData.observe(this.viewLifecycleOwner, this::viewFill)
+        movieDetailsViewModel.movie.observe(this.viewLifecycleOwner, this::viewFill)
     }
 
     private fun viewFill(movie: Movie) {
@@ -88,13 +88,13 @@ class MovieDetailsFragment : Fragment() {
             actorListRecyclerView.adapter = ActorAdapter()
             actorListRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-            if (actors.isNotEmpty()) {
+           /* if (actors.isNotEmpty()) {
                 actorListRecyclerView.visibility = View.VISIBLE
 
             } else {
                 actorListRecyclerView.visibility = View.INVISIBLE
 
-            }
+            }*/
         }
     }
 
