@@ -19,7 +19,6 @@ import com.example.moviedetails.ui.databinding.FragmentMoviesDetailsBinding
 import com.example.moviedetails.ui.moviedetails.adapter.ActorAdapter
 
 
-
 class MovieDetailsFragment : Fragment() {
 
 
@@ -28,7 +27,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private var selectedMovieID: Int = 0
-
+    private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
 
     private var binding: FragmentMoviesDetailsBinding? = null
 
@@ -83,18 +82,20 @@ class MovieDetailsFragment : Fragment() {
             binding!!.ratingBar.rating = convertRating(movie.ratings)
             binding!!.totalReviews.text = movie.numberOfRatings.toString()
             binding!!.storyLine.text = movie.overview
-            val actorListRecyclerView = binding!!.actorListRecyclerView
+            actorListRecycler = binding!!.actorListRecyclerView
+            val actorAdapter = ActorAdapter()
 
-            actorListRecyclerView.adapter = ActorAdapter()
-            actorListRecyclerView.layoutManager =
+            val linearLayoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-           /* if (actors.isNotEmpty()) {
-                actorListRecyclerView.visibility = View.VISIBLE
+            actorListRecycler.layoutManager = linearLayoutManager
+            actorListRecycler.adapter = actorAdapter
 
+            if (actors.isNotEmpty()) {
+                actorListRecycler.visibility = View.VISIBLE
             } else {
-                actorListRecyclerView.visibility = View.INVISIBLE
-
-            }*/
+                actorListRecycler.visibility = View.INVISIBLE
+            }
+            (actorListRecycler.adapter as ActorAdapter).updateActors(actors)
         }
     }
 
