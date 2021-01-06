@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import coil.load
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
+import com.example.moviedetails.domain.MovieInteractor
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModel
+import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelFactory
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMoviesDetailsBinding
 import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
@@ -26,7 +30,12 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 
-    val movieDetailsViewModel: MovieDetailsViewModel
+    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(MovieInteractor(requireContext()))
+    }
+
+    private var selectedMovieID: Int = 0
+
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding: FragmentMoviesDetailsBinding
         get() = _binding!!
@@ -37,26 +46,29 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movieId = arguments?.getInt(MOVIE_ID_KEY)
-
-        movieDetailsViewModel.getMovie(movieId!!)
 
         binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
-
-        binding.actorListRecyclerView.apply {
-            adapter = MovieDetailsAdapter()
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        movieDetailsViewModel.selectedMovieList.observe(
+            this.viewLifecycleOwner,
+            Observer { movieDetailsViewModel.getMovie() })
+        if (savedInstanceState == null) {
+            movieDetailsViewModel.setMovie(selectedMovieID)
         }
-        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
+        movieDetailsViewModel.movieLiveData.observe(this.viewLifecycleOwner, this::viewFill)
+    }
+
+    private fun viewFill(movie: Movie) {
+        movie.apply {
             binding.background.load(movie.backdrop)
-            binding.minimumAge.text = context!!.getString(
+            binding.minimumAge.text = requireContext().getString(
                 R.string.pg_rating,
                 movie.minimumAge.toString()
             )
@@ -65,8 +77,16 @@ class MovieDetailsFragment : Fragment() {
             binding.ratingBar.rating = convertRating(movie.ratings)
             binding.totalReviews.text = movie.numberOfRatings.toString()
             binding.storyLine.text = movie.overview
-            if (movie.actors.isEmpty()) view.findViewById<TextView>(R.id.cast).visibility =
-                View.GONE
+
+            binding.actorListRecyclerView.apply {
+                adapter = MovieDetailsAdapter()
+                layoutManager =
+                    LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            }
+            if (movie.actors.isEmpty()) {
+                view?.findViewById<TextView>(R.id.cast)?.visibility =
+                    View.GONE
+            }
             (binding.actorListRecyclerView.adapter as MovieDetailsAdapter).updateActors(movie.actors)
         }
     }
@@ -78,6 +98,9 @@ class MovieDetailsFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
 
 
 
