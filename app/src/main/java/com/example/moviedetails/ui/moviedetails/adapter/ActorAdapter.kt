@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.example.moviedetails.data.Actor
 import com.example.moviedetails.ui.R
 
-class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
+class ActorAdapter : RecyclerView.Adapter<ActorViewHolder>() {
 
     private var actors: List<Actor> = listOf()
 
@@ -25,11 +25,6 @@ class MovieDetailsAdapter : RecyclerView.Adapter<ActorViewHolder>() {
     }
 
     override fun getItemCount(): Int = actors.size
-
-    fun updateActors(newActors: List<Actor>) {
-        actors = newActors
-        notifyDataSetChanged()
-    }
 }
 
 class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
@@ -37,11 +32,7 @@ class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView
     private val name: TextView = listItemView.findViewById(R.id.actor_name)
 
     fun bind(actor: Actor) {
-        Glide.with(itemView.context)
-            .load(actor.picture)
-            .placeholder(R.drawable.ic_image_download)
-            .error(R.drawable.ic_image_download)
-            .into(avatar)
+        avatar.load(actor.picture)
         name.text = actor.name
     }
 }

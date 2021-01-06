@@ -9,7 +9,21 @@ class MovieDetailsViewModel(
     private val interactor: MovieInteractor
 ) : ViewModel() {
 
-    private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData<Movie>()
+    private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData(
+        Movie(
+            id = 0,
+            title = "",
+            overview = "",
+            poster = "",
+            backdrop = "",
+            ratings = 0f,
+            numberOfRatings = 0,
+            minimumAge = 0,
+            runtime = 0,
+            genres = listOf(),
+            actors = listOf()
+        )
+    )
     private var _mutableSelectedMovieList: MutableLiveData<Int> = MutableLiveData(0)
 
     val movieLiveData: LiveData<Movie> get() = _mutableMovieLiveData
