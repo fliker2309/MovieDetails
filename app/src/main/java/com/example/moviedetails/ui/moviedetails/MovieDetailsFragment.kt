@@ -30,8 +30,8 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
 
     private var _binding: FragmentMoviesDetailsBinding? = null
-    private val binding :FragmentMoviesDetailsBinding
-    get() = _binding!!
+    private val binding: FragmentMoviesDetailsBinding
+        get() = _binding!!
 
 
     override fun onCreateView(
@@ -39,7 +39,8 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_movies_details, container, false)
+        _binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +66,7 @@ class MovieDetailsFragment : Fragment() {
         )
         movieDetailsViewModel.selectedMovieList.observe(
             this.viewLifecycleOwner,
-            Observer { movieDetailsViewModel.getMovie() })
+            { movieDetailsViewModel.getMovie() })
         if (savedInstanceState == null) {
             movieDetailsViewModel.setMovie(selectedMovieID)
         }
@@ -82,7 +83,8 @@ class MovieDetailsFragment : Fragment() {
             binding.movieTitle.text = movie.title
             binding.genre.text = movie.genres.joinToString { it.name }
             binding.ratingBar.rating = convertRating(movie.ratings)
-            binding.totalReviews.text =getString(R.string.total_reviews,movie.numberOfRatings.toString())
+            binding.totalReviews.text =
+                getString(R.string.total_reviews, movie.numberOfRatings.toString())
             binding.storyLine.text = movie.overview
             actorListRecycler = binding.actorListRecyclerView
             val actorAdapter = ActorAdapter()
@@ -91,12 +93,6 @@ class MovieDetailsFragment : Fragment() {
                 LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             actorListRecycler.layoutManager = linearLayoutManager
             actorListRecycler.adapter = actorAdapter
-
-            if (actors.isNotEmpty()) {
-                actorListRecycler.visibility = View.VISIBLE
-            } else {
-                actorListRecycler.visibility = View.INVISIBLE
-            }
             (actorListRecycler.adapter as ActorAdapter).updateActors(actors)
         }
     }
@@ -115,7 +111,6 @@ class MovieDetailsFragment : Fragment() {
             return movieFragment
         }
     }
-
 }
 
 
