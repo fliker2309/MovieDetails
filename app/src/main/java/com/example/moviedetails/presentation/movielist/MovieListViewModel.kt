@@ -19,10 +19,7 @@ class MovieListViewModel(
 
     private fun getMovies() {
         viewModelScope.launch {
-          viewModelScope.launch {
-              val movies = interactor.getMoviesList()
-              _mutableMovieListLiveData.setValue(interactor.getMoviesList())
-          }
+            _mutableMovieListLiveData.setValue(interactor.getMoviesList())
         }
     }
 }

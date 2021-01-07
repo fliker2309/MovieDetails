@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
@@ -18,9 +17,7 @@ import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMoviesDetailsBinding
 import com.example.moviedetails.ui.moviedetails.adapter.ActorAdapter
 
-
 class MovieDetailsFragment : Fragment() {
-
 
     private val movieDetailsViewModel: MovieDetailsViewModel by viewModels {
         MovieDetailsViewModelFactory(MovieInteractor(requireContext()))
@@ -32,7 +29,6 @@ class MovieDetailsFragment : Fragment() {
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding: FragmentMoviesDetailsBinding
         get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

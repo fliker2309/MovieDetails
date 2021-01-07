@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.data.loadMovies
 import com.example.moviedetails.domain.MovieInteractor
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
@@ -19,7 +17,6 @@ import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
-import kotlinx.coroutines.*
 
 class MovieListFragment : Fragment() {
 
@@ -48,26 +45,27 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieListBinding.bind(view)
-        lateinit var movies: List<Movie>
-        movieListRecycler = _binding!!.movieListRecyclerView
-        val movieListEmpty = _binding!!.emptyRecyclerTextView
-
+        var movies: List<Movie> = listOf()
+        movieListRecycler = binding.movieListRecyclerView
+        val movieListEmpty = binding.emptyRecyclerTextView
+        setMovieListVisible(movies, movieListRecycler, movieListEmpty)
+        movieListViewModel.moviesList.observe(this.viewLifecycleOwner, this::updateMovieList)
         movieListViewModel.moviesList.observe(
             this.viewLifecycleOwner,
-            Observer { movieListViewModel.moviesList })
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-            movies = loadMovies(requireContext())
-            setMovieListVisible(movies, movieListRecycler, movieListEmpty)
-        }
+            { movieListViewModel.moviesList })
     }
 
-    private suspend fun setMovieListVisible(
+    private fun updateMovieList(movies: List<Movie>) {
+        val movieListRecyclerView = binding.movieListRecyclerView
+        val movieListEmpty = binding.emptyRecyclerTextView
+        setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
+    }
+
+    private fun setMovieListVisible(
         movies: List<Movie>,
         movieListRecyclerView: RecyclerView,
         movieListEmpty: TextView
-    ) = withContext(Dispatchers.Main) {
+    ) {
         if (movies.isNotEmpty()) {
             movieListRecyclerView.visibility = View.VISIBLE
             movieListEmpty.visibility = View.GONE
@@ -94,5 +92,10 @@ class MovieListFragment : Fragment() {
     private fun calculateSpanCount(spanWidthPixels: Int): Int {
         val screenWidthPixels = requireContext().resources.displayMetrics.widthPixels
         return (screenWidthPixels / spanWidthPixels + 0.5).toInt()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
