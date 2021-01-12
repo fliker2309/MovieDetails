@@ -2,14 +2,13 @@ package com.example.moviedetails.presentation.moviedetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.moviedetails.domain.MovieInteractor
 
-class MovieDetailsViewModelFactory(private val interactor: MovieInteractor) :
+class MovieDetailsViewModelFactory :
     ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = when (modelClass) {
-        MovieDetailsViewModel::class.java -> MovieDetailsViewModel(interactor)
+        MovieDetailsViewModel::class.java -> MovieDetailsViewModel()
         else -> throw IllegalArgumentException("$modelClass is not registered ViewModel")
     } as T
 }

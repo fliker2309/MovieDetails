@@ -1,5 +1,7 @@
 package com.example.moviedetails.data
 
+import com.example.moviedetails.data.model.Genre
+
 data class Movie(
     val id: Int,
     val title: String,

@@ -2,48 +2,28 @@ package com.example.moviedetails.presentation.moviedetails
 
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.domain.MovieInteractor
+import com.example.moviedetails.domain.network.TheMovieDbApi
+import com.example.moviedetails.domain.network.getMoviesList
+
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ExperimentalSerializationApi
 
-class MovieDetailsViewModel(
-    private val interactor: MovieInteractor
-) : ViewModel() {
+class MovieDetailsViewModel : ViewModel() {
 
-    private var _mutableMovie: MutableLiveData<Movie> = MutableLiveData(
-        Movie(
-            id = 0,
-            title = "",
-            overview = "",
-            poster = "",
-            backdrop = "",
-            ratings = 0f,
-            numberOfRatings = 0,
-            minimumAge = 0,
-            runtime = 0,
-            genres = listOf(),
-            actors = listOf()
-        )
-    )
-    private var _selectedMovieList: MutableLiveData<Int> = MutableLiveData(0)
+    private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData<Movie>()
+    private var _loadingMovieList: MutableLiveData<Boolean> = MutableLiveData()
 
-    val movie: LiveData<Movie> get() = _mutableMovie
-    val selectedMovieList: LiveData<Int> get() = _selectedMovieList
-
-    //получение фильма с помощью корутин в architecture components
-    fun getMovie() {
+    @ExperimentalSerializationApi
+    fun getMovie(movieId: Int) {
         viewModelScope.launch {
-            val movieID = selectedMovieList.value
-            val movies = interactor.getMoviesList()
-            val movie = movies.find { actor -> movieID == actor.id }
-            if (movie != null) {
-                _mutableMovie.setValue(movie)
+            _loadingMovieList.value = true
+            val movies = getMoviesList()
+            movies.singleOrNull { it.id == movieId }?.let {
+                _mutableMovieLiveData.value = it
             }
+            _loadingMovieList.value = false
         }
     }
 
-    fun setMovie(movieID: Int) {
-        viewModelScope.launch {
-            _selectedMovieList.setValue(movieID)
-        }
-    }
+
 }
