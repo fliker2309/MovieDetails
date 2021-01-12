@@ -1,4 +1,4 @@
-package com.example.moviedetails.domain.network
+package com.example.moviedetails.network
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

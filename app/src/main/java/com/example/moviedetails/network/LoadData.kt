@@ -1,4 +1,4 @@
-package com.example.moviedetails.domain.network
+package com.example.moviedetails.network
 
 import com.example.moviedetails.data.Actor
 import com.example.moviedetails.data.Movie
