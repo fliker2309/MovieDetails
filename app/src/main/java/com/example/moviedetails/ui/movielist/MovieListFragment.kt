@@ -21,7 +21,7 @@ import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 class MovieListFragment : Fragment() {
 
     private val movieListViewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory(MovieInteractor(requireContext()))
+        MovieListViewModelFactory()
     }
     private lateinit var movieListRecycler: RecyclerView
     private var _binding: FragmentMovieListBinding? = null

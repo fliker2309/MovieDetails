@@ -2,7 +2,6 @@ package com.example.moviedetails.presentation.moviedetails
 
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.domain.network.TheMovieDbApi
 import com.example.moviedetails.domain.network.getMoviesList
 
 import kotlinx.coroutines.launch
