@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.domain.MovieInteractor
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+
+import kotlinx.serialization.ExperimentalSerializationApi
 
 class MovieListFragment : Fragment() {
 
@@ -42,44 +42,31 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMovieListBinding.bind(view)
-        var movies: List<Movie> = listOf()
+        movieListViewModel.getMovies()
         movieListRecycler = binding.movieListRecyclerView
-        val movieListEmpty = binding.emptyRecyclerTextView
-        setMovieListVisible(movies, movieListRecycler, movieListEmpty)
-        movieListViewModel.moviesList.observe(this.viewLifecycleOwner, this::updateMovieList)
-        movieListViewModel.moviesList.observe(
-            this.viewLifecycleOwner,
-            { movieListViewModel.moviesList })
-    }
-
-    private fun updateMovieList(movies: List<Movie>) {
-        val movieListRecyclerView = binding.movieListRecyclerView
-        val movieListEmpty = binding.emptyRecyclerTextView
-        setMovieListVisible(movies, movieListRecyclerView, movieListEmpty)
-    }
-
-    private fun setMovieListVisible(
-        movies: List<Movie>,
-        movieListRecyclerView: RecyclerView,
-        movieListEmpty: TextView
-    ) {
-        if (movies.isNotEmpty()) {
-            movieListRecyclerView.visibility = View.VISIBLE
-            movieListEmpty.visibility = View.GONE
+        binding.movieListRecyclerView.let {
+            val movies : List<Movie> = listOf()
             val spanCount =
                 calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
+            it.layoutManager = GridLayoutManager(activity, spanCount)
             val movieListAdapter = MovieListAdapter(movies = movies, onMoviePromoCardClick())
             val gridLayoutManager = GridLayoutManager(activity, spanCount)
             gridLayoutManager.spanSizeLookup
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
-        } else {
-            movieListRecyclerView.visibility = View.INVISIBLE
-            movieListEmpty.visibility = View.VISIBLE
         }
+
+
+        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner){
+            (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
+        }
+        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner){
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
