@@ -24,9 +24,6 @@ class MovieDetailsFragment : Fragment() {
         MovieDetailsViewModelFactory()
     }
 
-
-    private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
-
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding: FragmentMoviesDetailsBinding
         get() = _binding!!

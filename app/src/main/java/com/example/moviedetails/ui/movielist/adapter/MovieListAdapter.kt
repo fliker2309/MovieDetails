@@ -8,6 +8,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
 import com.example.moviedetails.ui.R
@@ -53,6 +54,7 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }
+
         Glide
             .with(itemView.context)
             .load(movie.poster)
