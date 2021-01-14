@@ -15,7 +15,6 @@ import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
-
 import kotlinx.serialization.ExperimentalSerializationApi
 
 class MovieListFragment : Fragment() {
@@ -44,28 +43,28 @@ class MovieListFragment : Fragment() {
 
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        _binding = FragmentMovieListBinding.bind(view)
+
         movieListViewModel.getMovies()
         movieListRecycler = binding.movieListRecyclerView
-        binding.movieListRecyclerView.let {
+        binding.movieListRecyclerView.apply {
             val movies : List<Movie> = listOf()
             val spanCount =
                 calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
-            it.layoutManager = GridLayoutManager(activity, spanCount)
+            movieListRecycler.layoutManager = GridLayoutManager(activity, spanCount)
             val movieListAdapter = MovieListAdapter(movies = movies, onMoviePromoCardClick())
             val gridLayoutManager = GridLayoutManager(activity, spanCount)
             gridLayoutManager.spanSizeLookup
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
+        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner){
 
-
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner){
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner){
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
+
         super.onViewCreated(view, savedInstanceState)
     }
 
