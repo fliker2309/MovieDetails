@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.annotation.GlideModule
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.databinding.ViewHolderMovieBinding
@@ -35,7 +36,7 @@ class MovieListAdapter(
 
     override fun getItemCount(): Int = movies.size
 }
-
+@GlideModule
 class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
 
