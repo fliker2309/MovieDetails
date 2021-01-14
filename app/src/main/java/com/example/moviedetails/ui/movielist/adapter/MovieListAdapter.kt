@@ -10,6 +10,8 @@ import com.example.moviedetails.data.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviedetails.ui.R
+import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
+import com.example.moviedetails.ui.databinding.ViewHolderMovieBinding
 
 class MovieListAdapter(
     private var movies: List<Movie>,
@@ -26,11 +28,17 @@ class MovieListAdapter(
         holder.bind(movies[position])
     }
 
+    fun setMovies(newMovies: List<Movie>) {
+        movies = newMovies
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = movies.size
 }
 
 class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     RecyclerView.ViewHolder(view) {
+
     private val posterImage: ImageView = view.findViewById(R.id.poster)
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
     private val movieTitle: TextView = view.findViewById(R.id.movie_title)

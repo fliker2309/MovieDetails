@@ -2,7 +2,7 @@ package com.example.moviedetails.presentation.movielist
 
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.domain.network.getMoviesList
+import com.example.moviedetails.network.getMoviesList
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 
@@ -18,7 +18,7 @@ class MovieListViewModel : ViewModel() {
         get() = _loadingLiveData
 
     @ExperimentalSerializationApi
-    private fun getMovies() {
+    fun getMovies() {
         viewModelScope.launch {
             _loadingLiveData.value = true
             _mutableMovieListLiveData.value = getMoviesList()

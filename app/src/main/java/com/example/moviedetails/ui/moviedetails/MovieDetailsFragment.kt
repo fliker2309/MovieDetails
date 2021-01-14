@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import coil.load
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,14 +16,15 @@ import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelF
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMoviesDetailsBinding
 import com.example.moviedetails.ui.moviedetails.adapter.ActorAdapter
+import kotlinx.serialization.ExperimentalSerializationApi
 
 class MovieDetailsFragment : Fragment() {
 
     private val movieDetailsViewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModelFactory(MovieInteractor(requireContext()))
+        MovieDetailsViewModelFactory()
     }
 
-    private var selectedMovieID: Int = 0
+
     private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
 
     private var _binding: FragmentMoviesDetailsBinding? = null
@@ -38,58 +40,48 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
         _binding = FragmentMoviesDetailsBinding.bind(view)
+
+        val movieId = arguments?.getInt(MOVIE_ID_KEY)
+
         binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        viewFill(
-            Movie(
-                id = 0,
-                title = "",
-                overview = "",
-                poster = "",
-                backdrop = "",
-                ratings = 0f,
-                numberOfRatings = 0,
-                minimumAge = 0,
-                runtime = 0,
-                genres = listOf(),
-                actors = listOf()
-            )
-        )
-        movieDetailsViewModel.selectedMovieList.observe(
-            this.viewLifecycleOwner,
-            { movieDetailsViewModel.getMovie() })
-        if (savedInstanceState == null) {
-            movieDetailsViewModel.setMovie(selectedMovieID)
-        }
-        movieDetailsViewModel.movie.observe(this.viewLifecycleOwner, this::viewFill)
-    }
+        movieDetailsViewModel.getMovie(movieId!!)
 
-    private fun viewFill(movie: Movie) {
-        movie.apply {
-            binding.background.load(movie.backdrop)
-            binding.minimumAge.text = requireContext().getString(
-                R.string.pg_rating,
-                movie.minimumAge.toString()
-            )
-            binding.movieTitle.text = movie.title
-            binding.genre.text = movie.genres.joinToString { it.name }
-            binding.ratingBar.rating = convertRating(movie.ratings)
-            binding.totalReviews.text =
-                getString(R.string.total_reviews, movie.numberOfRatings.toString())
-            binding.storyLine.text = movie.overview
-            actorListRecycler = binding.actorListRecyclerView
-            val actorAdapter = ActorAdapter()
+        binding.actorListRecyclerView.apply {
+            adapter = ActorAdapter()
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL,false)
 
-            val linearLayoutManager =
-                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-            actorListRecycler.layoutManager = linearLayoutManager
-            actorListRecycler.adapter = actorAdapter
-            (actorListRecycler.adapter as ActorAdapter).updateActors(actors)
         }
+
+        movieDetailsViewModel.loadingMovieList.observe(viewLifecycleOwner){
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
+       movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner){ movie: Movie ->
+           binding.backToMainButton.visibility = View.VISIBLE
+           binding.background.load(movie.backdrop)
+           binding.minimumAge.text = requireContext().getString(
+               R.string.pg_rating,
+               movie.minimumAge.toString()
+           )
+           binding.movieTitle.text = movie.title
+           binding.genre.text = movie.genres.joinToString { it.name }
+           binding.ratingBar.visibility = View.VISIBLE
+           binding.ratingBar.rating = convertRating(movie.ratings)
+           binding.totalReviews.text =
+               getString(R.string.total_reviews, movie.numberOfRatings.toString())
+           binding.storyLineLabel.visibility = View.VISIBLE
+           binding.overview.text = movie.overview
+           binding.castLabel.visibility = View.VISIBLE
+           (binding.actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
+       }
+
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
@@ -100,10 +92,9 @@ class MovieDetailsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(movieID: Int): MovieDetailsFragment {
-            val movieFragment = MovieDetailsFragment()
-            movieFragment.selectedMovieID = movieID
-            return movieFragment
+        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
+        fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
+            arguments = bundleOf(MOVIE_ID_KEY to movieId)
         }
     }
 }
