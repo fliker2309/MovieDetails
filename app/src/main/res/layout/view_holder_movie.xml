@@ -117,14 +117,14 @@
             app:layout_constraintStart_toStartOf="@id/poster"
             app:layout_constraintTop_toBottomOf="@id/poster" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+       <!-- <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/runtime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/_137_min"
             android:textAppearance="@style/label_movie_duration"
             app:layout_constraintStart_toStartOf="@id/movie_title"
-            app:layout_constraintTop_toBottomOf="@id/movie_title" />
+            app:layout_constraintTop_toBottomOf="@id/movie_title" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
