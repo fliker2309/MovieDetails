@@ -65,26 +65,26 @@ class MovieDetailsFragment : Fragment() {
 
     private fun showMovieData(movie: Movie) {
         binding.apply {
-            binding.backToMainButton.visibility = View.VISIBLE
-            binding.background.load(movie.backdrop)
-            binding.minimumAge.text = requireContext().getString(
+            backToMainButton.visibility = View.VISIBLE
+            background.load(movie.backdrop)
+            minimumAge.text = requireContext().getString(
                 R.string.pg_rating,
                 movie.minimumAge.toString()
             )
-            binding.movieTitle.text = movie.title
-            binding.runtime.text = resources.getString(
+            movieTitle.text = movie.title
+            runtime.text = resources.getString(
                 R.string.movie_duration,
                 movie.runtime.toString()
             )
-            binding.genre.text = movie.genres.joinToString { it.name }
-            binding.ratingBar.visibility = View.VISIBLE
-            binding.ratingBar.rating = convertRating(movie.ratings)
-            binding.totalReviews.text =
+            genre.text = movie.genres.joinToString { it.name }
+            ratingBar.visibility = View.VISIBLE
+            ratingBar.rating = convertRating(movie.ratings)
+            totalReviews.text =
                 getString(R.string.total_reviews, movie.numberOfRatings.toString())
-            binding.storyLineLabel.visibility = View.VISIBLE
-            binding.overview.text = movie.overview
-            binding.castLabel.visibility = View.VISIBLE
-            (binding.actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
+            storyLineLabel.visibility = View.VISIBLE
+            overview.text = movie.overview
+            castLabel.visibility = View.VISIBLE
+            (actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
         }
     }
 
