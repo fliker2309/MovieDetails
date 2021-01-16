@@ -41,47 +41,51 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         _binding = FragmentMoviesDetailsBinding.bind(view)
-
         val movieId = arguments?.getInt(MOVIE_ID_KEY)
-
         binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        movieDetailsViewModel.getMovie(movieId!!)
 
+        movieDetailsViewModel.getMovie(movieId!!)
         binding.actorListRecyclerView.apply {
             adapter = ActorAdapter()
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL,false)
-
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
 
-        movieDetailsViewModel.loadingMovieList.observe(viewLifecycleOwner){
+        movieDetailsViewModel.loadingMovieList.observe(viewLifecycleOwner) {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
-       movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner){ movie: Movie ->
-           binding.backToMainButton.visibility = View.VISIBLE
-           binding.background.load(movie.backdrop)
-           binding.minimumAge.text = requireContext().getString(
-               R.string.pg_rating,
-               movie.minimumAge.toString()
-           )
-           binding.movieTitle.text = movie.title
-           binding.runtime.text = resources.getString(
-               R.string.movie_duration,
-               movie.runtime.toString())
-           binding.genre.text = movie.genres.joinToString { it.name }
-           binding.ratingBar.visibility = View.VISIBLE
-           binding.ratingBar.rating = convertRating(movie.ratings)
-           binding.totalReviews.text =
-               getString(R.string.total_reviews, movie.numberOfRatings.toString())
-           binding.storyLineLabel.visibility = View.VISIBLE
-           binding.overview.text = movie.overview
-           binding.castLabel.visibility = View.VISIBLE
-           (binding.actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
-       }
 
+        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
+            showMovieData(movie)
+        }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun showMovieData(movie: Movie) {
+        binding.apply {
+            binding.backToMainButton.visibility = View.VISIBLE
+            binding.background.load(movie.backdrop)
+            binding.minimumAge.text = requireContext().getString(
+                R.string.pg_rating,
+                movie.minimumAge.toString()
+            )
+            binding.movieTitle.text = movie.title
+            binding.runtime.text = resources.getString(
+                R.string.movie_duration,
+                movie.runtime.toString()
+            )
+            binding.genre.text = movie.genres.joinToString { it.name }
+            binding.ratingBar.visibility = View.VISIBLE
+            binding.ratingBar.rating = convertRating(movie.ratings)
+            binding.totalReviews.text =
+                getString(R.string.total_reviews, movie.numberOfRatings.toString())
+            binding.storyLineLabel.visibility = View.VISIBLE
+            binding.overview.text = movie.overview
+            binding.castLabel.visibility = View.VISIBLE
+            (binding.actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
+        }
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
