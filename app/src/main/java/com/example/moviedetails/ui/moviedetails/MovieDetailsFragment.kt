@@ -66,6 +66,9 @@ class MovieDetailsFragment : Fragment() {
                movie.minimumAge.toString()
            )
            binding.movieTitle.text = movie.title
+           binding.runtime.text = resources.getString(
+               R.string.movie_duration,
+               movie.runtime.toString())
            binding.genre.text = movie.genres.joinToString { it.name }
            binding.ratingBar.visibility = View.VISIBLE
            binding.ratingBar.rating = convertRating(movie.ratings)

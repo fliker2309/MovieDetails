@@ -45,7 +45,6 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
     private val likeIcon: ImageView = view.findViewById(R.id.ic_like)
     private val movieTitle: TextView = view.findViewById(R.id.movie_title)
     private val minimumAge: TextView = view.findViewById(R.id.minimum_age)
-    private val durationText: TextView = view.findViewById((R.id.runtime))
     private val genreText: TextView = view.findViewById(R.id.genre)
     private val totalReviewText: TextView = view.findViewById(R.id.total_reviews)
     private val rating: RatingBar = view.findViewById(R.id.ratingBar)
@@ -70,10 +69,6 @@ class MovieListViewHolder(view: View, private val cardListener: (Int) -> Unit) :
         )
         rating.rating = convertRating(movie.ratings)
         movieTitle.text = movie.title
-        durationText.text = itemView.resources.getString(
-            R.string.movie_duration,
-            movie.runtime.toString()
-        )
         genreText.text = movie.genres.joinToString { it.name }
         totalReviewText.text = itemView.context.getString(
             R.string.total_reviews,
