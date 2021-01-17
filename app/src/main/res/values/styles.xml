@@ -7,6 +7,7 @@
         <item name="android:fontFamily">@font/roboto_black</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:textColor">#D8D8D8</item>
         <item name="lineHeight">16sp</item>
     </style>
