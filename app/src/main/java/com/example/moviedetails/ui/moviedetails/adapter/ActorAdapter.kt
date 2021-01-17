@@ -37,7 +37,7 @@ class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView
     private val name: TextView = listItemView.findViewById(R.id.actor_name)
 
     fun bind(actor: Actor) {
-        avatar.load(actor.picture){
+        avatar.load(actor.picture) {
             placeholder(R.drawable.ic_image_download)
             error(R.drawable.ic_person)
         }

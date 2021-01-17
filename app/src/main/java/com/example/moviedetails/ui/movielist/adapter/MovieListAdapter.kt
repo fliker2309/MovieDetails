@@ -32,16 +32,18 @@ class MovieListAdapter(
 
 @GlideModule
 class MovieListViewHolder private constructor(
-    private val binding: ViewHolderMovieBinding, private val cardListener: (Int) -> Unit) :
+    private val binding: ViewHolderMovieBinding, private val cardListener: (Int) -> Unit
+) :
     RecyclerView.ViewHolder(binding.root) {
     companion object {
         fun from(parent: ViewGroup, cardListener: (Int) -> Unit): MovieListViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding =
-               ViewHolderMovieBinding.inflate(inflater, parent, false)
+                ViewHolderMovieBinding.inflate(inflater, parent, false)
             return MovieListViewHolder(binding, cardListener)
         }
     }
+
     private var movieId: Int? = null
 
     init {
@@ -51,6 +53,7 @@ class MovieListViewHolder private constructor(
             }
         }
     }
+
     fun bind(movie: Movie) {
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
