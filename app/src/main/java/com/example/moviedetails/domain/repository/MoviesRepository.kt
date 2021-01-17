@@ -1,14 +1,16 @@
-package com.example.moviedetails.network
+package com.example.moviedetails.domain.repository
 
 import com.example.moviedetails.data.Actor
 import com.example.moviedetails.data.Movie
 import com.example.moviedetails.data.model.Genre
 import com.example.moviedetails.data.model.Movies
+import com.example.moviedetails.network.Configuration
+import com.example.moviedetails.network.RetrofitConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 
-
+@ExperimentalSerializationApi
 private val api = RetrofitConfig.theMovieDbApiService
 
 @ExperimentalSerializationApi
