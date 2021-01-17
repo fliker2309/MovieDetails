@@ -4,6 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 const val API_KEY = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzQ2NWViNTk0YTRmNzAzZDlhZTRiMDg0MmRlMDdhNSIsInN1YiI6IjVmZjc4MWI1NmMwYjM2MDAzZWEyOGVlYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oegbpVOXZoPWW0RsGVU0FpO3Vd7fOR9uzDFYFePS3-8"
+
 const val LANG = "en-US"
 
 class ApiKeyInterceptor : Interceptor {
