@@ -5,103 +5,112 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
-import androidx.core.os.bundleOf
-import com.bumptech.glide.Glide
+import coil.load
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.data.loadMovies
+import com.example.moviedetails.domain.MovieInteractor
+import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModel
+import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelFactory
 import com.example.moviedetails.ui.R
-import com.example.moviedetails.ui.moviedetails.adapter.MovieDetailsAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.moviedetails.ui.databinding.FragmentMoviesDetailsBinding
+import com.example.moviedetails.ui.moviedetails.adapter.ActorAdapter
 
 class MovieDetailsFragment : Fragment() {
 
-    companion object {
-        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
-        fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
-            arguments = bundleOf(MOVIE_ID_KEY to movieId)
-        }
+    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(MovieInteractor(requireContext()))
     }
 
-    private var movieId: Int? = null
-    private lateinit var actorListRecycler: RecyclerView
+    private var selectedMovieID: Int = 0
+    private lateinit var actorListRecycler: RecyclerView //важно не забыть! добавив это, стал появляться список актеров
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            movieId = it.getInt(MOVIE_ID_KEY)
-        }
-    }
+    private var _binding: FragmentMoviesDetailsBinding? = null
+    private val binding: FragmentMoviesDetailsBinding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_movies_details, container, false)
+        _binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //инициализация movie
-        var movie: Movie?
-        actorListRecycler = view.findViewById(R.id.actor_list_recycler_view)
-        val movieDetailsAdapter = MovieDetailsAdapter()
-
-        val linearLayoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        actorListRecycler.layoutManager = linearLayoutManager
-        actorListRecycler.adapter = movieDetailsAdapter
-
-        val backgroundImage: ImageView = view.findViewById(R.id.background)
-        val minimumAge: TextView = view.findViewById(R.id.minimum_age)
-        val movieTitle: TextView = view.findViewById(R.id.movie_title)
-        val genre: TextView = view.findViewById(R.id.genre)
-        val rating: RatingBar = view.findViewById(R.id.ratingBar)
-        val totalReviews: TextView = view.findViewById(R.id.total_reviews)
-        val storyLine: TextView = view.findViewById(R.id.overview)
-
-        view.findViewById<Button>(R.id.back_to_main_button)?.setOnClickListener {
+        _binding = FragmentMoviesDetailsBinding.bind(view)
+        binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            movie = loadMovies(requireContext()).findLast { it.id == movieId }
-            withContext(Dispatchers.Main) {
-                movie?.let {
-                    Glide
-                        .with(this@MovieDetailsFragment)// для контекста фрагмента, а не корутины
-                        .load(movie?.backdrop)
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_image_download)
-                        .error(R.drawable.ic_image_download)
-                        .into(backgroundImage)
+        viewFill(
+            Movie(
+                id = 0,
+                title = "",
+                overview = "",
+                poster = "",
+                backdrop = "",
+                ratings = 0f,
+                numberOfRatings = 0,
+                minimumAge = 0,
+                runtime = 0,
+                genres = listOf(),
+                actors = listOf()
+            )
+        )
+        movieDetailsViewModel.selectedMovieList.observe(
+            this.viewLifecycleOwner,
+            { movieDetailsViewModel.getMovie() })
+        if (savedInstanceState == null) {
+            movieDetailsViewModel.setMovie(selectedMovieID)
+        }
+        movieDetailsViewModel.movie.observe(this.viewLifecycleOwner, this::viewFill)
+    }
 
-                    minimumAge.text = context!!.getString(
-                        R.string.pg_rating,
-                        movie?.minimumAge.toString()
-                    )
-                    movieTitle.text = movie?.title
-                    genre.text = movie?.genres?.joinToString { it.name }
-                    rating.rating = convertRating(it.ratings)
-                    totalReviews.text = movie?.numberOfRatings.toString()
-                    storyLine.text = movie?.overview
-                    (actorListRecycler.adapter as MovieDetailsAdapter).updateActors(it.actors)
-                }
-            }
+    private fun viewFill(movie: Movie) {
+        movie.apply {
+            binding.background.load(movie.backdrop)
+            binding.minimumAge.text = requireContext().getString(
+                R.string.pg_rating,
+                movie.minimumAge.toString()
+            )
+            binding.movieTitle.text = movie.title
+            binding.genre.text = movie.genres.joinToString { it.name }
+            binding.ratingBar.rating = convertRating(movie.ratings)
+            binding.totalReviews.text =
+                getString(R.string.total_reviews, movie.numberOfRatings.toString())
+            binding.storyLine.text = movie.overview
+            actorListRecycler = binding.actorListRecyclerView
+            val actorAdapter = ActorAdapter()
+
+            val linearLayoutManager =
+                LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            actorListRecycler.layoutManager = linearLayoutManager
+            actorListRecycler.adapter = actorAdapter
+            (actorListRecycler.adapter as ActorAdapter).updateActors(actors)
         }
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
+    companion object {
+        fun newInstance(movieID: Int): MovieDetailsFragment {
+            val movieFragment = MovieDetailsFragment()
+            movieFragment.selectedMovieID = movieID
+            return movieFragment
+        }
+    }
 }
+
+
+
 
 
 
