@@ -9,8 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.create
 
-const val LANG = "en-US"
-const val API_KEY = "63465eb594a4f703d9ae4b0842de07a5"
+const val BASE_URL = "https://api.themoviedb.org/3/"
 
 @ExperimentalSerializationApi
 object RetrofitConfig {
@@ -19,17 +18,15 @@ object RetrofitConfig {
         ignoreUnknownKeys = true
     }
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
-
     private val loggingInterceptor = HttpLoggingInterceptor().apply{
         level = HttpLoggingInterceptor.Level.BODY
     }
+
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(ApiKeyInterceptor())
         .addInterceptor(loggingInterceptor)
         .addNetworkInterceptor(loggingInterceptor)
         .build()
-
 
     private val contentType = "application/json".toMediaType()
 
