@@ -1,4 +1,8 @@
 package com.example.moviedetails.data.db
 
-class RoomDatabase {
+import androidx.room.*
+
+
+@Database(entities = )
+abstract class RoomDatabase : RoomDatabase {
 }
