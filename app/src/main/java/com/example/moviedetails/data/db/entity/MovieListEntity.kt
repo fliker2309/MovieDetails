@@ -12,7 +12,7 @@ data class MovieListEntity(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "pg")
-    val adult: Boolean,
+    val pgRating: String,
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
     @ColumnInfo(name = "rating")
