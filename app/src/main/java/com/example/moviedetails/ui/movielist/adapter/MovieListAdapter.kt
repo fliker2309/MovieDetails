@@ -82,6 +82,7 @@ class MovieListViewHolder private constructor(
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
+
 }
 
 

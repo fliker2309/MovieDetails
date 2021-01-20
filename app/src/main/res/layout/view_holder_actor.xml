@@ -27,6 +27,6 @@
         app:layout_constraintEnd_toEndOf="@+id/actor_image"
         app:layout_constraintStart_toStartOf="@id/actor_image"
         app:layout_constraintTop_toBottomOf="@+id/actor_image"
-        tools:text="@string/robert_downey_jr" />
+        tools:text="@string/cast" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

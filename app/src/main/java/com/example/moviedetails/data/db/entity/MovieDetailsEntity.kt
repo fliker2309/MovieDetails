@@ -9,4 +9,8 @@ data class MovieDetailsEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,
+
+    @ColumnInfo(name = "backdrop_path")
+    val backdropPath : String,
+
 )

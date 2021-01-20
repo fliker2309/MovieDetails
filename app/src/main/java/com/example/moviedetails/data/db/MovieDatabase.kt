@@ -4,5 +4,6 @@ import androidx.room.*
 
 
 @Database(entities = )
-abstract class RoomDatabase : RoomDatabase {
+abstract class MovieDatabase : RoomDatabase() {
+
 }
