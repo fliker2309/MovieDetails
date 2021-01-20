@@ -47,7 +47,7 @@ class MovieListFragment : Fragment() {
         movieListViewModel.getMovies()
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
-            val movies : List<Movie> = listOf()
+            val movies: List<Movie> = listOf()
             val spanCount =
                 calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
             movieListRecycler.layoutManager = GridLayoutManager(activity, spanCount)
@@ -57,11 +57,11 @@ class MovieListFragment : Fragment() {
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner){
+        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
 
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
-        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner){
+        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
 
