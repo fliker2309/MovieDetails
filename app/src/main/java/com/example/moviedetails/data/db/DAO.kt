@@ -15,7 +15,7 @@ interface DAO {
     suspend fun insertMovies(movies: Movies)
 
     @Query("SELECT * FROM movie_details")
-    fun readDetails(): LiveData<ДЕТАЛИФИЛЬМА>
+    fun readDetails(): LiveData<Details>
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetails(details: Details)
