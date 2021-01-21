@@ -39,9 +39,8 @@ data class MovieDetailsEntity(
     val voteCount: Long,
 
     @ColumnInfo(name = "overview")
-    val overview : String,
+    val overview: String,
 
-    //как список актеров сохранить?
-@ColumnInfo(name Актеры)
-
-    )
+    @ColumnInfo(name = "movie_id")
+    val movieId: Long
+)
