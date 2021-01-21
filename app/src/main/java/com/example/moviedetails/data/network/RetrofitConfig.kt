@@ -1,4 +1,4 @@
-package com.example.moviedetails.network
+package com.example.moviedetails.data.network
 
 import retrofit2.Retrofit
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
