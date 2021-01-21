@@ -8,17 +8,17 @@ import androidx.room.ForeignKey.SET_DEFAULT
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "cast",
+    tableName = "cast_list",
     foreignKeys = [ForeignKey(
         entity = MovieDetailsEntity::class,
-        parentColumns = arrayOf("id"),
+        parentColumns = arrayOf("movie_id"),
         childColumns = arrayOf("movie_id"),
         onDelete = SET_DEFAULT
     )]
 )
 data class CastEntity(
     @PrimaryKey
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "cast_id")
     val id: Long,
 
     @ColumnInfo(name = "name")

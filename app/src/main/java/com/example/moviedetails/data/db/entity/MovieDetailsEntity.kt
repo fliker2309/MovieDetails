@@ -7,14 +7,14 @@ import androidx.room.ForeignKey.CASCADE
     tableName = "movie_details",
     foreignKeys = [ForeignKey(
         entity = MovieListEntity::class,
-        parentColumns = arrayOf("id"),
+        parentColumns = arrayOf("movie_id"),
         childColumns = arrayOf("movie_id"),
         onDelete = CASCADE
     )]
 )
 data class MovieDetailsEntity(
     @PrimaryKey
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "details_id")
     val id: Long,
 
     @ColumnInfo(name = "backdrop_path")

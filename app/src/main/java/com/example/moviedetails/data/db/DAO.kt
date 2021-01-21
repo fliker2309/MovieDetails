@@ -22,7 +22,7 @@ interface DAO {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetails(details: Details)
 
-    @Query("SELECT * FROM cast WHERE movie_id = :id")
+    @Query("SELECT * FROM cast_list WHERE movie_id = :id")
     suspend fun insertCast(cast: CastEntity)
 
 }
