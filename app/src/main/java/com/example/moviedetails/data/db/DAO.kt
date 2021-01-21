@@ -2,6 +2,8 @@ package com.example.moviedetails.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.moviedetails.data.db.entity.CastEntity
+import com.example.moviedetails.data.model.Cast
 import com.example.moviedetails.data.model.Details
 import com.example.moviedetails.data.model.Movies
 
@@ -19,5 +21,9 @@ interface DAO {
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetails(details: Details)
+
+    @Query("SELECT * FROM cast WHERE movie_id = :id")
+    suspend fun insertCast(cast: CastEntity)
+
 }
 
