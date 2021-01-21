@@ -2,8 +2,7 @@ package com.example.moviedetails.presentation.moviedetails
 
 import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
-import com.example.moviedetails.domain.repository.getMoviesList
-
+import com.example.moviedetails.data.repositories.movies.getMoviesList
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 
