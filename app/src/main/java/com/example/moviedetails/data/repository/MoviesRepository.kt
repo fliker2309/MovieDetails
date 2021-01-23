@@ -13,11 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 
-class MoviesRepository(private val movieDao: MovieDao){
-    val readAllMoviesFromDb : LiveData<List<Movie>> = movieDao.readMovies()
+class MoviesRepository(private val movieDao: MovieDao) {
+    val readAllMoviesFromDb: LiveData<List<Movie>> = movieDao.readMovies()
 
-    suspend fun insertMoviesInDb(movieEntity : MovieEntity){
-        movieDao.insertMovies(movieEntity)
+    suspend fun insertMoviesInDb(movieEntity: MovieEntity) {
+        movieDao.insertMoviesInDb(movieEntity)
     }
 }
 

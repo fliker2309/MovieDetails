@@ -9,19 +9,18 @@ import com.example.moviedetails.data.model.Movies
 
 @Dao
 interface MovieDao {
-    //add data in DB
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(movieEntity: MovieEntity)
 
     @Query("SELECT * FROM movies")
     fun readMovies(): LiveData<List<Movie>>//!!!!!!!!!!!!!!!!! read from db
 
+    //add data in DB
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMoviesInDb(movieEntity: MovieEntity)
 
 
 
 
-   /* @Query("SELECT * FROM cast_list WHERE details_id = :id")
-    suspend fun insertCast(cast: CastEntity)*/
+
 
 }
 
