@@ -27,7 +27,7 @@ data class Result(
     val backdropPath: String,
 
     @SerialName("genre_ids")
-    val genreIDS: List<Int>, //закинуть в строку через , с помощью конвертера
+    val genreIDS: List<Int>,
 
     @SerialName("id")
     val id: Int,
