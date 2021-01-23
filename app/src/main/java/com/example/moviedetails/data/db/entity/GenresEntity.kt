@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "genres",
     foreignKeys = [ForeignKey(
-        entity = MovieListEntity::class,
+        entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("movie_id"),
         onDelete = SET_DEFAULT

@@ -1,6 +1,5 @@
 package com.example.moviedetails.data.db.entity
 
-import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -10,9 +9,9 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "cast_list",
     foreignKeys = [ForeignKey(
-        entity = MovieDetailsEntity::class,
+        entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("details_id"),
+        childColumns = arrayOf("movie_id"),
         onDelete = SET_DEFAULT
     )]
 )
@@ -24,9 +23,9 @@ data class CastEntity(
     @ColumnInfo(name = "name")
     val name: String,
 
-    @ColumnInfo(name = "picture")
-    val picture: Bitmap,
+    @ColumnInfo(name = "profile_path")
+    val profilePath: String? = null,
 
-    @ColumnInfo(name = "details_id")
-    val detailsId: Long
+    @ColumnInfo(name = "movie_id")
+    val movieId: Long
 )
