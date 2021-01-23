@@ -36,9 +36,24 @@ data class MovieEntity(
     @ColumnInfo(name = "overview")
     val overview: String,
 
-//сконвертировать в строку при записи
+//сконвертировать в строку при записи в дао
     @ColumnInfo(name = "genre")
-    val genre: String
+    val genre: String,
 
+    @Embedded
+    val actor: Actor?
+)
 
+data class Actor(
+    @ColumnInfo(name = "id")
+    val actorId: Long,
+
+    @ColumnInfo(name = "name")
+    val name: String,
+
+    @ColumnInfo(name = "profile_path")
+    val profilePath: String? = null,
+
+    @ColumnInfo(name = "movie_id")
+    val movieId: Long
 )

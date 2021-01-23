@@ -25,7 +25,7 @@ class Converters {
     fun toListOfStrings(flatStringList: String): List<String> {
         return flatStringList.split(",")
     }
-
+//из строки в лист
     @TypeConverter
     fun fromListOfStrings(listOfString: List<String>): String {
         return listOfString.joinToString(",")
