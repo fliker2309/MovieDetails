@@ -1,20 +1,20 @@
 package com.example.moviedetails.data.db.entity
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.SET_DEFAULT
 
 @Entity(
     tableName = "movie_details",
     foreignKeys = [ForeignKey(
         entity = MovieListEntity::class,
-        parentColumns = arrayOf("movie_id"),
+        parentColumns = arrayOf("id"),
         childColumns = arrayOf("movie_id"),
-        onDelete = CASCADE
+        onDelete = SET_DEFAULT
     )]
 )
 data class MovieDetailsEntity(
     @PrimaryKey
-    @ColumnInfo(name = "details_id")
+    @ColumnInfo(name = "id")
     val id: Long,
 
     @ColumnInfo(name = "backdrop_path")
@@ -29,8 +29,8 @@ data class MovieDetailsEntity(
     @ColumnInfo(name = "runtime")
     val runtime: String,
 
-    @ColumnInfo(name = "genres")
-    val genres: String,
+   /* @ColumnInfo(name = "genres")
+    val genres: String,*/
 
     @ColumnInfo(name = "rating")
     val voteAverage: Long,

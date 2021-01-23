@@ -10,14 +10,14 @@ import androidx.room.PrimaryKey
     tableName = "genres",
     foreignKeys = [ForeignKey(
         entity = MovieListEntity::class,
-        parentColumns = arrayOf("movie_id"),
+        parentColumns = arrayOf("id"),
         childColumns = arrayOf("movie_id"),
         onDelete = SET_DEFAULT
     )]
 )
 data class GenresEntity(
     @PrimaryKey
-    @ColumnInfo(name = "genre_id")
+    @ColumnInfo(name = "id")
     val id: Long,
 
     @ColumnInfo(name = "genre_name")

@@ -11,14 +11,14 @@ import androidx.room.PrimaryKey
     tableName = "cast_list",
     foreignKeys = [ForeignKey(
         entity = MovieDetailsEntity::class,
-        parentColumns = arrayOf("movie_id"),
-        childColumns = arrayOf("movie_id"),
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("details_id"),
         onDelete = SET_DEFAULT
     )]
 )
 data class CastEntity(
     @PrimaryKey
-    @ColumnInfo(name = "cast_id")
+    @ColumnInfo(name = "id")
     val id: Long,
 
     @ColumnInfo(name = "name")
@@ -27,6 +27,6 @@ data class CastEntity(
     @ColumnInfo(name = "picture")
     val picture: Bitmap,
 
-    @ColumnInfo(name = "movie_id")
-    val movieId: Long
+    @ColumnInfo(name = "details_id")
+    val detailsId: Long
 )
