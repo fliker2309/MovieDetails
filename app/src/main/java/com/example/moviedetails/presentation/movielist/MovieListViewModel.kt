@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.example.moviedetails.data.Movie
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.entity.MovieEntity
-import com.example.moviedetails.data.repository.MoviesRepository
+import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.repository.getMoviesList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -23,11 +23,11 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val loadingLiveData: LiveData<Boolean>
         get() = _loadingLiveData
 
-    private val repository: MoviesRepository
+    private val repository: MovieRepository
 
     init {
         val movieDao = MovieDatabase.getDatabase(application).movieDao()
-        repository = MoviesRepository(movieDao)
+        repository = MovieRepository(movieDao)
         movieListLiveData = repository.readAllMoviesFromDb
     }
 
