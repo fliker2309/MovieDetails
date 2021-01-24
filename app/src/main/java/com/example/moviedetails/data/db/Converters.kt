@@ -1,34 +1,40 @@
 package com.example.moviedetails.data.db
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
-import java.io.ByteArrayOutputStream
+import com.example.moviedetails.data.Actor
+import com.example.moviedetails.data.model.Genre
 
 class Converters {
 
-    //для записи в БД, нужен массив байтов
-  /*  @TypeConverter
-    fun fromBitmap(bitmap: Bitmap): ByteArray {
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        return outputStream.toByteArray()
+    @TypeConverter
+    fun fromGenres(genres: List<Genre>): String =
+        genres.joinToString("|") { "${it.id}:${it.name}" }
+
+    @TypeConverter
+    fun toGenres(genres: String): List<Genre> {
+        return genres.split("|").map {
+            val rawGenre: List<String> = it.split(":")
+            val id = rawGenre[0].toInt()
+            val name = rawGenre[1]
+            Genre(id = id, name = name)
+        }
     }
 
     @TypeConverter
-    fun toBitmap(byteArray: ByteArray): Bitmap {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-    }*/
-
-    //для записи списка жанров в строку
-    @TypeConverter
-    fun toListOfStrings(flatStringList: String): List<String> {
-        return flatStringList.split(",")
-    }
-//из строки в лист
-    @TypeConverter
-    fun fromListOfStrings(listOfString: List<String>): String {
-        return listOfString.joinToString(",")
+    fun fromActors(actors: List<Actor>): String {
+        return actors.joinToString("|") {
+            "${it.id};${it.name};${it.picture}"
+        }
     }
 
+    @TypeConverter
+    fun toActors(actors: String): List<Actor> {
+        return actors.split("|").map {
+            val rawActor = it.split(";")
+            val id = rawActor[0].toInt()
+            val name = rawActor[1]
+            val picture = rawActor[2]
+            Actor(id = id, picture = picture, name = name)
+        }
+    }
 }
