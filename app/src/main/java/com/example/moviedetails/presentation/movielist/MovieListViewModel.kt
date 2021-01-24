@@ -1,6 +1,5 @@
 package com.example.moviedetails.presentation.movielist
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
@@ -32,7 +31,7 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
         viewModelScope.launch {
             _loadingLiveData.value = true
             val loadedMovies = getMoviesList()
-            _mutableMovieListLiveData.value = loadedMovies()
+            _mutableMovieListLiveData.value = loadedMovies
             _loadingLiveData.value = false
             repository.insertMoviesInDb(loadedMovies)
         }
