@@ -2,11 +2,11 @@ package com.example.moviedetails.data.db
 
 import android.content.Context
 import androidx.room.*
-import com.example.moviedetails.data.db.entity.MovieEntity
+import com.example.moviedetails.data.db.entity.Movie
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
-@Database(entities = [MovieEntity::class], version = 1, exportSchema = false)
+@Database(entities = [Movie::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class MovieDatabase : RoomDatabase() {
 

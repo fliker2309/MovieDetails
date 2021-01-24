@@ -1,4 +1,4 @@
-package com.example.moviedetails.data
+package com.example.moviedetails.data.model
 
 data class Actor(
     val id: Int?,

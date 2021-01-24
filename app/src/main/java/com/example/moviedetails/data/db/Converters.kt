@@ -1,7 +1,7 @@
 package com.example.moviedetails.data.db
 
 import androidx.room.TypeConverter
-import com.example.moviedetails.data.Actor
+import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.data.model.Genre
 
 class Converters {

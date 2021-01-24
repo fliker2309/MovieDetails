@@ -1,7 +1,7 @@
 package com.example.moviedetails.presentation.moviedetails
 
 import androidx.lifecycle.*
-import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.network.getMoviesList
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -19,7 +19,7 @@ class MovieDetailsViewModel : ViewModel() {
         viewModelScope.launch {
             _loadingMovieList.value = true
             val movies = getMoviesList()
-            movies.singleOrNull { it.id == movieId }?.let {
+            movies.singleOrNull { it.id == movieId }.let {
                 _mutableMovieLiveData.value = it
             }
             _loadingMovieList.value = false

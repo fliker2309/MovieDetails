@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.moviedetails.data.Actor
+import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.ui.R
 
 class ActorAdapter : RecyclerView.Adapter<ActorViewHolder>() {

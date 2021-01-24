@@ -1,7 +1,7 @@
 package com.example.moviedetails.data.network
 
-import com.example.moviedetails.data.Actor
-import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.model.Actor
+import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.model.Genre
 import com.example.moviedetails.data.model.Movies
 import kotlinx.coroutines.Dispatchers

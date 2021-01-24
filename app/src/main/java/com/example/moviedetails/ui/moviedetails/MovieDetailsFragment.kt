@@ -10,7 +10,7 @@ import coil.load
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModel
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelFactory
 import com.example.moviedetails.ui.R
@@ -56,14 +56,14 @@ class MovieDetailsFragment : Fragment() {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
 
-        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
+        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie:Movie ->
             showMovieData(movie)
         }
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun showMovieData(movie: Movie) {
+    private fun showMovieData(movie:Movie) {
         binding.apply {
             backToMainButton.visibility = View.VISIBLE
             background.load(movie.backdrop)
