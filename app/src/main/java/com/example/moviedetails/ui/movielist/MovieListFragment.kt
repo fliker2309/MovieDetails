@@ -68,10 +68,10 @@ class MovieListFragment : Fragment() {
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
 
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
         }
+
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
