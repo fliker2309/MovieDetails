@@ -14,9 +14,16 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 
 class MovieRepository(private val movieDao: MovieDao) {
-    val readAllMoviesFromDb: LiveData<List<Movie>> = movieDao.readMovies()
 
-    suspend fun insertMoviesInDb(movieEntity: MovieEntity) {
-        movieDao.insertMoviesInDb(movieEntity)
+    suspend fun readAllMoviesFromDb(): List<MovieEntity> = withContext(Dispatchers.IO){
+        movieDao.readMoviesFromDb()
+    }
+
+    suspend fun getMovieByIdFromDb(id: Int): MovieEntity = withContext(Dispatchers.IO){
+        movieDao.getMovieByIdFromDb(id)
+    }
+
+    suspend fun insertMoviesInDb(movies: List<MovieEntity>) {
+        movieDao.insertMoviesInDb(movies)
     }
 }
