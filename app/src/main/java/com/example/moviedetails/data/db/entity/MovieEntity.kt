@@ -11,7 +11,7 @@ import com.example.moviedetails.data.model.Genre
 data class MovieEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long,
+    val id: Int,
 
     @ColumnInfo(name = "title")
     val title: String,
