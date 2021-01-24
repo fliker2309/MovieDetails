@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedetails.data.db.MovieDatabase
+import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
@@ -18,11 +20,17 @@ import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
+@InternalCoroutinesApi
 class MovieListFragment : Fragment() {
+
+    private val repository: MovieRepository by lazy {
+        val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
+        MovieRepository(db.movieDao())
+    }
 
     @InternalCoroutinesApi
     private val movieListViewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory()
+        MovieListViewModelFactory(repository)
     }
     private lateinit var movieListRecycler: RecyclerView
     private var _binding: FragmentMovieListBinding? = null
