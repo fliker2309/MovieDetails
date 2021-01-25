@@ -70,6 +70,7 @@ class MovieListFragment : Fragment() {
         }
 
         movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
 
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
