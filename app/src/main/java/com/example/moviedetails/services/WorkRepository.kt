@@ -1,15 +1,19 @@
 package com.example.moviedetails.services
 
-import androidx.work.OneTimeWorkRequest
-import androidx.work.NetworkType
-import androidx.work.Constraints
+import androidx.work.*
+import java.util.concurrent.TimeUnit
 
 class WorkRepository {
 
+    //условия работы
     private val constraints = Constraints.Builder()
         .setRequiresCharging(true)
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
 
-  /*  val constraintsRequest = */
+    val constraintsRequest = PeriodicWorkRequest.Builder(WorkManager::class.java, 8, TimeUnit.HOURS)
+        .setConstraints(constraints)
+        .build()
+
+    private fun
 }
