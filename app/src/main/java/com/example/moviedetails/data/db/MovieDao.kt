@@ -15,7 +15,6 @@ interface MovieDao {
     @Update
     suspend fun updateMovieInDb(movie: Movie)
 
-    //add data in DB
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMoviesInDb(movies: List<Movie>)
 }

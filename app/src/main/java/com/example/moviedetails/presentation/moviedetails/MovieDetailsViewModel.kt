@@ -3,7 +3,6 @@ package com.example.moviedetails.presentation.moviedetails
 import androidx.lifecycle.*
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
-import com.example.moviedetails.data.network.getMoviesList
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 
@@ -20,18 +19,7 @@ class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel
         viewModelScope.launch {
             _loadingMovieList.value = true
             _mutableMovieLiveData.value = repository.getMovieByIdFromDb(movieId)
-         /*   val movies = getMoviesList()
-            movies.singleOrNull { it.id == movieId }.let {
-                _mutableMovieLiveData.value = it
-            }*/
             _loadingMovieList.value = false
         }
     }
-}
-
-sealed class Result<out T : Any> {
-
-    data class Success<out T : Any>(val data: T) : Result<T>()
-    data class Error(val message: String) : Result<Nothing>()
-
 }
