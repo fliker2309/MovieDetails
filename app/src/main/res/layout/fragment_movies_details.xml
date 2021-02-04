@@ -162,7 +162,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cast_label"
             tools:listitem="@layout/view_holder_actor" />
 
-        <ProgressBar
+       <!-- <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/back_to_main_button"
-            tools:visibility="visible" />
+            tools:visibility="visible" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

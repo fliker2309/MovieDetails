@@ -62,18 +62,14 @@ class MovieDetailsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         }
 
-        movieDetailsViewModel.loadingMovieList.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
-
-        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie:Movie ->
+        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
             showMovieData(movie)
         }
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun showMovieData(movie:Movie) {
+    private fun showMovieData(movie: Movie) {
         binding.apply {
             backToMainButton.visibility = View.VISIBLE
             background.load(movie.backdrop)

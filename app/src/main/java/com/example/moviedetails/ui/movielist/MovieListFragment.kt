@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
@@ -33,6 +35,7 @@ class MovieListFragment : Fragment() {
         MovieListViewModelFactory(repository)
     }
     private lateinit var movieListRecycler: RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var _binding: FragmentMovieListBinding? = null
     private val binding: FragmentMovieListBinding
         get() = _binding!!
@@ -55,7 +58,7 @@ class MovieListFragment : Fragment() {
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        movieListViewModel.getMovies()
+
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
             val movies: List<Movie> = listOf()
@@ -69,12 +72,18 @@ class MovieListFragment : Fragment() {
             movieListRecycler.adapter = movieListAdapter
         }
 
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
 
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
+        }
+
+        swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = true
+            movieListViewModel.getMovies()
+            swipeRefreshLayout.isRefreshing = false
+               Toast.makeText(context, "Data was refreshed", Toast.LENGTH_SHORT).show()
         }
 
         super.onViewCreated(view, savedInstanceState)

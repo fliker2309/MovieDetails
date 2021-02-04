@@ -1,3 +1,4 @@
+/*
 package com.example.moviedetails.services
 
 import android.content.Context
@@ -12,4 +13,4 @@ class WorkManager(context: Context, params: WorkerParameters) : Worker(context,p
         Log.d("WorkManager", "Connecting to internet")
 
     }
-}
+}*/
