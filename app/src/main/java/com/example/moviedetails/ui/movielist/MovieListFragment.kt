@@ -8,19 +8,29 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.db.MovieDatabase
+import com.example.moviedetails.data.db.MovieRepository
+import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
+@InternalCoroutinesApi
 class MovieListFragment : Fragment() {
 
+    private val repository: MovieRepository by lazy {
+        val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
+        MovieRepository(db.movieDao())
+    }
+
+    @InternalCoroutinesApi
     private val movieListViewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory()
+        MovieListViewModelFactory(repository)
     }
     private lateinit var movieListRecycler: RecyclerView
     private var _binding: FragmentMovieListBinding? = null
@@ -41,13 +51,14 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
+    @InternalCoroutinesApi
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         movieListViewModel.getMovies()
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
-            val movies : List<Movie> = listOf()
+            val movies: List<Movie> = listOf()
             val spanCount =
                 calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
             movieListRecycler.layoutManager = GridLayoutManager(activity, spanCount)
@@ -57,11 +68,12 @@ class MovieListFragment : Fragment() {
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner){
 
+        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
-        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner){
+
+        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
 

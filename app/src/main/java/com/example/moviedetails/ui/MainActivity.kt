@@ -3,7 +3,9 @@ package com.example.moviedetails.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.moviedetails.ui.movielist.MovieListFragment
+import kotlinx.coroutines.InternalCoroutinesApi
 
+@InternalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private lateinit var movieListFragment: MovieListFragment

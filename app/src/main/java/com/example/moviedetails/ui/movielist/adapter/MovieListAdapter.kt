@@ -2,7 +2,7 @@ package com.example.moviedetails.ui.movielist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.moviedetails.data.Movie
+import com.example.moviedetails.data.db.entity.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.annotation.GlideModule
@@ -82,6 +82,7 @@ class MovieListViewHolder private constructor(
     }
 
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
+
 }
 
 
