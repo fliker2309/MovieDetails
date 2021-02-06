@@ -1,6 +1,5 @@
 package com.example.moviedetails.data.network
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.model.Genre
@@ -51,10 +50,9 @@ suspend fun getMoviesList(): List<Movie> = withContext(Dispatchers.IO) {
             minimumAge = if (it.adult) 16 else 13,
             runtime = getRuntime(it.id),
             genres = it.genreIDS.map { id -> genres.getOrDefault(id, Genre(0, "")) }.toList(),
-            actors = getActors(it.id).map { actor -> actor.copy(picture = "$imagesBaseUrl/original/${actor.picture}")
+            actors = getActors(it.id).map { actor ->
+                actor.copy(picture = "$imagesBaseUrl/original/${actor.picture}")
             }
         )
-
     }
-
 }

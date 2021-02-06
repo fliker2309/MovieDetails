@@ -1,12 +1,12 @@
-/*
 package com.example.moviedetails.services
 
 import androidx.work.*
+import kotlinx.coroutines.InternalCoroutinesApi
 import java.util.concurrent.TimeUnit
 
+@InternalCoroutinesApi
 class WorkRepository {
 
-    //условия работы
     private val constraints = Constraints.Builder()
         .setRequiresCharging(true)
         .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -17,4 +17,4 @@ class WorkRepository {
         .build()
 
 
-}*/
+}
