@@ -18,7 +18,7 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
     val movieListLiveData: LiveData<List<Movie>>
         get() = _mutableMovieListLiveData
 
-/*    private lateinit var swipeRefreshLayout: SwipeRefreshLayout*/
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     init {
         viewModelScope.launch {
