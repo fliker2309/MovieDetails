@@ -47,7 +47,6 @@ class MovieListFragment : Fragment() {
     private val binding: FragmentMovieListBinding
         get() = _binding!!
 
-
     companion object {
         fun newInstance() = MovieListFragment()
         const val TAG = "moviesListFragment"
