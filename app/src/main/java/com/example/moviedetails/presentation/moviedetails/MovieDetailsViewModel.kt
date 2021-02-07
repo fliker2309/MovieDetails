@@ -11,15 +11,10 @@ class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel
     private var _mutableMovieLiveData: MutableLiveData<Movie> = MutableLiveData<Movie>()
     val movieLiveData: LiveData<Movie> = _mutableMovieLiveData
 
-    private var _loadingMovieList: MutableLiveData<Boolean> = MutableLiveData()
-    val loadingMovieList: LiveData<Boolean> = _loadingMovieList
-
     @ExperimentalSerializationApi
     fun getMovie(movieId: Int) {
         viewModelScope.launch {
-            _loadingMovieList.value = true
             _mutableMovieLiveData.value = repository.getMovieByIdFromDb(movieId)
-            _loadingMovieList.value = false
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.example.moviedetails.presentation.movielist
 
-
 import androidx.lifecycle.*
-
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.network.getMoviesList
@@ -38,7 +36,5 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
             repository.insertMoviesInDb(loadedMovies)
         }
     }
-
-
 }
 

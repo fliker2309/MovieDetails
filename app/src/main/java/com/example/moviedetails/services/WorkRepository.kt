@@ -15,6 +15,4 @@ class WorkRepository {
     val constraintsRequest = PeriodicWorkRequest.Builder(WorkManager::class.java, 8, TimeUnit.HOURS)
         .setConstraints(constraints)
         .build()
-
-
 }

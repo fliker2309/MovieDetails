@@ -22,12 +22,12 @@ class MovieListAdapter(
         holder.bind(movies[position])
     }
 
+    override fun getItemCount(): Int = movies.size
+
     fun setMovies(newMovies: List<Movie>) {
         movies = newMovies
         notifyDataSetChanged()
     }
-
-    override fun getItemCount(): Int = movies.size
 }
 
 @GlideModule
