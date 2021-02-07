@@ -20,6 +20,7 @@ import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @InternalCoroutinesApi
@@ -34,6 +35,7 @@ class MovieListFragment : Fragment() {
     private val movieListViewModel: MovieListViewModel by viewModels {
         MovieListViewModelFactory(repository)
     }
+
     private lateinit var movieListRecycler: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var _binding: FragmentMovieListBinding? = null
@@ -58,7 +60,8 @@ class MovieListFragment : Fragment() {
     @ExperimentalSerializationApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
+        swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
             val movies: List<Movie> = listOf()
@@ -72,19 +75,16 @@ class MovieListFragment : Fragment() {
             movieListRecycler.adapter = movieListAdapter
         }
 
-
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
 
-        swipeRefreshLayout = binding.swipeRefreshLayout
-        swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
         swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = true
             movieListViewModel.getMovies()
-            swipeRefreshLayout.isRefreshing = false
-               Toast.makeText(context, "Data was refreshed", Toast.LENGTH_SHORT).show()
-        }
+            movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+                swipeRefreshLayout.isRefreshing = it
+                }
+            }
 
         super.onViewCreated(view, savedInstanceState)
     }

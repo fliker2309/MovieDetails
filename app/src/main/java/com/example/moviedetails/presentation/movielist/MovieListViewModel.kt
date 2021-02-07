@@ -1,11 +1,11 @@
 package com.example.moviedetails.presentation.movielist
 
+
 import androidx.lifecycle.*
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.network.getMoviesList
-/*import com.example.moviedetails.data.network.fetchMovies*/
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -18,7 +18,9 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
     val movieListLiveData: LiveData<List<Movie>>
         get() = _mutableMovieListLiveData
 
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private var _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingLiveData: LiveData<Boolean>
+        get() = _loadingLiveData
 
     init {
         viewModelScope.launch {
@@ -26,21 +28,17 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
         }
     }
 
+
     @ExperimentalSerializationApi
     fun getMovies() {
         viewModelScope.launch {
+            _loadingLiveData.value = true
             val loadedMovies = getMoviesList()
             _mutableMovieListLiveData.value = loadedMovies
+            _loadingLiveData.value = false
             repository.insertMoviesInDb(loadedMovies)
         }
     }
-
-   /* fun fetchedMovies() {
-        swipeRefreshLayout.isRefreshing = true
-        val fetchMovies = fetchMovies()
-        _mutableMovieListLiveData.value = fetchMovies
-        swipeRefreshLayout.isRefreshing = false
-    }*/
 
 
 }
