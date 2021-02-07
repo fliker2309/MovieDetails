@@ -19,7 +19,7 @@ class WorkManager(context: Context, params: WorkerParameters) : CoroutineWorker(
     @ExperimentalSerializationApi
     override suspend fun doWork(): Result {
         return try {
-            Log.d("WorkManager", "Connected to internet")
+            Log.d("WorkManager", "Connected to internet,wait for fetch movies")
             val loadedMovies = getMoviesList()
             repository.insertMoviesInDb(loadedMovies)
             Result.success()

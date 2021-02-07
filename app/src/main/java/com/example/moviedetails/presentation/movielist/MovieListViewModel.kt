@@ -28,7 +28,6 @@ class MovieListViewModel(private val repository: MovieRepository) : ViewModel() 
         }
     }
 
-
     @ExperimentalSerializationApi
     fun getMovies() {
         viewModelScope.launch {

@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.ui.R
+import kotlin.coroutines.coroutineContext
 
 class ActorAdapter : RecyclerView.Adapter<ActorViewHolder>() {
 
@@ -33,6 +35,7 @@ class ActorAdapter : RecyclerView.Adapter<ActorViewHolder>() {
 }
 
 class ActorViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+
     private val avatar: ImageView = listItemView.findViewById(R.id.actor_image)
     private val name: TextView = listItemView.findViewById(R.id.actor_name)
 

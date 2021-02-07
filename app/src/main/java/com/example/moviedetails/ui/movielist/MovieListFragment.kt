@@ -10,11 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
+import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
@@ -23,13 +26,14 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.serialization.ExperimentalSerializationApi
 
+const val BACKGROUND_UPDATE: String = "Update movies in background"
+
 @InternalCoroutinesApi
 class MovieListFragment : Fragment() {
 
     private val repository: MovieRepository by lazy {
         val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
         MovieRepository(db.movieDao())
-
     }
 
     @InternalCoroutinesApi
@@ -42,6 +46,7 @@ class MovieListFragment : Fragment() {
     private var _binding: FragmentMovieListBinding? = null
     private val binding: FragmentMovieListBinding
         get() = _binding!!
+
 
     companion object {
         fun newInstance() = MovieListFragment()
@@ -57,6 +62,7 @@ class MovieListFragment : Fragment() {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
 
         setUpRecycler()
+
         movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
             (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
         }
@@ -67,6 +73,13 @@ class MovieListFragment : Fragment() {
                 swipeRefreshLayout.isRefreshing = it
             }
         }
+
+        WorkManager.getInstance(requireContext().applicationContext)
+            .enqueueUniquePeriodicWork(
+                BACKGROUND_UPDATE,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                WorkRepository().constraintsRequest
+            )
 
         return binding.root
     }
