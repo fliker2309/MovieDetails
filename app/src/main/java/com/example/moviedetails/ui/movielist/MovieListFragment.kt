@@ -29,6 +29,7 @@ class MovieListFragment : Fragment() {
     private val repository: MovieRepository by lazy {
         val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
         MovieRepository(db.movieDao())
+
     }
 
     @InternalCoroutinesApi
@@ -47,19 +48,30 @@ class MovieListFragment : Fragment() {
         const val TAG = "moviesListFragment"
     }
 
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
+
+        setUpRecycler()
+        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
+            (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            movieListViewModel.getMovies()
+            movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+                swipeRefreshLayout.isRefreshing = it
+            }
+        }
+
         return binding.root
     }
 
-    @InternalCoroutinesApi
-    @ExperimentalSerializationApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+    private fun setUpRecycler() {
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
         movieListRecycler = binding.movieListRecyclerView
@@ -74,19 +86,6 @@ class MovieListFragment : Fragment() {
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
-
-        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
-            (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
-        }
-
-        swipeRefreshLayout.setOnRefreshListener {
-            movieListViewModel.getMovies()
-            movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
-                swipeRefreshLayout.isRefreshing = it
-                }
-            }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
