@@ -13,24 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFirstApp">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="@string/com.example.moviedetails.ui"
+                    android:host="@string/moviedetails.com"
                     android:pathPattern="@string/movie_details"
-                    android:scheme="@string/https"/>
-
+                    android:scheme="@string/https" />
             </intent-filter>
         </activity>
     </application>
