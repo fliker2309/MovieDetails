@@ -2,6 +2,8 @@ package com.example.moviedetails.services
 
 import android.content.Context
 import android.util.Log
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.moviedetails.data.db.MovieDatabase
@@ -16,6 +18,8 @@ class WorkManager(context: Context, params: WorkerParameters) : CoroutineWorker(
     private val repository =
         MovieRepository(MovieDatabase.getDatabase(applicationContext).movieDao())
 
+    private val notificationManager = NotificationManagerCompat.from(applicationContext)
+
     @ExperimentalSerializationApi
     override suspend fun doWork(): Result {
         return try {
@@ -29,4 +33,7 @@ class WorkManager(context: Context, params: WorkerParameters) : CoroutineWorker(
             Result.failure()
         }
     }
+
+    
+
 }

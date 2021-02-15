@@ -45,11 +45,6 @@ class MovieListFragment : Fragment() {
     private val binding: FragmentMovieListBinding
         get() = _binding!!
 
-    companion object {
-        fun newInstance() = MovieListFragment()
-        const val TAG = "moviesListFragment"
-    }
-
     @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,5 +108,10 @@ class MovieListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = MovieListFragment()
+        const val TAG = "moviesListFragment"
     }
 }

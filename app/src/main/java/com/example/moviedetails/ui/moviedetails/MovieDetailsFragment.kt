@@ -99,6 +99,7 @@ class MovieDetailsFragment : Fragment() {
     }
 
     companion object {
+        const val TAG = "MovieDetailsFragment"
         private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
         fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
             arguments = bundleOf(MOVIE_ID_KEY to movieId)

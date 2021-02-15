@@ -13,5 +13,7 @@
     <string name="moviedetails.com">moviedetails.com</string>
     <string name="https">https://</string>
     <string name="movie_details">/movie/.*</string>
+    <string name="channel_name_text">We already have new movies!</string>
+    <string name="channel_description_text">MovieApp movies update</string>
 
 </resources>
