@@ -33,6 +33,7 @@ private suspend fun getRuntime(movieId: Int): Int = api.getDetails(movieId).runt
 
 @ExperimentalSerializationApi
 suspend fun getMoviesList(): List<Movie> = withContext(Dispatchers.IO) {
+
     val imagesBaseUrl = getConfiguration().images.secureBaseUrl.dropLast(1)
 
     val genres: Map<Int, Genre> = getGenres()
@@ -49,7 +50,9 @@ suspend fun getMoviesList(): List<Movie> = withContext(Dispatchers.IO) {
             minimumAge = if (it.adult) 16 else 13,
             runtime = getRuntime(it.id),
             genres = it.genreIDS.map { id -> genres.getOrDefault(id, Genre(0, "")) }.toList(),
-            actors = getActors(it.id).map { actor -> actor.copy(picture = "$imagesBaseUrl/original/${actor.picture}") }
+            actors = getActors(it.id).map { actor ->
+                actor.copy(picture = "$imagesBaseUrl/original/${actor.picture}")
+            }
         )
     }
 }

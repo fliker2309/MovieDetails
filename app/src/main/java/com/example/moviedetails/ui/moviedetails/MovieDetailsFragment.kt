@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import coil.load
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
@@ -38,42 +37,29 @@ class MovieDetailsFragment : Fragment() {
     private val binding: FragmentMoviesDetailsBinding
         get() = _binding!!
 
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    @ExperimentalSerializationApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        _binding = FragmentMoviesDetailsBinding.bind(view)
         val movieId = arguments?.getInt(MOVIE_ID_KEY)
         binding.backToMainButton.setOnClickListener {
             activity?.onBackPressed()
         }
 
         movieDetailsViewModel.getMovie(movieId!!)
-        binding.actorListRecyclerView.apply {
-            adapter = ActorAdapter()
-            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        }
-
-        movieDetailsViewModel.loadingMovieList.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
-
-        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie:Movie ->
+        initRecycler()
+        movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
             showMovieData(movie)
         }
 
-        super.onViewCreated(view, savedInstanceState)
+        return binding.root
     }
 
-    private fun showMovieData(movie:Movie) {
+    private fun showMovieData(movie: Movie) {
         binding.apply {
             backToMainButton.visibility = View.VISIBLE
             background.load(movie.backdrop)
@@ -95,6 +81,13 @@ class MovieDetailsFragment : Fragment() {
             overview.text = movie.overview
             castLabel.visibility = View.VISIBLE
             (actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
+        }
+    }
+
+    private fun initRecycler() {
+        binding.actorListRecyclerView.apply {
+            adapter = ActorAdapter()
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 

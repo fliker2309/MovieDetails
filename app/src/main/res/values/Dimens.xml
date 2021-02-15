@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="spacing_low">8dp</dimen>
-    <dimen name="spacing_6dp">6dp</dimen>
     <dimen name="actor_corner_radius">4dp</dimen>
+    <dimen name="spacing_6dp">6dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="spacing_low">8dp</dimen>
+    <dimen name="spacing_18dp">18dp</dimen>
+    <dimen name="spacing_top">44dp</dimen>
+    <dimen name="cast_pick_size">80dp</dimen>
     <dimen name="card_view_min_width">140dp</dimen>
     <dimen name="card_view_max_width">170dp</dimen>
-    <dimen name="cast_pick_size">80dp</dimen>
-    <dimen name="poster_image_spacing">6dp</dimen>
     <dimen name="poster_image_height">250dp</dimen>
-    <dimen name="spacing_top">44dp</dimen>
-    <dimen name="card_corner_radius">6dp</dimen>
     <dimen name="movie_background_max_height">300dp</dimen>
 </resources>

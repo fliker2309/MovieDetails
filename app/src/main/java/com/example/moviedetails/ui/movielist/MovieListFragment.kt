@@ -8,17 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
+import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
+
+const val BACKGROUND_UPDATE: String = "Update movies in background"
 
 @InternalCoroutinesApi
 class MovieListFragment : Fragment() {
@@ -32,7 +38,9 @@ class MovieListFragment : Fragment() {
     private val movieListViewModel: MovieListViewModel by viewModels {
         MovieListViewModelFactory(repository)
     }
+
     private lateinit var movieListRecycler: RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var _binding: FragmentMovieListBinding? = null
     private val binding: FragmentMovieListBinding
         get() = _binding!!
@@ -42,20 +50,40 @@ class MovieListFragment : Fragment() {
         const val TAG = "moviesListFragment"
     }
 
+    @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
+
+        setUpRecycler()
+
+        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
+            (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            movieListViewModel.getMovies()
+            movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
+                swipeRefreshLayout.isRefreshing = it
+            }
+        }
+
+        WorkManager.getInstance(requireContext().applicationContext)
+            .enqueueUniquePeriodicWork(
+                BACKGROUND_UPDATE,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                WorkRepository().constraintsRequest
+            )
+
         return binding.root
     }
 
-    @InternalCoroutinesApi
-    @ExperimentalSerializationApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        movieListViewModel.getMovies()
+    private fun setUpRecycler() {
+        swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
             val movies: List<Movie> = listOf()
@@ -68,16 +96,6 @@ class MovieListFragment : Fragment() {
             movieListRecycler.layoutManager = gridLayoutManager
             movieListRecycler.adapter = movieListAdapter
         }
-
-        movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
-
-        movieListViewModel.movieListLiveData.observe(viewLifecycleOwner) {
-            (binding.movieListRecyclerView.adapter as MovieListAdapter).setMovies(it)
-        }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->

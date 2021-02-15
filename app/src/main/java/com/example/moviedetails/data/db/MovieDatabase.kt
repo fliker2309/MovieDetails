@@ -12,7 +12,6 @@ abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
 
-    //singleton, too bad to create multiply databases,too expensive
     companion object {
         @Volatile
         private var INSTANCE: MovieDatabase? = null
