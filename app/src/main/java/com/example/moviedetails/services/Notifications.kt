@@ -21,7 +21,7 @@ import com.example.moviedetails.ui.R
 import kotlinx.coroutines.InternalCoroutinesApi
 
 interface Notifications {
-
+    fun createChannel()
     fun showNotification(movie: Movie)
     fun dismissNotification(movie: Movie)
 }
@@ -39,10 +39,8 @@ class MovieNotifications(private val context: Context) : Notifications {
     private val notificationManagerCompat: NotificationManagerCompat =
         NotificationManagerCompat.from(context)
 
-    @InternalCoroutinesApi
-    @WorkerThread
-    override fun showNotification(movie: Movie) {
 
+    override fun createChannel() {
         val channel = NotificationChannelCompat
             .Builder(CHANNEL_NEW_MOVIES, IMPORTANCE_HIGH)
             .setName(R.string.channel_new_movies.toString())
@@ -50,6 +48,11 @@ class MovieNotifications(private val context: Context) : Notifications {
             .build()
 
         notificationManagerCompat.createNotificationChannel(channel)
+    }
+
+    @InternalCoroutinesApi
+    @WorkerThread
+    override fun showNotification(movie: Movie) {
 
         val contentUri = DeepLinks.getMovieDetailsDeepLink(movie.id)
 
