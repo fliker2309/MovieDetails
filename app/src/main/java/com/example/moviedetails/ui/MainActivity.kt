@@ -8,8 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.lifecycleScope
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
+import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import com.example.moviedetails.ui.movielist.BACKGROUND_UPDATE
 import com.example.moviedetails.ui.movielist.MovieListFragment
 
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -17,14 +23,16 @@ import kotlinx.coroutines.InternalCoroutinesApi
 @InternalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
-    override fun onStart() {
-        super.onStart()
-        createNotificationChannel()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        WorkManager.getInstance(applicationContext)
+            .enqueueUniquePeriodicWork(
+                BACKGROUND_UPDATE,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                WorkRepository().constraintsRequest
+            )
 
         if (savedInstanceState == null) {
             openMoviesList()
@@ -54,10 +62,9 @@ class MainActivity : AppCompatActivity() {
         val movieListFragment = MovieListFragment.newInstance()
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_view_tag, movieListFragment, MovieListFragment.TAG)
+            .add(R.id.fragment_container, movieListFragment, MovieListFragment.TAG)
             .commit()
     }
-
 
     private fun openMovieDetails(movieId: Int) {
         supportFragmentManager.popBackStack(
@@ -68,27 +75,10 @@ class MainActivity : AppCompatActivity() {
         val movieDetailsFragment = MovieDetailsFragment.newInstance(movieId)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_view_tag, movieDetailsFragment, MovieListFragment.TAG)
+            .add(R.id.fragment_container, movieDetailsFragment, MovieListFragment.TAG)
             .addToBackStack(MovieDetailsFragment.TAG)
             .commit()
     }
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val channelName = getString(R.string.channel_name_text)
-        val channelDescription = getString(R.string.channel_description_text)
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
-
-        val channel = NotificationChannel(channelId, channelName, importance).apply {
-            description = channelDescription
-        }
-        NotificationManagerCompat.from(applicationContext).createNotificationChannel(channel)
-
-    }
-
-
 }
 
 

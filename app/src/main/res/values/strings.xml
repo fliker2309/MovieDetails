@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MovieDetails</string>
     <string name="back">Back</string>
+
+    <!-- MovieDetails -->
     <string name="avengers_end_game">Avengers:\nEnd Game</string>
     <string name="_13">13+</string>
     <string name="_16">16+</string>
@@ -10,10 +12,14 @@
     <string name="total_reviews">%s Reviews</string>
     <string name="movie_duration">%s MIN</string>
     <string name="pg_rating">%s+</string>
+
+    <!-- DeepLinks -->
     <string name="moviedetails.com">moviedetails.com</string>
     <string name="https">https://</string>
     <string name="movie_details">/movie/.*</string>
-    <string name="channel_name_text">We already have new movies!</string>
-    <string name="channel_description_text">MovieApp movies update</string>
+
+    <!-- Notifications -->
+    <string name="channel_new_movies">New movies</string>
+    <string name="channel_new_movies_description">MovieApp movies update</string>
 
 </resources>
