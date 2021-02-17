@@ -18,7 +18,7 @@ class MovieRepository(private val movieDao: MovieDao) {
         movieDao.insertMoviesInDb(movies)
     }
 
-    suspend fun getMovieByMaxRatingFromDb(movies: List<Movie>) = withContext(Dispatchers.IO){
-        movieDao.getMovieByMaxRatingFromDb(movies)
+    suspend fun getMovieByMaxRatingFromDb(id: Int) : Movie = withContext(Dispatchers.IO){
+        movieDao.getMovieByMaxRatingFromDb(id)
     }
 }

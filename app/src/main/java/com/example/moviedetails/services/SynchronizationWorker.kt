@@ -27,15 +27,17 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) :
     private val notificationManagerCompat: NotificationManagerCompat =
         NotificationManagerCompat.from(applicationContext)
 
+
     @ExperimentalSerializationApi
     override suspend fun doWork(): Result {
         return try {
-
+            val movieId: Int
             Log.d("WorkManager", "Connected to internet,wait for fetch movies")
             val loadedMovies = getMoviesList()
             repository.insertMoviesInDb(loadedMovies)
-            repository.getMovieByMaxRatingFromDb(loadedMovies)
+            repository.getMovieByMaxRatingFromDb(movieId)
             //здесь бы показать уведомление, но я передал список фильма, а нужно показать 1 фильм
+            // showNotification(movie) вот так хотелось бы сделать
             Result.success()
 
         } catch (e: Exception) {
