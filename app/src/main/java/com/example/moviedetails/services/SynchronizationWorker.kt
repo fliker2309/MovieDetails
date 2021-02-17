@@ -19,7 +19,8 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @InternalCoroutinesApi
-class SynchronizationWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+class SynchronizationWorker(context: Context, params: WorkerParameters) :
+    CoroutineWorker(context, params) {
 
     private val repository =
         MovieRepository(MovieDatabase.getDatabase(context).movieDao())
@@ -29,9 +30,12 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) : Corout
     @ExperimentalSerializationApi
     override suspend fun doWork(): Result {
         return try {
+
             Log.d("WorkManager", "Connected to internet,wait for fetch movies")
             val loadedMovies = getMoviesList()
             repository.insertMoviesInDb(loadedMovies)
+            repository.getMovieByMaxRatingFromDb(loadedMovies)
+            //здесь бы показать уведомление, но я передал список фильма, а нужно показать 1 фильм
             Result.success()
 
         } catch (e: Exception) {
@@ -41,6 +45,7 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) : Corout
     }
 
     private fun showNotification(movie: Movie) {
+
 
         val contentUri = DeepLinks.getMovieDetailsDeepLink(movie.id)
 
@@ -56,7 +61,7 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) : Corout
             .setContentIntent(
                 PendingIntent.getActivity(
                     applicationContext,
-                   REQUEST_CONTENT,
+                    REQUEST_CONTENT,
                     Intent(applicationContext, MainActivity::class.java)
                         .setAction(Intent.ACTION_VIEW)
                         .setData(contentUri),

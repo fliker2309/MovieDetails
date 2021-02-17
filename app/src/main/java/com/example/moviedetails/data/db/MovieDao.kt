@@ -17,5 +17,8 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMoviesInDb(movies: List<Movie>)
+
+    @Query("SELECT * FROM movies WHERE rating=(SELECT MAX(rating) FROM movies)")
+    suspend fun  getMovieByMaxRatingFromDb(movies: List<Movie>)
 }
 
