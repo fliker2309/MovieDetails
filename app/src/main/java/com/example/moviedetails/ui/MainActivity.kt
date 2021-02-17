@@ -1,18 +1,15 @@
 package com.example.moviedetails.ui
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
+import com.example.moviedetails.services.SynchronizationWorker
 import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
 import com.example.moviedetails.ui.movielist.BACKGROUND_UPDATE
@@ -79,6 +76,25 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(MovieDetailsFragment.TAG)
             .commit()
     }
+
+    override fun onStart() {
+        super.onStart()
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
+        val notificationManagerCompat: NotificationManagerCompat =
+            NotificationManagerCompat.from(applicationContext)
+
+        val channel = NotificationChannelCompat
+            .Builder(SynchronizationWorker.CHANNEL_NEW_MOVIES, NotificationManager.IMPORTANCE_HIGH)
+            .setName(R.string.channel_new_movies.toString())
+            .setDescription(R.string.channel_new_movies_description.toString())
+            .build()
+
+        notificationManagerCompat.createNotificationChannel(channel)
+    }
+
 }
 
 
