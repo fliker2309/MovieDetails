@@ -31,7 +31,7 @@
 
                 <data
                     android:host="moviedetails.com"
-                    android:pathPattern="movie_details"
+                    android:pathPattern="/movie/.*"
                     android:scheme="https" />
             </intent-filter>
         </activity>
