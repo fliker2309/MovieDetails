@@ -30,9 +30,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="@string/moviedetails.com"
-                    android:pathPattern="@string/movie_details"
-                    android:scheme="@string/https" />
+                    android:host="moviedetails.com"
+                    android:pathPattern="movie_details"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
     </application>

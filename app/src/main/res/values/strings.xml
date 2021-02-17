@@ -13,11 +13,6 @@
     <string name="movie_duration">%s MIN</string>
     <string name="pg_rating">%s+</string>
 
-    <!-- DeepLinks -->
-    <string name="moviedetails.com">moviedetails.com</string>
-    <string name="https">https://</string>
-    <string name="movie_details">/movie/.*</string>
-
     <!-- Notifications -->
     <string name="channel_new_movies">New movies</string>
     <string name="channel_new_movies_description">MovieApp movies update</string>
