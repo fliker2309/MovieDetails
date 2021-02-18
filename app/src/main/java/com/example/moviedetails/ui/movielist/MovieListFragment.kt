@@ -12,7 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import com.example.moviedetails.data.db.MovieDatabase
-import com.example.moviedetails.data.db.MovieRepository
+import com.example.moviedetails.data.db.MovieLocalDataSource
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
@@ -29,14 +29,14 @@ const val BACKGROUND_UPDATE: String = "Update movies in background"
 @InternalCoroutinesApi
 class MovieListFragment : Fragment() {
 
-    private val repository: MovieRepository by lazy {
+    private val localDataSource: MovieLocalDataSource by lazy {
         val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
-        MovieRepository(db.movieDao())
+        MovieLocalDataSource(db.movieDao())
     }
 
     @InternalCoroutinesApi
     private val movieListViewModel: MovieListViewModel by viewModels {
-        MovieListViewModelFactory(repository)
+        MovieListViewModelFactory(localDataSource)
     }
 
     private lateinit var movieListRecycler: RecyclerView
@@ -65,13 +65,6 @@ class MovieListFragment : Fragment() {
                 swipeRefreshLayout.isRefreshing = it
             }
         }
-
-        WorkManager.getInstance(requireContext().applicationContext)
-            .enqueueUniquePeriodicWork(
-                BACKGROUND_UPDATE,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                WorkRepository().constraintsRequest
-            )
 
         return binding.root
     }

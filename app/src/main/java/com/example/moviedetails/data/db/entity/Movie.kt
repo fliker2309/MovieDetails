@@ -40,6 +40,9 @@ data class Movie(
     val genres: List<Genre>,
 
     @ColumnInfo(name = "actors")
-    val actors: List<Actor>
+    val actors: List<Actor>,
+
+    @ColumnInfo(name = "last_update")
+    val lastUpdate : Long = System.currentTimeMillis()
 )
 

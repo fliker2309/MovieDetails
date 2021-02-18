@@ -8,14 +8,18 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.moviedetails.data.db.MovieDao
 import com.example.moviedetails.data.db.MovieDatabase
-import com.example.moviedetails.data.db.MovieRepository
+import com.example.moviedetails.data.db.MovieLocalDataSource
 import com.example.moviedetails.data.db.entity.Movie
+import com.example.moviedetails.data.network.calculateNewMovies
 import com.example.moviedetails.data.network.getMoviesList
 import com.example.moviedetails.ui.DeepLinks
 import com.example.moviedetails.ui.MainActivity
 import com.example.moviedetails.ui.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @InternalCoroutinesApi
@@ -23,7 +27,7 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
 
     private val repository =
-        MovieRepository(MovieDatabase.getDatabase(context).movieDao())
+        MovieLocalDataSource(MovieDatabase.getDatabase(context).movieDao())
     private val notificationManagerCompat: NotificationManagerCompat =
         NotificationManagerCompat.from(applicationContext)
 
@@ -31,11 +35,15 @@ class SynchronizationWorker(context: Context, params: WorkerParameters) :
     @ExperimentalSerializationApi
     override suspend fun doWork(): Result {
         return try {
-            val movieId: Int
+
+
             Log.d("WorkManager", "Connected to internet,wait for fetch movies")
             val loadedMovies = getMoviesList()
+            calculateNewMovies(loadedMovies)
             repository.insertMoviesInDb(loadedMovies)
-            repository.getMovieByMaxRatingFromDb(movieId)
+
+
+
             //здесь бы показать уведомление, но я передал список фильма, а нужно показать 1 фильм
             // showNotification(movie) вот так хотелось бы сделать
             Result.success()

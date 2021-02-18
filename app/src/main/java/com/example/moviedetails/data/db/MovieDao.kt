@@ -19,6 +19,9 @@ interface MovieDao {
     suspend fun insertMoviesInDb(movies: List<Movie>)
 
     @Query("SELECT * FROM movies WHERE rating=(SELECT MAX(rating) FROM movies)")
-    suspend fun  getMovieByMaxRatingFromDb(id: Int) : Movie
+    suspend fun  getMovieByMaxRatingFromDb(id: Int): Movie
+
+  /*  @Query("SELECT * FROM movies ORDER BY last_update ASC")
+    fun getLastUpdatedMovies() : List<Movie>*/
 }
 

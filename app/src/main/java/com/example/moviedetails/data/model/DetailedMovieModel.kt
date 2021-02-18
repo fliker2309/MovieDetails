@@ -4,30 +4,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Movies(
-    @SerialName("page")
-    val page: Long,
-
-    @SerialName("results")
-    val results: List<Result>,
-
-    @SerialName("total_pages")
-    val totalPages: Long,
-
-    @SerialName("total_results")
-    val totalResults: Long
-)
-
-@Serializable
-data class Result(
-    @SerialName("adult")
-    val adult: Boolean,
-
+data class DetailedMovieModel(
     @SerialName("backdrop_path")
     val backdropPath: String,
 
-    @SerialName("genre_ids")
-    val genreIDS: List<Int>,
+    @SerialName("genres")
+    val genres: List<Genre>,
 
     @SerialName("id")
     val id: Int,
@@ -37,6 +19,9 @@ data class Result(
 
     @SerialName("poster_path")
     val posterPath: String,
+
+    @SerialName("runtime")
+    val runtime: Int,
 
     @SerialName("title")
     val title: String,
