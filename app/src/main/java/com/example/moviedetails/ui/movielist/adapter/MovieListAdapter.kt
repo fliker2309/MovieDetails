@@ -47,9 +47,6 @@ class MovieListAdapter(
     }
 }
 
-
-
-
 @GlideModule
 class MovieListViewHolder private constructor(
     private val binding: ViewHolderMovieBinding, private val cardListener: (Int) -> Unit
