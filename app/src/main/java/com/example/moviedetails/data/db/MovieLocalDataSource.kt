@@ -17,10 +17,7 @@ class MovieLocalDataSource(private val movieDao: MovieDao) {
     suspend fun insertMoviesInDb(movies: List<Movie>) = withContext(Dispatchers.IO) {
         movieDao.insertMoviesInDb(movies)
     }
-
-    suspend fun getMovieByMaxRatingFromDb(): Movie = withContext(Dispatchers.IO) {
-        movieDao.getMovieByMaxRatingFromDb()
-    }
-
-
 }
+
+
+
