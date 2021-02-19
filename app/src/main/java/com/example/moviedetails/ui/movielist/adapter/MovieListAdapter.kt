@@ -48,14 +48,6 @@ class MovieListAdapter(
 }
 
 
-sealed class DataItem {
-    data class MovieItem(val movie: Movie) : DataItem() {
-        override val id: Int
-            get() = movie.id
-    }
-
-    abstract val id: Int
-}
 
 
 @GlideModule
@@ -113,6 +105,12 @@ class MovieListViewHolder private constructor(
     private fun convertRating(rating10: Float): Float = rating10 / 2.0f
 }
 
+sealed class DataItem {
+    data class MovieItem(val movie: Movie) : DataItem() {
+        override val id: Int
+            get() = movie.id
+    }
 
-
+    abstract val id: Int
+}
 
