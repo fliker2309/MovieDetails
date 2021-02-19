@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             openMoviesList()
-            intent?.let { ::handleIntent }
+            intent?.let(::handleIntent)
         }
     }
 
@@ -83,18 +83,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createNotificationChannel() {
-        val notificationManagerCompat: NotificationManagerCompat =
-            NotificationManagerCompat.from(applicationContext)
-
+        val notificationManagerCompat = NotificationManagerCompat.from(applicationContext)
         val channel = NotificationChannelCompat
             .Builder(SynchronizationWorker.CHANNEL_NEW_MOVIES, NotificationManager.IMPORTANCE_HIGH)
-            .setName(R.string.channel_new_movies.toString())
-            .setDescription(R.string.channel_new_movies_description.toString())
+            .setName("New movies")
+            .setDescription("MovieApp movies update")
             .build()
 
         notificationManagerCompat.createNotificationChannel(channel)
     }
-
 }
 
 

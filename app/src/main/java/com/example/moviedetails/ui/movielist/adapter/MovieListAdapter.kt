@@ -2,6 +2,7 @@ package com.example.moviedetails.ui.movielist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import com.example.moviedetails.data.db.entity.Movie
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,23 +13,50 @@ import com.example.moviedetails.ui.databinding.ViewHolderMovieBinding
 class MovieListAdapter(
     private var movies: List<Movie>,
     private val cardListener: (Int) -> Unit
-) : RecyclerView.Adapter<MovieListViewHolder>() {
+) : ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieDiffUtilCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
-        return MovieListViewHolder.from(parent, cardListener)
+    companion object {
+        const val MOVIE_ITEM_ID = 1
     }
 
-    override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        holder.bind(movies[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        when (viewType) {
+            MOVIE_ITEM_ID -> MovieListViewHolder.from(parent, cardListener)
+            else -> throw NoSuchElementException("Adapter doesn't know this view type")
+        }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val item = getItem(position)
+        when (holder) {
+            is MovieListViewHolder -> holder.bind(
+                (item as DataItem.MovieItem).movie,
+                cardListener
+            )
+        }
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.MovieItem -> MOVIE_ITEM_ID
+        }
+    }
 
-    fun setMovies(newMovies: List<Movie>) {
-        movies = newMovies
-        notifyDataSetChanged()
+    fun setMovies(movies: List<Movie>) {
+        val resultList = movies.map { DataItem.MovieItem(it) }
+        submitList(resultList)
     }
 }
+
+
+sealed class DataItem {
+    data class MovieItem(val movie: Movie) : DataItem() {
+        override val id: Int
+            get() = movie.id
+    }
+
+    abstract val id: Int
+}
+
 
 @GlideModule
 class MovieListViewHolder private constructor(
@@ -54,7 +82,8 @@ class MovieListViewHolder private constructor(
         }
     }
 
-    fun bind(movie: Movie) {
+    fun bind(movie: Movie, cardListener: (Int) -> Unit) {
+        this.movieId = movie.id
         itemView.setOnClickListener {
             cardListener.invoke(movie.id)
         }

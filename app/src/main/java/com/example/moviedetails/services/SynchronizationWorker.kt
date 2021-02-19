@@ -25,8 +25,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 @InternalCoroutinesApi
 class SynchronizationWorker(
     context: Context,
-    params: WorkerParameters,
-    private val localDataSource: MovieLocalDataSource
+    params: WorkerParameters
 ) :
     CoroutineWorker(context, params) {
 
@@ -37,23 +36,22 @@ class SynchronizationWorker(
 
 
     @ExperimentalSerializationApi
-    override suspend fun doWork(): Result {
-        return try {
+    override suspend fun doWork(): Result = try {
 
-            Log.d("WorkManager", "Connected to internet,wait for fetch movies")
+        Log.d("WorkManager", "Connected to internet,wait for fetch movies")
+        val netMovies = getMoviesList()
+        val differenceMovies = calculateNewMovies(netMovies)
+        repository.insertMoviesInDb(netMovies)
 
-            val netMovies = getMoviesList()
-            val differenceMovies = calculateNewMovies(netMovies)
-            repository.insertMoviesInDb(netMovies)
+        val maxRatedFilm = differenceMovies.maxByOrNull { it.ratings }
+        maxRatedFilm?.let { showNotification(it) }
+        Log.e("WorkManager", "Update was successful")
+        Result.success()
 
-            val maxRatedFilm = differenceMovies.maxByOrNull { it.ratings }
-            maxRatedFilm?.let { showNotification(it) }
-            Result.success()
 
-        } catch (e: Exception) {
-            Log.d("WorkManager", "Can't fetch movies: $e")
-            Result.failure()
-        }
+    } catch (e: Throwable) {
+        Log.d("WorkManager", "Can't fetch movies: $e")
+        Result.failure()
     }
 
     private fun showNotification(movie: Movie) {
@@ -88,7 +86,7 @@ class SynchronizationWorker(
 
     private suspend fun calculateNewMovies(movies: List<Movie>): List<Movie> =
         withContext(Dispatchers.IO) {
-            val moviesFromDb: List<Movie> = localDataSource.readAllMoviesFromDb()
+            val moviesFromDb: List<Movie> = repository.readAllMoviesFromDb()
 
             val moviesFromDbIds: List<Int> = moviesFromDb.map { it.id }
 
@@ -97,15 +95,11 @@ class SynchronizationWorker(
             }
         }
 
-
     companion object {
         const val CHANNEL_NEW_MOVIES = "New movies"
 
         const val REQUEST_CONTENT = 1
-
-        const val MOVIE_TAG = "movie"
     }
-
 }
 
 

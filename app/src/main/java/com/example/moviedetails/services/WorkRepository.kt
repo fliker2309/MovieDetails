@@ -8,11 +8,11 @@ import java.util.concurrent.TimeUnit
 class WorkRepository {
 
     private val constraints = Constraints.Builder()
-  /*      .setRequiresCharging(true)*/
+        .setRequiresCharging(true)
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
 
-    val constraintsRequest = PeriodicWorkRequest.Builder(SynchronizationWorker::class.java, 8, TimeUnit.SECONDS)
+    val constraintsRequest = PeriodicWorkRequest.Builder(SynchronizationWorker::class.java, 1, TimeUnit.HOURS)
         .setConstraints(constraints)
         .build()
 }
