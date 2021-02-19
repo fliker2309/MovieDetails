@@ -3,7 +3,6 @@ package com.example.moviedetails.data.db
 import com.example.moviedetails.data.db.entity.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.ExperimentalSerializationApi
 
 class MovieLocalDataSource(private val movieDao: MovieDao) {
 
@@ -19,9 +18,9 @@ class MovieLocalDataSource(private val movieDao: MovieDao) {
         movieDao.insertMoviesInDb(movies)
     }
 
-       suspend fun getMovieByMaxRatingFromDb(id: Int): Movie = withContext(Dispatchers.IO) {
-           movieDao.getMovieByMaxRatingFromDb(id)
-       }
+    suspend fun getMovieByMaxRatingFromDb(): Movie = withContext(Dispatchers.IO) {
+        movieDao.getMovieByMaxRatingFromDb()
+    }
 
 
 }

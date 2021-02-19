@@ -1,7 +1,5 @@
 package com.example.moviedetails.data.network
 
-import com.example.moviedetails.data.db.MovieDao
-import com.example.moviedetails.data.db.MovieLocalDataSource
 import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.model.Genre
@@ -9,8 +7,6 @@ import com.example.moviedetails.data.model.MovieResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
-
-private val movieLocalDataSource = MovieLocalDataSource(movieDao = MovieDao)
 
 @ExperimentalSerializationApi
 private val api = RetrofitConfig.theMovieDbApiService
@@ -62,12 +58,3 @@ suspend fun getMoviesList(): List<Movie> = withContext(Dispatchers.IO) {
 }
 
 
-suspend fun calculateNewMovies(movies: List<Movie>): List<Movie> = withContext(Dispatchers.IO) {
-    val moviesFromDb: List<Movie> = movieLocalDataSource.readAllMoviesFromDb()
-
-    val moviesFromDbIds: List<Int> = moviesFromDb.map { it.id }
-
-    return@withContext movies.filter { movieFromNet ->
-        movieFromNet.id !in moviesFromDbIds
-    }
-}
