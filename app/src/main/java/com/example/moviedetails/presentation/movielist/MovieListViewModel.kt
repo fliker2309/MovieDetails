@@ -1,7 +1,7 @@
 package com.example.moviedetails.presentation.movielist
 
 import androidx.lifecycle.*
-import com.example.moviedetails.data.db.MovieLocalDataSource
+import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.network.getMoviesList
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -10,7 +10,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 
 @InternalCoroutinesApi
 class MovieListViewModel(
-    private val localDataSource: MovieLocalDataSource
+    private val repository: MovieRepository
 ) :
     ViewModel() {
 
@@ -25,7 +25,7 @@ class MovieListViewModel(
 
     init {
         viewModelScope.launch {
-            _mutableMovieListLiveData.value = localDataSource.readAllMoviesFromDb()
+            _mutableMovieListLiveData.value = repository.readAllMoviesFromDb()
         }
     }
 
@@ -36,7 +36,7 @@ class MovieListViewModel(
             val loadedMovies = getMoviesList()
             _mutableMovieListLiveData.value = loadedMovies
             _loadingLiveData.value = false
-            localDataSource.insertMoviesInDb(loadedMovies)
+            repository.insertMoviesInDb(loadedMovies)
         }
     }
 }

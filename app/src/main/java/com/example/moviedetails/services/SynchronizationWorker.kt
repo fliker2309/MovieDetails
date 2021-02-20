@@ -11,7 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.moviedetails.data.db.MovieDatabase
-import com.example.moviedetails.data.db.MovieLocalDataSource
+import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.network.getMoviesList
 import com.example.moviedetails.ui.DeepLinks
@@ -30,7 +30,7 @@ class SynchronizationWorker(
     CoroutineWorker(context, params) {
 
     private val repository =
-        MovieLocalDataSource(MovieDatabase.getDatabase(context).movieDao())
+        MovieRepository(MovieDatabase.getDatabase(context).movieDao())
     private val notificationManagerCompat: NotificationManagerCompat =
         NotificationManagerCompat.from(applicationContext)
 

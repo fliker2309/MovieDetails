@@ -10,7 +10,7 @@ import coil.load
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedetails.data.db.MovieDatabase
-import com.example.moviedetails.data.db.MovieLocalDataSource
+import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModel
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelFactory
@@ -24,13 +24,13 @@ import kotlinx.serialization.ExperimentalSerializationApi
 class MovieDetailsFragment : Fragment() {
 
     @InternalCoroutinesApi
-    private val localDataSource: MovieLocalDataSource by lazy {
+    private val repository: MovieRepository by lazy {
         val db = MovieDatabase.getDatabase(this.requireContext().applicationContext)
-        MovieLocalDataSource(db.movieDao())
+        MovieRepository(db.movieDao())
     }
 
     private val movieDetailsViewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModelFactory(localDataSource)
+        MovieDetailsViewModelFactory(repository)
     }
 
     private var _binding: FragmentMoviesDetailsBinding? = null
