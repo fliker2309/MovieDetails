@@ -57,7 +57,7 @@ class MovieListFragment : Fragment() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            movieListViewModel.getMovies()
+            movieListViewModel.getMoviesFromNet()
             movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
                 swipeRefreshLayout.isRefreshing = it
             }

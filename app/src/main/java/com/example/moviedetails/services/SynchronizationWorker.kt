@@ -48,7 +48,6 @@ class SynchronizationWorker(
         Log.e("WorkManager", "Update was successful")
         Result.success()
 
-
     } catch (e: Throwable) {
         Log.d("WorkManager", "Can't fetch movies: $e")
         Result.failure()
