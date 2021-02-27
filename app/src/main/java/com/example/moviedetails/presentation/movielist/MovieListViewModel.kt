@@ -9,7 +9,10 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @InternalCoroutinesApi
-class MovieListViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieListViewModel(
+    private val repository: MovieRepository
+) :
+    ViewModel() {
 
     private var _mutableMovieListLiveData: MutableLiveData<List<Movie>> =
         MutableLiveData(emptyList())

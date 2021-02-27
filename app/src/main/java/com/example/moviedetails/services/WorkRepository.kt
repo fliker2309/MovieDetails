@@ -12,7 +12,7 @@ class WorkRepository {
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
 
-    val constraintsRequest = PeriodicWorkRequest.Builder(WorkManager::class.java, 8, TimeUnit.HOURS)
+    val constraintsRequest = PeriodicWorkRequest.Builder(SynchronizationWorker::class.java, 1, TimeUnit.HOURS)
         .setConstraints(constraints)
         .build()
 }

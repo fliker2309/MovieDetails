@@ -4,12 +4,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Details(
+data class MovieModel(
+    @SerialName("adult")
+    val adult: Boolean,
+
     @SerialName("backdrop_path")
     val backdropPath: String,
 
-    @SerialName("genres")
-    val genres: List<Genre>,
+    @SerialName("genre_ids")
+    val genreIDS: List<Int>,
 
     @SerialName("id")
     val id: Int,
@@ -19,9 +22,6 @@ data class Details(
 
     @SerialName("poster_path")
     val posterPath: String,
-
-    @SerialName("runtime")
-    val runtime: Int,
 
     @SerialName("title")
     val title: String,

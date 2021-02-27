@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ic_gps"
         android:layout_width="wrap_content"
@@ -38,9 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingStart="@dimen/spacing_6dp"
+            android:paddingStart="6dp"
             android:paddingTop="@dimen/spacing_top"
-            android:paddingEnd="@dimen/spacing_6dp"
+            android:paddingEnd="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

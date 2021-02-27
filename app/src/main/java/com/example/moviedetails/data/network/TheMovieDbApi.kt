@@ -8,8 +8,8 @@ interface TheMovieDbApi {
     @GET("configuration")
     suspend fun getConfiguration(): Configuration
 
-    @GET("movie/now_playing")
-    suspend fun getMovies(): Movies
+    @GET("movie/upcoming")
+    suspend fun getMovies(): MovieResultModel
 
     @GET("genre/movie/list")
     suspend fun getGenres(): Genres
@@ -18,5 +18,5 @@ interface TheMovieDbApi {
     suspend fun getCredits(@Path("id") movieId: Int): Credits
 
     @GET("movie/{id}")
-    suspend fun getDetails(@Path("id") movieId: Int): Details
+    suspend fun getDetails(@Path("id") movieId: Int): DetailedMovieModel
 }

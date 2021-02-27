@@ -6,11 +6,11 @@ import kotlinx.coroutines.withContext
 
 class MovieRepository(private val movieDao: MovieDao) {
 
-    suspend fun readAllMoviesFromDb(): List<Movie> = withContext(Dispatchers.IO){
+    suspend fun readAllMoviesFromDb(): List<Movie> = withContext(Dispatchers.IO) {
         movieDao.readMoviesFromDb()
     }
 
-    suspend fun getMovieByIdFromDb(id: Int): Movie = withContext(Dispatchers.IO){
+    suspend fun getMovieByIdFromDb(id: Int): Movie = withContext(Dispatchers.IO) {
         movieDao.getMovieByIdFromDb(id)
     }
 
@@ -18,3 +18,6 @@ class MovieRepository(private val movieDao: MovieDao) {
         movieDao.insertMoviesInDb(movies)
     }
 }
+
+
+

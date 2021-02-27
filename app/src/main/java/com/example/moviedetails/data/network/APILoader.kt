@@ -3,7 +3,7 @@ package com.example.moviedetails.data.network
 import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.data.model.Genre
-import com.example.moviedetails.data.model.Movies
+import com.example.moviedetails.data.model.MovieResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -15,7 +15,7 @@ private val api = RetrofitConfig.theMovieDbApiService
 private suspend fun getConfiguration(): Configuration = api.getConfiguration()
 
 @ExperimentalSerializationApi
-private suspend fun getMovies(): Movies = api.getMovies()
+private suspend fun getMovies(): MovieResultModel = api.getMovies()
 
 @ExperimentalSerializationApi
 private suspend fun getGenres(): Map<Int, Genre> =
@@ -56,3 +56,5 @@ suspend fun getMoviesList(): List<Movie> = withContext(Dispatchers.IO) {
         )
     }
 }
+
+

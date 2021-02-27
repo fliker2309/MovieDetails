@@ -9,14 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.WorkManager
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
-import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
@@ -45,11 +42,6 @@ class MovieListFragment : Fragment() {
     private val binding: FragmentMovieListBinding
         get() = _binding!!
 
-    companion object {
-        fun newInstance() = MovieListFragment()
-        const val TAG = "moviesListFragment"
-    }
-
     @ExperimentalSerializationApi
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,13 +62,6 @@ class MovieListFragment : Fragment() {
                 swipeRefreshLayout.isRefreshing = it
             }
         }
-
-        WorkManager.getInstance(requireContext().applicationContext)
-            .enqueueUniquePeriodicWork(
-                BACKGROUND_UPDATE,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                WorkRepository().constraintsRequest
-            )
 
         return binding.root
     }
@@ -101,7 +86,7 @@ class MovieListFragment : Fragment() {
     private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
         fragmentManager?.beginTransaction()
             ?.addToBackStack(null)
-            ?.add(R.id.main_container, MovieDetailsFragment.newInstance(movieId))
+            ?.add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
             ?.commit()
     }
 
@@ -113,5 +98,10 @@ class MovieListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = MovieListFragment()
+        const val TAG = "moviesListFragment"
     }
 }
