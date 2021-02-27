@@ -9,6 +9,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
+import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.services.SynchronizationWorker
 import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
@@ -50,9 +51,16 @@ class MainActivity : AppCompatActivity() {
                 val movieId = intent.data?.lastPathSegment?.toIntOrNull()
                 movieId?.let {
                     openMovieDetails(movieId)
+                    hideNotification(movieId)
                 }
             }
         }
+    }
+
+    private fun hideNotification(movieId: Int) {
+        val notificationManagerCompat: NotificationManagerCompat =
+            NotificationManagerCompat.from(applicationContext)
+        notificationManagerCompat.cancel(movieId)
     }
 
     private fun openMoviesList() {
