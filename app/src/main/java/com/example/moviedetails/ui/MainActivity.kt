@@ -9,7 +9,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
-import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.services.SynchronizationWorker
 import com.example.moviedetails.services.WorkRepository
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
