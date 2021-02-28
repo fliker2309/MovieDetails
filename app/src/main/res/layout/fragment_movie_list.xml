@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:transitionGroup="true"
-            android:transitionName="movie_list_fragment"
+            android:transitionName="@string/list_transition"
             android:paddingStart="6dp"
             android:paddingTop="@dimen/spacing_top"
             android:paddingEnd="6dp"
