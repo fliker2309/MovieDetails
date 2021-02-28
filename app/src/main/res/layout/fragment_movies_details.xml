@@ -10,8 +10,7 @@
         android:id="@+id/movie_detail_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp"
-        android:transitionName="@string/details_transition">
+        android:paddingBottom="24dp">
 
 
         <androidx.appcompat.widget.AppCompatImageView
