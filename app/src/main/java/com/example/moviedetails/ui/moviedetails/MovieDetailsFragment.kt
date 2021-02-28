@@ -81,8 +81,13 @@ class MovieDetailsFragment : Fragment() {
         movieDetailsViewModel.movieLiveData.observe(viewLifecycleOwner) { movie: Movie ->
             showMovieData(movie)
         }
-        startPostponedEnterTransition()
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+          startPostponedEnterTransition()
     }
 
     private fun showMovieData(movie: Movie) {
