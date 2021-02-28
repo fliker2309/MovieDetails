@@ -24,13 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      /*  WorkManager.getInstance(applicationContext)
-            .enqueueUniquePeriodicWork(
-                BACKGROUND_UPDATE,
-                ExistingPeriodicWorkPolicy.REPLACE,
-                WorkRepository().constraintsRequest
-            )*/
-
         if (savedInstanceState == null) {
             openMoviesList()
             intent?.let(::handleIntent)
