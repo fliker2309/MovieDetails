@@ -17,8 +17,4 @@
     <string name="channel_new_movies">New movies</string>
     <string name="channel_new_movies_description">MovieApp movies update</string>
 
-    <!-- Animations -->
-
-    <string name="details_transition">details_fragment</string>
-    <string name="list_transition">movie_list_fragment</string>
 </resources>
