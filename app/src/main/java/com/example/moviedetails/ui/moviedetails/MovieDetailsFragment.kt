@@ -38,7 +38,6 @@ class MovieDetailsFragment : Fragment() {
         MovieDetailsViewModelFactory(repository)
     }
 
-    private var actorAdapter: ActorAdapter? = null
     private var movieId: Int? = null
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding: FragmentMoviesDetailsBinding
@@ -69,6 +68,7 @@ class MovieDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentMoviesDetailsBinding.inflate(inflater, container, false)
         ViewCompat.setTransitionName(binding.movieDetailContainer, MOVIE_SCREEN_TRANSITION_KEY)
         postponeEnterTransition()
@@ -85,16 +85,10 @@ class MovieDetailsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-          startPostponedEnterTransition()
-    }
-
     private fun showMovieData(movie: Movie) {
         binding.apply {
             backToMainButton.visibility = View.VISIBLE
             background.load(movie.backdrop)
-
             minimumAge.text = requireContext().getString(
                 R.string.pg_rating,
                 movie.minimumAge.toString()
@@ -113,6 +107,7 @@ class MovieDetailsFragment : Fragment() {
             overview.text = movie.overview
             castLabel.visibility = View.VISIBLE
             (actorListRecyclerView.adapter as ActorAdapter).updateActors(movie.actors)
+            startPostponedEnterTransition()
         }
     }
 
@@ -138,9 +133,11 @@ class MovieDetailsFragment : Fragment() {
 
     companion object {
         const val TAG = "MovieDetailsFragment"
-        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
-        const val ANIMATION_DURATION_MILLIS = 400L
         const val MOVIE_SCREEN_TRANSITION_KEY = "MOVIE_DETAILS_TRANSITION_KEY"
+        const val ANIMATION_DURATION_MILLIS = 400L
+
+        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
+
         fun newInstance(movieId: Int) = MovieDetailsFragment().apply {
             arguments = bundleOf(MOVIE_ID_KEY to movieId)
         }

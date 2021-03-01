@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
-import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
