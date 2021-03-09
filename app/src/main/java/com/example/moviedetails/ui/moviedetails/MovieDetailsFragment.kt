@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
 import com.example.moviedetails.data.db.entity.Movie
-import com.example.moviedetails.data.model.Actor
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModel
 import com.example.moviedetails.presentation.moviedetails.MovieDetailsViewModelFactory
 import com.example.moviedetails.ui.R
