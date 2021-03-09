@@ -1,7 +1,9 @@
 package com.example.moviedetails.ui.movielist.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.ListAdapter
 import com.example.moviedetails.data.db.entity.Movie
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +13,7 @@ import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.ViewHolderMovieBinding
 
 class MovieListAdapter(
-    private var movies: List<Movie>,
-    private val cardListener: (Int) -> Unit
+    private val cardListener: (Int, View) -> Unit
 ) : ListAdapter<DataItem, RecyclerView.ViewHolder>(MovieDiffUtilCallback()) {
 
     companion object {
@@ -29,8 +30,7 @@ class MovieListAdapter(
         val item = getItem(position)
         when (holder) {
             is MovieListViewHolder -> holder.bind(
-                (item as DataItem.MovieItem).movie,
-                cardListener
+                (item as DataItem.MovieItem).movie
             )
         }
     }
@@ -49,11 +49,11 @@ class MovieListAdapter(
 
 @GlideModule
 class MovieListViewHolder private constructor(
-    private val binding: ViewHolderMovieBinding, private val cardListener: (Int) -> Unit
+    private val binding: ViewHolderMovieBinding, private val cardListener: (Int,View) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
     companion object {
-        fun from(parent: ViewGroup, cardListener: (Int) -> Unit): MovieListViewHolder {
+        fun from(parent: ViewGroup, cardListener: (Int, View) -> Unit): MovieListViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding =
                 ViewHolderMovieBinding.inflate(inflater, parent, false)
@@ -64,18 +64,18 @@ class MovieListViewHolder private constructor(
     private var movieId: Int? = null
 
     init {
-        binding.moviePromoCard.setOnClickListener {
+        binding.moviePromoCard.setOnClickListener { promoCardView ->
             movieId?.let { id ->
-                cardListener(id)
+                cardListener(id, promoCardView)
             }
         }
     }
 
-    fun bind(movie: Movie, cardListener: (Int) -> Unit) {
+    fun bind(movie: Movie) {
         this.movieId = movie.id
-        itemView.setOnClickListener {
-            cardListener.invoke(movie.id)
-        }
+
+        ViewCompat.setTransitionName(binding.moviePromoCard, "MOVIE_WITH_ID_${movie.id}")
+
         binding.apply {
             Glide
                 .with(itemView.context)

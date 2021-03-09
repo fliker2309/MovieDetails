@@ -30,7 +30,7 @@ class MovieListViewModel(
     }
 
     @ExperimentalSerializationApi
-    fun getMovies() {
+    fun getMoviesFromNet() {
         viewModelScope.launch {
             _loadingLiveData.value = true
             val loadedMovies = getMoviesList()

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.moviedetails.data.db.MovieDatabase
 import com.example.moviedetails.data.db.MovieRepository
-import com.example.moviedetails.data.db.entity.Movie
 import com.example.moviedetails.presentation.movielist.MovieListViewModel
 import com.example.moviedetails.presentation.movielist.MovieListViewModelFactory
 import com.example.moviedetails.ui.movielist.adapter.MovieListAdapter
 import com.example.moviedetails.ui.R
 import com.example.moviedetails.ui.databinding.FragmentMovieListBinding
 import com.example.moviedetails.ui.moviedetails.MovieDetailsFragment
+import com.google.android.material.transition.MaterialElevationScale
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.serialization.ExperimentalSerializationApi
 
@@ -36,6 +37,7 @@ class MovieListFragment : Fragment() {
         MovieListViewModelFactory(repository)
     }
 
+    private var movieListAdapter: MovieListAdapter? = null
     private lateinit var movieListRecycler: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var _binding: FragmentMovieListBinding? = null
@@ -49,6 +51,7 @@ class MovieListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
+        postponeEnterTransition()
 
         setUpRecycler()
 
@@ -57,7 +60,7 @@ class MovieListFragment : Fragment() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            movieListViewModel.getMovies()
+            movieListViewModel.getMoviesFromNet()
             movieListViewModel.loadingLiveData.observe(viewLifecycleOwner) {
                 swipeRefreshLayout.isRefreshing = it
             }
@@ -66,16 +69,27 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+    }
+
     private fun setUpRecycler() {
+        movieListAdapter = MovieListAdapter(
+            cardListener = onMoviePromoCardClick()
+        )
+
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setColorSchemeResources(R.color.star_color)
+
         movieListRecycler = binding.movieListRecyclerView
         binding.movieListRecyclerView.apply {
-            val movies: List<Movie> = listOf()
             val spanCount =
                 calculateSpanCount(resources.getDimensionPixelSize(R.dimen.card_view_max_width))
             movieListRecycler.layoutManager = GridLayoutManager(activity, spanCount)
-            val movieListAdapter = MovieListAdapter(movies = movies, onMoviePromoCardClick())
+
             val gridLayoutManager = GridLayoutManager(activity, spanCount)
             gridLayoutManager.spanSizeLookup
             movieListRecycler.layoutManager = gridLayoutManager
@@ -83,11 +97,21 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    private fun onMoviePromoCardClick(): (Int) -> Unit = { movieId ->
-        fragmentManager?.beginTransaction()
-            ?.addToBackStack(null)
-            ?.add(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
-            ?.commit()
+    private fun onMoviePromoCardClick(): (Int, View) -> Unit = { movieId, promoCardView ->
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = ANIMATION_DURATION_MILLIS
+        }
+
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = ANIMATION_DURATION_MILLIS
+        }
+
+        parentFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .addSharedElement(promoCardView, MovieDetailsFragment.MOVIE_SCREEN_TRANSITION_KEY)
+            .replace(R.id.fragment_container, MovieDetailsFragment.newInstance(movieId))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun calculateSpanCount(spanWidthPixels: Int): Int {
@@ -103,5 +127,6 @@ class MovieListFragment : Fragment() {
     companion object {
         fun newInstance() = MovieListFragment()
         const val TAG = "moviesListFragment"
+        const val ANIMATION_DURATION_MILLIS = 400L
     }
 }
