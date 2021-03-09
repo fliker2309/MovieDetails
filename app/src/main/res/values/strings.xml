@@ -17,4 +17,11 @@
     <string name="channel_new_movies">New movies</string>
     <string name="channel_new_movies_description">MovieApp movies update</string>
 
+
+    <!-- No internet -->
+    <string name="unexpected_error_text">Unexpected error, please contact to @Felipemassa22</string>
+    <string name="bad_request_error_text">Application has sent wrong parameters to the server!</string>
+    <string name="server_unavailable_error_text">Server is unavailable now! Please try again later</string>
+    <string name="server_internal_error_text">Something was wrong on the server side</string>
+    <string name="not_found_error_text">Server can\'t find requested entity</string>
 </resources>
